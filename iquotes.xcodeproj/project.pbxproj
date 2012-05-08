@@ -1,0 +1,526 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		189F91DC1555666C00AD0D08 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189F91DA1555666C00AD0D08 /* ShareViewController.m */; };
+		189F91DD1555666C00AD0D08 /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189F91DB1555666C00AD0D08 /* ShareViewController.xib */; };
+		18A2BCA5154FA89B00FEFAF4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2BCA4154FA89B00FEFAF4 /* UIKit.framework */; };
+		18A2BCA7154FA89B00FEFAF4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2BCA6154FA89B00FEFAF4 /* Foundation.framework */; };
+		18A2BCA9154FA89B00FEFAF4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2BCA8154FA89B00FEFAF4 /* CoreGraphics.framework */; };
+		18A2BCAF154FA89B00FEFAF4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18A2BCAD154FA89B00FEFAF4 /* InfoPlist.strings */; };
+		18A2BCB1154FA89B00FEFAF4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A2BCB0154FA89B00FEFAF4 /* main.m */; };
+		18A2BCB5154FA89B00FEFAF4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A2BCB4154FA89B00FEFAF4 /* AppDelegate.m */; };
+		18A2BCB8154FA89B00FEFAF4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A2BCB7154FA89B00FEFAF4 /* ViewController.m */; };
+		18A2BCBB154FA89B00FEFAF4 /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A2BCB9154FA89B00FEFAF4 /* ViewController_iPhone.xib */; };
+		18A2BCBE154FA89B00FEFAF4 /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A2BCBC154FA89B00FEFAF4 /* ViewController_iPad.xib */; };
+		18A2BCC6154FA8BE00FEFAF4 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A2BCC5154FA8BE00FEFAF4 /* iCarousel.m */; };
+		18A2BCC8154FA8DA00FEFAF4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2BCC7154FA8DA00FEFAF4 /* QuartzCore.framework */; };
+		18A2BCCF154FB00600FEFAF4 /* stars1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18A2BCCD154FB00600FEFAF4 /* stars1.jpg */; };
+		18A2BCD0154FB00600FEFAF4 /* stars2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18A2BCCE154FB00600FEFAF4 /* stars2.jpg */; };
+		18A2BCD6154FD1FF00FEFAF4 /* steve_jobs.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A2BCD5154FD1FF00FEFAF4 /* steve_jobs.png */; };
+		18A2BCD8154FD23A00FEFAF4 /* bill_gates.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A2BCD7154FD23A00FEFAF4 /* bill_gates.png */; };
+		18A2BCEA15500E7C00FEFAF4 /* QuotesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A2BCE715500E7C00FEFAF4 /* QuotesManager.m */; };
+		18A2BCEB15500E7C00FEFAF4 /* QuoteObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A2BCE915500E7C00FEFAF4 /* QuoteObject.m */; };
+		18A2BCEE15500E8C00FEFAF4 /* jobs_quotes1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18A2BCED15500E8C00FEFAF4 /* jobs_quotes1.plist */; };
+		18A563B11554D9180069AC14 /* SCFacebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A563B01554D9180069AC14 /* SCFacebook.m */; };
+		18A563B21554D9520069AC14 /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A563AE1554D8E80069AC14 /* libfacebook_ios_sdk.a */; };
+		18EF224F1554127F000315D6 /* QuoteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EF224E1554127F000315D6 /* QuoteView.m */; };
+		18EF228E1554C4F8000315D6 /* libBlocksKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18EF22851554C4B4000315D6 /* libBlocksKit.a */; };
+		18EF22901554C611000315D6 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18EF228F1554C611000315D6 /* MessageUI.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		18A563AD1554D8E80069AC14 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18A563A61554D8E80069AC14 /* facebook-ios-sdk.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = "facebook-ios-sdk";
+		};
+		18EF22841554C4B4000315D6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18EF22771554C4B4000315D6 /* BlocksKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6C3DBF8D1382F1BA00E6C9AA;
+			remoteInfo = "iOS Library";
+		};
+		18EF22861554C4B4000315D6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18EF22771554C4B4000315D6 /* BlocksKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6CC40A751447BB1400E47595;
+			remoteInfo = "OS X Framework";
+		};
+		18EF22881554C4B4000315D6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18EF22771554C4B4000315D6 /* BlocksKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6CC08FCE1385555D00DDEABB;
+			remoteInfo = "OS X Library";
+		};
+		18EF228A1554C4B4000315D6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18EF22771554C4B4000315D6 /* BlocksKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6CC0900913855CAE00DDEABB;
+			remoteInfo = "Chameleon Library";
+		};
+		18EF228C1554C4B4000315D6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 18EF22771554C4B4000315D6 /* BlocksKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 60FF000713C023CB004A1394;
+			remoteInfo = "iOS Tests";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		189F91D91555666C00AD0D08 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
+		189F91DA1555666C00AD0D08 /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
+		189F91DB1555666C00AD0D08 /* ShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareViewController.xib; sourceTree = "<group>"; };
+		18A2BCA0154FA89B00FEFAF4 /* iquotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iquotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		18A2BCA4154FA89B00FEFAF4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		18A2BCA6154FA89B00FEFAF4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		18A2BCA8154FA89B00FEFAF4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		18A2BCAC154FA89B00FEFAF4 /* iquotes-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iquotes-Info.plist"; sourceTree = "<group>"; };
+		18A2BCAE154FA89B00FEFAF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		18A2BCB0154FA89B00FEFAF4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		18A2BCB2154FA89B00FEFAF4 /* TestCarouse-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TestCarouse-Prefix.pch"; sourceTree = "<group>"; };
+		18A2BCB3154FA89B00FEFAF4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		18A2BCB4154FA89B00FEFAF4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		18A2BCB6154FA89B00FEFAF4 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		18A2BCB7154FA89B00FEFAF4 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		18A2BCBA154FA89B00FEFAF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
+		18A2BCBD154FA89B00FEFAF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPad.xib; sourceTree = "<group>"; };
+		18A2BCC4154FA8BE00FEFAF4 /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
+		18A2BCC5154FA8BE00FEFAF4 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
+		18A2BCC7154FA8DA00FEFAF4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		18A2BCCD154FB00600FEFAF4 /* stars1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = stars1.jpg; sourceTree = "<group>"; };
+		18A2BCCE154FB00600FEFAF4 /* stars2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = stars2.jpg; sourceTree = "<group>"; };
+		18A2BCD5154FD1FF00FEFAF4 /* steve_jobs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = steve_jobs.png; sourceTree = "<group>"; };
+		18A2BCD7154FD23A00FEFAF4 /* bill_gates.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bill_gates.png; sourceTree = "<group>"; };
+		18A2BCE615500E7C00FEFAF4 /* QuotesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuotesManager.h; sourceTree = "<group>"; };
+		18A2BCE715500E7C00FEFAF4 /* QuotesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuotesManager.m; sourceTree = "<group>"; };
+		18A2BCE815500E7C00FEFAF4 /* QuoteObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuoteObject.h; sourceTree = "<group>"; };
+		18A2BCE915500E7C00FEFAF4 /* QuoteObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuoteObject.m; sourceTree = "<group>"; };
+		18A2BCED15500E8C00FEFAF4 /* jobs_quotes1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = jobs_quotes1.plist; sourceTree = "<group>"; };
+		18A563A61554D8E80069AC14 /* facebook-ios-sdk.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "facebook-ios-sdk.xcodeproj"; path = "SCFacebook/SCFacebook/ExternalFrameworks/facebook-ios-sdk/src/facebook-ios-sdk.xcodeproj"; sourceTree = "<group>"; };
+		18A563AF1554D9180069AC14 /* SCFacebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCFacebook.h; sourceTree = "<group>"; };
+		18A563B01554D9180069AC14 /* SCFacebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCFacebook.m; sourceTree = "<group>"; };
+		18EF224D1554127F000315D6 /* QuoteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuoteView.h; sourceTree = "<group>"; };
+		18EF224E1554127F000315D6 /* QuoteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuoteView.m; sourceTree = "<group>"; };
+		18EF22771554C4B4000315D6 /* BlocksKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BlocksKit.xcodeproj; path = BlocksKit/BlocksKit.xcodeproj; sourceTree = SOURCE_ROOT; };
+		18EF228F1554C611000315D6 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		18A2BC9D154FA89B00FEFAF4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18A563B21554D9520069AC14 /* libfacebook_ios_sdk.a in Frameworks */,
+				18EF22901554C611000315D6 /* MessageUI.framework in Frameworks */,
+				18EF228E1554C4F8000315D6 /* libBlocksKit.a in Frameworks */,
+				18A2BCC8154FA8DA00FEFAF4 /* QuartzCore.framework in Frameworks */,
+				18A2BCA5154FA89B00FEFAF4 /* UIKit.framework in Frameworks */,
+				18A2BCA7154FA89B00FEFAF4 /* Foundation.framework in Frameworks */,
+				18A2BCA9154FA89B00FEFAF4 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		18A2BC95154FA89B00FEFAF4 = {
+			isa = PBXGroup;
+			children = (
+				18A2BCAA154FA89B00FEFAF4 /* TestCarouse */,
+				18A2BCA3154FA89B00FEFAF4 /* Frameworks */,
+				18A2BCA1154FA89B00FEFAF4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		18A2BCA1154FA89B00FEFAF4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				18A2BCA0154FA89B00FEFAF4 /* iquotes.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		18A2BCA3154FA89B00FEFAF4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				18A563A61554D8E80069AC14 /* facebook-ios-sdk.xcodeproj */,
+				18EF22771554C4B4000315D6 /* BlocksKit.xcodeproj */,
+				18EF228F1554C611000315D6 /* MessageUI.framework */,
+				18A2BCC7154FA8DA00FEFAF4 /* QuartzCore.framework */,
+				18A2BCA4154FA89B00FEFAF4 /* UIKit.framework */,
+				18A2BCA6154FA89B00FEFAF4 /* Foundation.framework */,
+				18A2BCA8154FA89B00FEFAF4 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		18A2BCAA154FA89B00FEFAF4 /* TestCarouse */ = {
+			isa = PBXGroup;
+			children = (
+				18A2BCEF15500EDA00FEFAF4 /* Model */,
+				18A2BCF015500EF300FEFAF4 /* View */,
+				18A2BCB3154FA89B00FEFAF4 /* AppDelegate.h */,
+				18A2BCB4154FA89B00FEFAF4 /* AppDelegate.m */,
+				18A2BCAB154FA89B00FEFAF4 /* Supporting Files */,
+			);
+			path = TestCarouse;
+			sourceTree = "<group>";
+		};
+		18A2BCAB154FA89B00FEFAF4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				18A2BCED15500E8C00FEFAF4 /* jobs_quotes1.plist */,
+				18A2BCD7154FD23A00FEFAF4 /* bill_gates.png */,
+				18A2BCD5154FD1FF00FEFAF4 /* steve_jobs.png */,
+				18A2BCCD154FB00600FEFAF4 /* stars1.jpg */,
+				18A2BCCE154FB00600FEFAF4 /* stars2.jpg */,
+				18A2BCAC154FA89B00FEFAF4 /* iquotes-Info.plist */,
+				18A2BCAD154FA89B00FEFAF4 /* InfoPlist.strings */,
+				18A2BCB0154FA89B00FEFAF4 /* main.m */,
+				18A2BCB2154FA89B00FEFAF4 /* TestCarouse-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		18A2BCEF15500EDA00FEFAF4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				18A2BCE615500E7C00FEFAF4 /* QuotesManager.h */,
+				18A2BCE715500E7C00FEFAF4 /* QuotesManager.m */,
+				18A2BCE815500E7C00FEFAF4 /* QuoteObject.h */,
+				18A2BCE915500E7C00FEFAF4 /* QuoteObject.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		18A2BCF015500EF300FEFAF4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				18A563AF1554D9180069AC14 /* SCFacebook.h */,
+				18A563B01554D9180069AC14 /* SCFacebook.m */,
+				18A2BCC4154FA8BE00FEFAF4 /* iCarousel.h */,
+				18A2BCC5154FA8BE00FEFAF4 /* iCarousel.m */,
+				18EF224D1554127F000315D6 /* QuoteView.h */,
+				18EF224E1554127F000315D6 /* QuoteView.m */,
+				18A2BCB6154FA89B00FEFAF4 /* ViewController.h */,
+				18A2BCB7154FA89B00FEFAF4 /* ViewController.m */,
+				189F91D91555666C00AD0D08 /* ShareViewController.h */,
+				189F91DA1555666C00AD0D08 /* ShareViewController.m */,
+				189F91DB1555666C00AD0D08 /* ShareViewController.xib */,
+				18A2BCB9154FA89B00FEFAF4 /* ViewController_iPhone.xib */,
+				18A2BCBC154FA89B00FEFAF4 /* ViewController_iPad.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		18A563A71554D8E80069AC14 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				18A563AE1554D8E80069AC14 /* libfacebook_ios_sdk.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		18EF22781554C4B4000315D6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				18EF22851554C4B4000315D6 /* libBlocksKit.a */,
+				18EF22871554C4B4000315D6 /* BlocksKit.framework */,
+				18EF22891554C4B4000315D6 /* BlocksKit.dylib */,
+				18EF228B1554C4B4000315D6 /* BlocksKit_Chameleon.dylib */,
+				18EF228D1554C4B4000315D6 /* iOS Tests.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		18A2BC9F154FA89B00FEFAF4 /* iquotes */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18A2BCC1154FA89B00FEFAF4 /* Build configuration list for PBXNativeTarget "iquotes" */;
+			buildPhases = (
+				18A2BC9C154FA89B00FEFAF4 /* Sources */,
+				18A2BC9D154FA89B00FEFAF4 /* Frameworks */,
+				18A2BC9E154FA89B00FEFAF4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iquotes;
+			productName = TestCarouse;
+			productReference = 18A2BCA0154FA89B00FEFAF4 /* iquotes.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		18A2BC97154FA89B00FEFAF4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = 18A2BC9A154FA89B00FEFAF4 /* Build configuration list for PBXProject "iquotes" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 18A2BC95154FA89B00FEFAF4;
+			productRefGroup = 18A2BCA1154FA89B00FEFAF4 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 18EF22781554C4B4000315D6 /* Products */;
+					ProjectRef = 18EF22771554C4B4000315D6 /* BlocksKit.xcodeproj */;
+				},
+				{
+					ProductGroup = 18A563A71554D8E80069AC14 /* Products */;
+					ProjectRef = 18A563A61554D8E80069AC14 /* facebook-ios-sdk.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				18A2BC9F154FA89B00FEFAF4 /* iquotes */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		18A563AE1554D8E80069AC14 /* libfacebook_ios_sdk.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libfacebook_ios_sdk.a;
+			remoteRef = 18A563AD1554D8E80069AC14 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		18EF22851554C4B4000315D6 /* libBlocksKit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libBlocksKit.a;
+			remoteRef = 18EF22841554C4B4000315D6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		18EF22871554C4B4000315D6 /* BlocksKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BlocksKit.framework;
+			remoteRef = 18EF22861554C4B4000315D6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		18EF22891554C4B4000315D6 /* BlocksKit.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = BlocksKit.dylib;
+			remoteRef = 18EF22881554C4B4000315D6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		18EF228B1554C4B4000315D6 /* BlocksKit_Chameleon.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = BlocksKit_Chameleon.dylib;
+			remoteRef = 18EF228A1554C4B4000315D6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		18EF228D1554C4B4000315D6 /* iOS Tests.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "iOS Tests.app";
+			remoteRef = 18EF228C1554C4B4000315D6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		18A2BC9E154FA89B00FEFAF4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18A2BCAF154FA89B00FEFAF4 /* InfoPlist.strings in Resources */,
+				18A2BCBB154FA89B00FEFAF4 /* ViewController_iPhone.xib in Resources */,
+				18A2BCBE154FA89B00FEFAF4 /* ViewController_iPad.xib in Resources */,
+				18A2BCCF154FB00600FEFAF4 /* stars1.jpg in Resources */,
+				18A2BCD0154FB00600FEFAF4 /* stars2.jpg in Resources */,
+				18A2BCD6154FD1FF00FEFAF4 /* steve_jobs.png in Resources */,
+				18A2BCD8154FD23A00FEFAF4 /* bill_gates.png in Resources */,
+				18A2BCEE15500E8C00FEFAF4 /* jobs_quotes1.plist in Resources */,
+				189F91DD1555666C00AD0D08 /* ShareViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		18A2BC9C154FA89B00FEFAF4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18A2BCB1154FA89B00FEFAF4 /* main.m in Sources */,
+				18A2BCB5154FA89B00FEFAF4 /* AppDelegate.m in Sources */,
+				18A2BCB8154FA89B00FEFAF4 /* ViewController.m in Sources */,
+				18A2BCC6154FA8BE00FEFAF4 /* iCarousel.m in Sources */,
+				18A2BCEA15500E7C00FEFAF4 /* QuotesManager.m in Sources */,
+				18A2BCEB15500E7C00FEFAF4 /* QuoteObject.m in Sources */,
+				18EF224F1554127F000315D6 /* QuoteView.m in Sources */,
+				18A563B11554D9180069AC14 /* SCFacebook.m in Sources */,
+				189F91DC1555666C00AD0D08 /* ShareViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		18A2BCAD154FA89B00FEFAF4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18A2BCAE154FA89B00FEFAF4 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		18A2BCB9154FA89B00FEFAF4 /* ViewController_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18A2BCBA154FA89B00FEFAF4 /* en */,
+			);
+			name = ViewController_iPhone.xib;
+			sourceTree = "<group>";
+		};
+		18A2BCBC154FA89B00FEFAF4 /* ViewController_iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18A2BCBD154FA89B00FEFAF4 /* en */,
+			);
+			name = ViewController_iPad.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		18A2BCBF154FA89B00FEFAF4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		18A2BCC0154FA89B00FEFAF4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		18A2BCC2154FA89B00FEFAF4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TestCarouse/TestCarouse-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"./SCFacebook/SCFacebook/ExternalFrameworks/facebook-ios-sdk/**",
+					"./BlocksKit/**",
+				);
+				INFOPLIST_FILE = "TestCarouse/iquotes-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		18A2BCC3154FA89B00FEFAF4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TestCarouse/TestCarouse-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"./SCFacebook/SCFacebook/ExternalFrameworks/facebook-ios-sdk/**",
+					"./BlocksKit/**",
+				);
+				INFOPLIST_FILE = "TestCarouse/iquotes-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		18A2BC9A154FA89B00FEFAF4 /* Build configuration list for PBXProject "iquotes" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18A2BCBF154FA89B00FEFAF4 /* Debug */,
+				18A2BCC0154FA89B00FEFAF4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		18A2BCC1154FA89B00FEFAF4 /* Build configuration list for PBXNativeTarget "iquotes" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18A2BCC2154FA89B00FEFAF4 /* Debug */,
+				18A2BCC3154FA89B00FEFAF4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 18A2BC97154FA89B00FEFAF4 /* Project object */;
+}

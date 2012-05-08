@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>New item</key>
+	<dict>
+		<key>quote</key>
+		<string>Stay hungry,stay foolish.</string>
+		<key>topic</key>
+		<array>
+			<string>design</string>
+			<string>life</string>
+		</array>
+	</dict>
+	<key>New item - 2</key>
+	<dict>
+		<key>quote</key>
+		<string>Stay hungry,stay foolish.</string>
+		<key>topic</key>
+		<array>
+			<string>design</string>
+			<string>life</string>
+		</array>
+	</dict>
+	<key>New item - 3</key>
+	<dict>
+		<key>quote</key>
+		<string>Stay hungry,stay foolish.</string>
+		<key>topic</key>
+		<array>
+			<string>design</string>
+			<string>life</string>
+		</array>
+	</dict>
+</dict>
+</plist>
