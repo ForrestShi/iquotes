@@ -121,11 +121,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TestCarouse/ViewController.m"
-         timestampString = "357966563.904656"
+         timestampString = "358174911.241752"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "275"
-         endingLineNumber = "275"
+         startingLineNumber = "262"
+         endingLineNumber = "262"
          landmarkName = "-carousel:placeholderViewAtIndex:reusingView:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -135,11 +135,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TestCarouse/ViewController.m"
-         timestampString = "357966563.904656"
+         timestampString = "358174911.241752"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "276"
-         endingLineNumber = "276"
+         startingLineNumber = "263"
+         endingLineNumber = "263"
          landmarkName = "-carousel:placeholderViewAtIndex:reusingView:"
          landmarkType = "5">
       </FileBreakpoint>

@@ -96,7 +96,7 @@ typedef enum{
         quotes = nil;
     }
     if (!quotes) {
-        NSString *plist1Path = [[NSBundle mainBundle] pathForResource:@"jobs_quotes1" ofType:@"plist" ];
+        NSString *plist1Path = [[NSBundle mainBundle] pathForResource:@"jobs_quotes" ofType:@"plist" ];
         quotes = [[[QuotesManager alloc] initWithPlist:plist1Path] quotesArray];
     }
     if (_carousel) {
@@ -161,12 +161,6 @@ typedef enum{
 
 - (void) swipAction:(UISwipeGestureRecognizer*)sender{
     
-//    dispatch_queue_t load_queue = dispatch_queue_create("load", NULL);
-//    dispatch_async(load_queue
-//                   , ^{
-//                       self.quotes = [QuotesManager shareInstance].quotesArray; 
-//                   });
-    
     [UIView animateWithDuration:1.0 animations:^{
         self.carousel.type = iCarouselTypeTimeMachine;
         self.carousel.vertical = NO;
@@ -213,10 +207,9 @@ typedef enum{
 	if (view == nil)
 	{
         if (_carouseView == PEOPLE_VIEW) {
-            view = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"steve_jobs.png"]];
+            view = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"steve.png"]];
         }else if (_carouseView == QUOTE_VIEW) {
-            //view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 800, 600)];
-            view = [[QuoteView alloc] initWithFrame:CGRectMake(0, 80, 1024, 768-160)];
+            view = [[QuoteView alloc] initWithFrame:CGRectMake(50, 80, 1024 - 50*2 , 768-160)];
         }
 		label = [[UILabel alloc] initWithFrame:view.bounds];
 		label.backgroundColor = [UIColor clearColor];
@@ -233,27 +226,21 @@ typedef enum{
     if (_carouseView == PEOPLE_VIEW ) {
        	label.text = [[peoples objectAtIndex:index] stringValue];
         
-//        UISwipeGestureRecognizer *swipGesture1 = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipAction:)];
-//        swipGesture1.direction = UISwipeGestureRecognizerDirectionLeft | UISwipeGestureRecognizerDirectionLeft;
-//        swipGesture1.numberOfTouchesRequired = 1;
-//        
-//        UISwipeGestureRecognizer *swipGesture2 = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipAction:)];
-//        swipGesture2.direction = UISwipeGestureRecognizerDirectionLeft | UISwipeGestureRecognizerDirectionLeft;
-//        swipGesture2.numberOfTouchesRequired = 2;
-//        
-//        [view addGestureRecognizer:swipGesture1];
-//        [view addGestureRecognizer:swipGesture2];
-        
     }else if (_carouseView == QUOTE_VIEW ) {
         QuoteView  *quoteView = (QuoteView*)view;
         quoteView.backgroundColor = [UIColor blackColor];
         
-        quoteView.peopleImage = [UIImage imageNamed:@"steve_jobs.png"];
+        quoteView.peopleImage = [UIImage imageNamed:@"steve.png"];
         
         NSInteger quotesTotalNum = [quotes count];
         if (quotesTotalNum > 0 ) {
             QuoteObject *quote = (QuoteObject*)[self.quotes objectAtIndex:index%quotesTotalNum];
             quoteView.quoteText = quote.quoteText;
+            DLog(@"%s count %d", __PRETTY_FUNCTION__, [quote.quoteText length] );
+            if ([quote.quoteText length] > 60) {
+                label.font = [label.font fontWithSize:30];
+ 
+            }
         }
     }
 
@@ -319,7 +306,6 @@ typedef enum{
     DLog(@"%s",__PRETTY_FUNCTION__);
     
     UIView  *cellView = [carousel itemViewAtIndex:index];
-    //UIView  *shareView = self.facebookView;  //  //[[UIView alloc] initWithFrame:cellView.frame];
     
     _shareVC = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
     UIView  *shareView  = _shareVC.view;

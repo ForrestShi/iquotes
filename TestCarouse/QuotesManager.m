@@ -25,7 +25,7 @@
     static QuotesManager* _instance = nil;
     if (_instance == nil) {
         _instance = [[QuotesManager alloc] init];
-        NSString *plist1Path = [[NSBundle mainBundle] pathForResource:@"jobs_quotes1" ofType:@"plist" ];
+        NSString *plist1Path = [[NSBundle mainBundle] pathForResource:@"jobs_quotes" ofType:@"plist" ];
         [_instance loadQuotesFromPlistFile:plist1Path];
     }
     return _instance;

@@ -39,7 +39,12 @@
     quoteLabel.textAlignment = UITextAlignmentRight;
     
     quoteLabel.text = _quoteText;
-    quoteLabel.font = [UIFont fontWithName:@"ArialMT" size:34];
+    int fontSize = 30;
+    if ([_quoteText length] > 250 ) {
+        fontSize = 20;
+    } 
+    quoteLabel.font = [UIFont fontWithName:@"ArialMT" size:fontSize];
+    
     quoteLabel.textColor = [UIColor whiteColor];
    // quoteLabel.shadowColor = [UIColor lightGrayColor];
     quoteLabel.lineBreakMode = UILineBreakModeWordWrap;

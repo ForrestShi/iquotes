@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1898575C15594EE500F7A0F8 /* jobs_quotes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1898575B15594EE500F7A0F8 /* jobs_quotes.plist */; };
+		1898575E15594FA300F7A0F8 /* steve.png in Resources */ = {isa = PBXBuildFile; fileRef = 1898575D15594FA300F7A0F8 /* steve.png */; };
 		189F91DC1555666C00AD0D08 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189F91DA1555666C00AD0D08 /* ShareViewController.m */; };
 		189F91DD1555666C00AD0D08 /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189F91DB1555666C00AD0D08 /* ShareViewController.xib */; };
 		18A2BCA5154FA89B00FEFAF4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2BCA4154FA89B00FEFAF4 /* UIKit.framework */; };
@@ -80,6 +82,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1898575B15594EE500F7A0F8 /* jobs_quotes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = jobs_quotes.plist; sourceTree = "<group>"; };
+		1898575D15594FA300F7A0F8 /* steve.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = steve.png; sourceTree = "<group>"; };
 		189F91D91555666C00AD0D08 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
 		189F91DA1555666C00AD0D08 /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
 		189F91DB1555666C00AD0D08 /* ShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareViewController.xib; sourceTree = "<group>"; };
@@ -139,6 +143,7 @@
 		18A2BC95154FA89B00FEFAF4 = {
 			isa = PBXGroup;
 			children = (
+				1898575B15594EE500F7A0F8 /* jobs_quotes.plist */,
 				18A2BCAA154FA89B00FEFAF4 /* TestCarouse */,
 				18A2BCA3154FA89B00FEFAF4 /* Frameworks */,
 				18A2BCA1154FA89B00FEFAF4 /* Products */,
@@ -182,6 +187,7 @@
 		18A2BCAB154FA89B00FEFAF4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1898575D15594FA300F7A0F8 /* steve.png */,
 				18A2BCED15500E8C00FEFAF4 /* jobs_quotes1.plist */,
 				18A2BCD7154FD23A00FEFAF4 /* bill_gates.png */,
 				18A2BCD5154FD1FF00FEFAF4 /* steve_jobs.png */,
@@ -360,6 +366,8 @@
 				18A2BCD8154FD23A00FEFAF4 /* bill_gates.png in Resources */,
 				18A2BCEE15500E8C00FEFAF4 /* jobs_quotes1.plist in Resources */,
 				189F91DD1555666C00AD0D08 /* ShareViewController.xib in Resources */,
+				1898575C15594EE500F7A0F8 /* jobs_quotes.plist in Resources */,
+				1898575E15594FA300F7A0F8 /* steve.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
