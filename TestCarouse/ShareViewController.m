@@ -5,9 +5,17 @@
 //  Created by Shi Forrest on 12-5-5.
 //  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
 //
+#import <Twitter/twitter.h>
 
 #import "ShareViewController.h"
 #import "SCFacebook.h"
+
+@interface ShareViewController () {
+@private
+    UIView *loadingView; 
+    NSString *_quoteText;
+}
+@end
 
 @implementation ShareViewController
 
@@ -16,6 +24,16 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+    }
+    return self;
+}
+
+- (id) initWithFrame:(CGRect)frame quoteText:(NSString*)quote{
+    self = [super initWithNibName:@"ShareViewController" bundle:nil];
+    if (self) {
+        // Custom initialization
+        self.view.frame = frame;
+        _quoteText = quote;
     }
     return self;
 }
@@ -34,8 +52,30 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    //Loading
     
+    loadingView = [[UIView alloc] initWithFrame:self.view.bounds];
+	loadingView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.8];
+	UIActivityIndicatorView *aiView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+	[loadingView addSubview:aiView];
+	[aiView startAnimating];
+	aiView.center =  loadingView.center;
+	loadingView.hidden = YES;
     [self.view addSubview:loadingView];
+    
+    //textfield
+    
+    if (textView) {
+        [self performBlock:^(id sender) {
+            //
+            textView.alpha = 0;
+            textView.text = [NSString stringWithFormat:@"%@ -- Steve Jobs ", _quoteText];
+            [UIView animateWithDuration:1.5 animations:^{
+                textView.alpha = 1.0;
+            }];
+            
+        } afterDelay:.5];
+    }
 }
 
 - (void)viewDidUnload
@@ -71,89 +111,70 @@
 }
 
 
-- (void)publishYourWall:(id)sender 
-{
-    UIActionSheet *sheet = [[UIActionSheet alloc]
-                            initWithTitle:@"Option Publish"
-                            delegate:self
-                            cancelButtonTitle:nil
-                            destructiveButtonTitle:@"Cancel"
-                            otherButtonTitles:@"Link", @"Message", @"Message Dialog", @"Photo", nil];
-    sheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
-	[sheet showFromRect:self.view.bounds inView:self.view animated:YES];
-}
-
-
 - (IBAction)publishToMyFBWall:(id)sender{
     
     loadingView.hidden = NO;
     
     [SCFacebook loginCallBack:^(BOOL success, id result) {
-        loadingView.hidden = YES;
         
         if (success) {
-            //[self publishYourWall:sender];
-            // DLog(@"%s", __PRETTY_FUNCTION__);
-            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://www.lucascorrea.com/lucas_apple.png"]]];
-            loadingView.hidden = NO;
-//            [SCFacebook feedPostWithPhoto:image caption:@"This is message with photo" callBack:^(BOOL success, id result) {
-//                loadingView.hidden = YES;
-//            }];
-
-            [SCFacebook feedPostWithAppStore:@"I am using Steve Jobs Quotes" callBack:^(BOOL success, id result) {
+            DLog(@"succeed to login");
+            
+            [SCFacebook feedPostWithAppStore:_quoteText callBack:^(BOOL success, id result) {
+                if (success) {
+                    DLog(@"succeed to post msg to fb");
+                } 
                 loadingView.hidden = YES;
             }];
-            
-            
         }
+        
+        loadingView.hidden = YES;
+        
     }];
     
 }
 
-
-#pragma mark - UIActionSheetDelegate
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex 
-{
-	if (buttonIndex == actionSheet.destructiveButtonIndex) { return; }
+- (IBAction)inviteFBFriendsToUseThisApp:(id)sender{
     
-    switch (buttonIndex) {
-            
-            //Link
-		case 1:{
-            loadingView.hidden = NO;
-            [SCFacebook feedPostWithLinkPath:@"http://www.lucascorrea.com" caption:@"Portfolio" callBack:^(BOOL success, id result) {
-                loadingView.hidden = YES;
-            }];
-            break;
-		}
-            
-            //Message
-		case 2:{
-            loadingView.hidden = NO;
-            [SCFacebook feedPostWithMessage:@"This is message" callBack:^(BOOL success, id result) {
-                loadingView.hidden = YES;
-            }];
-            break;
-		}
-            //Message Dialog
-		case 3:{
-            
-            [SCFacebook feedPostWithMessageDialogCallBack:^(BOOL success, id result) {
-            }];
-            break;
-		}
-            //Photo
-        case 4:{
-            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:@"http://www.lucascorrea.com/lucas_apple.png"]]];
-            loadingView.hidden = NO;
-            [SCFacebook feedPostWithPhoto:image caption:@"This is message with photo" callBack:^(BOOL success, id result) {
-                loadingView.hidden = YES;
-            }];
-            break;
-		}
-	}
+    [SCFacebook inviteFriendsWithMessage:@"Come on,check out what Steve Jobs said" callBack:^(BOOL success, id result) {
+        if (success) {
+            DLog(@"succeed to invite");
+        }else
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] 
+                                      initWithTitle:@"Sorry"                                                             
+                                      message:@"You can't invite friends right now, make sure you have login in Facebook already"                                                          
+                                      delegate:self                                              
+                                      cancelButtonTitle:@"OK"                                                   
+                                      otherButtonTitles:nil];
+            [alertView show];
+        }
+        
+    }];
+}
+- (IBAction)sendToTwitter:(id)sender{
+    
+    if ([TWTweetComposeViewController canSendTweet])
+    {
+        TWTweetComposeViewController *tweetSheet = 
+        [[TWTweetComposeViewController alloc] init];
+        [tweetSheet setInitialText:_quoteText];
+        [self presentModalViewController:tweetSheet animated:YES];
+    }else
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] 
+                                  initWithTitle:@"Sorry"                                                             
+                                  message:@"You can't invite right now, make sure your device has an internet connection and you have at least one Twitter account setup"                                                                                                                    
+                                  delegate:self                                              
+                                  cancelButtonTitle:@"OK"                                                   
+                                  otherButtonTitles:nil];
+        [alertView show];
+    }
+    
 }
 
+- (IBAction)emailSend:(id)sender{
+    
+}
 
 @end

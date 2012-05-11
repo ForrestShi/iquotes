@@ -26,14 +26,6 @@
     }
     self.window.rootViewController = self.viewController;
     
-    //Loading
-    loadingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-	loadingView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.8];
-	UIActivityIndicatorView *aiView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-	[loadingView addSubview:aiView];
-	[aiView startAnimating];
-	aiView.center =  CGPointMake(160, 240);
-	loadingView.hidden = YES;
     
     [self.window makeKeyAndVisible];
     return YES;

@@ -8,12 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ShareViewController : UIViewController < UIActionSheetDelegate >
+@interface ShareViewController : UIViewController 
 {
     IBOutlet UITextView   *textView;
 
 }
 
+- (id) initWithFrame:(CGRect)frame quoteText:(NSString*)quote;
+
 - (IBAction)publishToMyFBWall:(id)sender;
+- (IBAction)inviteFBFriendsToUseThisApp:(id)sender;
+- (IBAction)sendToTwitter:(id)sender;
+- (IBAction)emailSend:(id)sender;
 
 @end

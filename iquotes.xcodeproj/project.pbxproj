@@ -11,6 +11,7 @@
 		1898575E15594FA300F7A0F8 /* steve.png in Resources */ = {isa = PBXBuildFile; fileRef = 1898575D15594FA300F7A0F8 /* steve.png */; };
 		189F91DC1555666C00AD0D08 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189F91DA1555666C00AD0D08 /* ShareViewController.m */; };
 		189F91DD1555666C00AD0D08 /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189F91DB1555666C00AD0D08 /* ShareViewController.xib */; };
+		18A04F75155D79A80079F831 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A04F74155D79A80079F831 /* Twitter.framework */; };
 		18A2BCA5154FA89B00FEFAF4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2BCA4154FA89B00FEFAF4 /* UIKit.framework */; };
 		18A2BCA7154FA89B00FEFAF4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2BCA6154FA89B00FEFAF4 /* Foundation.framework */; };
 		18A2BCA9154FA89B00FEFAF4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2BCA8154FA89B00FEFAF4 /* CoreGraphics.framework */; };
@@ -87,6 +88,7 @@
 		189F91D91555666C00AD0D08 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
 		189F91DA1555666C00AD0D08 /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
 		189F91DB1555666C00AD0D08 /* ShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareViewController.xib; sourceTree = "<group>"; };
+		18A04F74155D79A80079F831 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		18A2BCA0154FA89B00FEFAF4 /* iquotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iquotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18A2BCA4154FA89B00FEFAF4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		18A2BCA6154FA89B00FEFAF4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -127,6 +129,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18A04F75155D79A80079F831 /* Twitter.framework in Frameworks */,
 				18A563B21554D9520069AC14 /* libfacebook_ios_sdk.a in Frameworks */,
 				18EF22901554C611000315D6 /* MessageUI.framework in Frameworks */,
 				18EF228E1554C4F8000315D6 /* libBlocksKit.a in Frameworks */,
@@ -140,9 +143,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18A04F72155D68280079F831 /* Social */ = {
+			isa = PBXGroup;
+			children = (
+				18A563AF1554D9180069AC14 /* SCFacebook.h */,
+				18A563B01554D9180069AC14 /* SCFacebook.m */,
+			);
+			name = Social;
+			sourceTree = "<group>";
+		};
+		18A04F73155D685D0079F831 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				189F91D91555666C00AD0D08 /* ShareViewController.h */,
+				189F91DA1555666C00AD0D08 /* ShareViewController.m */,
+				189F91DB1555666C00AD0D08 /* ShareViewController.xib */,
+				18A2BCB6154FA89B00FEFAF4 /* ViewController.h */,
+				18A2BCB7154FA89B00FEFAF4 /* ViewController.m */,
+				18A2BCB9154FA89B00FEFAF4 /* ViewController_iPhone.xib */,
+				18A2BCBC154FA89B00FEFAF4 /* ViewController_iPad.xib */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
 		18A2BC95154FA89B00FEFAF4 = {
 			isa = PBXGroup;
 			children = (
+				18A04F74155D79A80079F831 /* Twitter.framework */,
 				1898575B15594EE500F7A0F8 /* jobs_quotes.plist */,
 				18A2BCAA154FA89B00FEFAF4 /* TestCarouse */,
 				18A2BCA3154FA89B00FEFAF4 /* Frameworks */,
@@ -175,6 +202,7 @@
 		18A2BCAA154FA89B00FEFAF4 /* TestCarouse */ = {
 			isa = PBXGroup;
 			children = (
+				18A04F72155D68280079F831 /* Social */,
 				18A2BCEF15500EDA00FEFAF4 /* Model */,
 				18A2BCF015500EF300FEFAF4 /* View */,
 				18A2BCB3154FA89B00FEFAF4 /* AppDelegate.h */,
@@ -215,19 +243,11 @@
 		18A2BCF015500EF300FEFAF4 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				18A563AF1554D9180069AC14 /* SCFacebook.h */,
-				18A563B01554D9180069AC14 /* SCFacebook.m */,
 				18A2BCC4154FA8BE00FEFAF4 /* iCarousel.h */,
 				18A2BCC5154FA8BE00FEFAF4 /* iCarousel.m */,
 				18EF224D1554127F000315D6 /* QuoteView.h */,
 				18EF224E1554127F000315D6 /* QuoteView.m */,
-				18A2BCB6154FA89B00FEFAF4 /* ViewController.h */,
-				18A2BCB7154FA89B00FEFAF4 /* ViewController.m */,
-				189F91D91555666C00AD0D08 /* ShareViewController.h */,
-				189F91DA1555666C00AD0D08 /* ShareViewController.m */,
-				189F91DB1555666C00AD0D08 /* ShareViewController.xib */,
-				18A2BCB9154FA89B00FEFAF4 /* ViewController_iPhone.xib */,
-				18A2BCBC154FA89B00FEFAF4 /* ViewController_iPad.xib */,
+				18A04F73155D685D0079F831 /* ViewControllers */,
 			);
 			name = View;
 			sourceTree = "<group>";

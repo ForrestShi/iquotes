@@ -29,14 +29,12 @@ typedef enum{
 @private
     CAROUSELVIEW _carouseView;
     ShareViewController *_shareVC ;
-    
+    NSString            *_currentQuoteText;
 }
 @property (nonatomic, assign) BOOL wrap;
 @property (nonatomic, strong) NSMutableArray *peoples;
 @property (nonatomic, strong) NSMutableArray *quotes;
 @property (nonatomic, strong) ShareViewController *shareVC;
-
-
 @end
 
 
@@ -47,6 +45,7 @@ typedef enum{
 @synthesize quotes;
 @synthesize facebookView;
 @synthesize shareVC = _shareVC;
+
 
 - (void)setUp
 {
@@ -305,13 +304,19 @@ typedef enum{
 - (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index{
     DLog(@"%s",__PRETTY_FUNCTION__);
     
+    QuoteObject *currentQuote =  [self.quotes objectAtIndex:index % [self.quotes count]];
+    _currentQuoteText = [currentQuote quoteText];
+    
     UIView  *cellView = [carousel itemViewAtIndex:index];
     
-    _shareVC = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
+//    _shareVC = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
+//    UIView  *shareView  = _shareVC.view;
+//    shareView.frame = cellView.frame;
+
+    DLog(@"current quote %@", _currentQuoteText);
+    _shareVC = [[ShareViewController alloc] initWithFrame:cellView.frame quoteText:_currentQuoteText];
     UIView  *shareView  = _shareVC.view;
-    //shareView.frame = cellView.frame;
-    shareView.backgroundColor = [UIColor blueColor];
-    
+
     [UIView transitionFromView:cellView toView:shareView duration:1.0 options:UIViewAnimationOptionTransitionFlipFromTop completion:^(BOOL finished) {
         if (finished) {
             //remove all gestures for carouse 
@@ -331,25 +336,4 @@ typedef enum{
     }];
 }
  
-#pragma mark - share methods of Facebook 
-
-- (IBAction)publishToMyFBWall:(id)sender{
-
-    DLog(@"%s", __PRETTY_FUNCTION__);
-
-    [SCFacebook loginCallBack:^(BOOL success, id result) {
-        if (success) {
-            DLog(@"%s", __PRETTY_FUNCTION__);
-            
-            [SCFacebook feedPostWithMessage:@"This is test message from iQuotes" callBack:^(BOOL success, id result) {
-                if (success) {
-                    
-                }
-            }];
-            
-        }
-    }];
-    
-}
-
 @end
