@@ -83,13 +83,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1898575B15594EE500F7A0F8 /* jobs_quotes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = jobs_quotes.plist; sourceTree = "<group>"; };
+		1898575B15594EE500F7A0F8 /* jobs_quotes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = jobs_quotes.plist; path = ../jobs_quotes.plist; sourceTree = "<group>"; };
 		1898575D15594FA300F7A0F8 /* steve.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = steve.png; sourceTree = "<group>"; };
 		189F91D91555666C00AD0D08 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
 		189F91DA1555666C00AD0D08 /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
 		189F91DB1555666C00AD0D08 /* ShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareViewController.xib; sourceTree = "<group>"; };
 		18A04F74155D79A80079F831 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
-		18A2BCA0154FA89B00FEFAF4 /* iquotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iquotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		18A2BCA0154FA89B00FEFAF4 /* SJQuotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SJQuotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18A2BCA4154FA89B00FEFAF4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		18A2BCA6154FA89B00FEFAF4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		18A2BCA8154FA89B00FEFAF4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -169,8 +169,6 @@
 		18A2BC95154FA89B00FEFAF4 = {
 			isa = PBXGroup;
 			children = (
-				18A04F74155D79A80079F831 /* Twitter.framework */,
-				1898575B15594EE500F7A0F8 /* jobs_quotes.plist */,
 				18A2BCAA154FA89B00FEFAF4 /* TestCarouse */,
 				18A2BCA3154FA89B00FEFAF4 /* Frameworks */,
 				18A2BCA1154FA89B00FEFAF4 /* Products */,
@@ -180,7 +178,7 @@
 		18A2BCA1154FA89B00FEFAF4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				18A2BCA0154FA89B00FEFAF4 /* iquotes.app */,
+				18A2BCA0154FA89B00FEFAF4 /* SJQuotes.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -188,6 +186,7 @@
 		18A2BCA3154FA89B00FEFAF4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				18A04F74155D79A80079F831 /* Twitter.framework */,
 				18A563A61554D8E80069AC14 /* facebook-ios-sdk.xcodeproj */,
 				18EF22771554C4B4000315D6 /* BlocksKit.xcodeproj */,
 				18EF228F1554C611000315D6 /* MessageUI.framework */,
@@ -215,6 +214,7 @@
 		18A2BCAB154FA89B00FEFAF4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1898575B15594EE500F7A0F8 /* jobs_quotes.plist */,
 				1898575D15594FA300F7A0F8 /* steve.png */,
 				18A2BCED15500E8C00FEFAF4 /* jobs_quotes1.plist */,
 				18A2BCD7154FD23A00FEFAF4 /* bill_gates.png */,
@@ -275,9 +275,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		18A2BC9F154FA89B00FEFAF4 /* iquotes */ = {
+		18A2BC9F154FA89B00FEFAF4 /* SJQuotes */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 18A2BCC1154FA89B00FEFAF4 /* Build configuration list for PBXNativeTarget "iquotes" */;
+			buildConfigurationList = 18A2BCC1154FA89B00FEFAF4 /* Build configuration list for PBXNativeTarget "SJQuotes" */;
 			buildPhases = (
 				18A2BC9C154FA89B00FEFAF4 /* Sources */,
 				18A2BC9D154FA89B00FEFAF4 /* Frameworks */,
@@ -287,9 +287,9 @@
 			);
 			dependencies = (
 			);
-			name = iquotes;
+			name = SJQuotes;
 			productName = TestCarouse;
-			productReference = 18A2BCA0154FA89B00FEFAF4 /* iquotes.app */;
+			productReference = 18A2BCA0154FA89B00FEFAF4 /* SJQuotes.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -322,7 +322,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				18A2BC9F154FA89B00FEFAF4 /* iquotes */,
+				18A2BC9F154FA89B00FEFAF4 /* SJQuotes */,
 			);
 		};
 /* End PBXProject section */
@@ -490,6 +490,8 @@
 		18A2BCC2154FA89B00FEFAF4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Shi Lin (NER6K732V4)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TestCarouse/TestCarouse-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -503,6 +505,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "D1B7A183-61B1-46A1-95C5-09F7A7776442";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -539,7 +543,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		18A2BCC1154FA89B00FEFAF4 /* Build configuration list for PBXNativeTarget "iquotes" */ = {
+		18A2BCC1154FA89B00FEFAF4 /* Build configuration list for PBXNativeTarget "SJQuotes" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				18A2BCC2154FA89B00FEFAF4 /* Debug */,

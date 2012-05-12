@@ -30,6 +30,7 @@ typedef enum{
     CAROUSELVIEW _carouseView;
     ShareViewController *_shareVC ;
     NSString            *_currentQuoteText;
+    NSTimer             *changeBgTimer ;
 }
 @property (nonatomic, assign) BOOL wrap;
 @property (nonatomic, strong) NSMutableArray *peoples;
@@ -45,6 +46,7 @@ typedef enum{
 @synthesize quotes;
 @synthesize facebookView;
 @synthesize shareVC = _shareVC;
+@synthesize bacgroundImageView;
 
 
 - (void)setUp
@@ -114,6 +116,30 @@ typedef enum{
         DLog(@"%s", __PRETTY_FUNCTION__);
         _carousel.type = rand()%iCarouselTypeCustom;
     }];
+    
+    //dynamic background images
+    static int count = 0;
+ 
+    NSArray *imageNameArray = [NSArray arrayWithObjects:@"steve_jobs.png",
+                               @"stars1.jpg",
+                               @"bill_gates.png",nil];
+    
+    changeBgTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 block:^(NSTimeInterval time) {
+        NSString *imageName = [imageNameArray objectAtIndex:(count++)%[imageNameArray count] ];
+        
+        BOOL animated = YES;
+        
+        if (animated) {
+            CATransition *transition = [CATransition animation];
+            transition.duration = 2.5f;
+            transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+            transition.type = kCATransitionFade;
+            [bacgroundImageView.layer addAnimation:transition forKey:@"image"];
+        }
+
+        bacgroundImageView.image = [UIImage imageNamed:imageName];
+        
+    } repeats:YES];
     
 }
 
@@ -301,6 +327,18 @@ typedef enum{
     return wrap;
 }
 
+
+- (void) captureCurrentQuote:(NSInteger)index carousel:(iCarousel*)carousel asImage:(UIImage**)capturedImage{
+    UIView  *cellView = [carousel itemViewAtIndex:index];
+    CGRect rect =cellView.frame;  
+    UIGraphicsBeginImageContext(rect.size);  
+    CGContextRef context = UIGraphicsGetCurrentContext();  
+    [cellView.layer renderInContext:context];  
+    UIImage *imageCaptureRect = UIGraphicsGetImageFromCurrentImageContext();  
+    *capturedImage = imageCaptureRect;
+    UIGraphicsEndImageContext();
+}
+
 - (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index{
     DLog(@"%s",__PRETTY_FUNCTION__);
     
@@ -308,13 +346,11 @@ typedef enum{
     _currentQuoteText = [currentQuote quoteText];
     
     UIView  *cellView = [carousel itemViewAtIndex:index];
-    
-//    _shareVC = [[ShareViewController alloc] initWithNibName:@"ShareViewController" bundle:nil];
-//    UIView  *shareView  = _shareVC.view;
-//    shareView.frame = cellView.frame;
+    UIImage *cellImage = nil;
+    [self captureCurrentQuote:index carousel:carousel asImage:&cellImage];
 
     DLog(@"current quote %@", _currentQuoteText);
-    _shareVC = [[ShareViewController alloc] initWithFrame:cellView.frame quoteText:_currentQuoteText];
+    _shareVC = [[ShareViewController alloc] initWithFrame:cellView.frame quoteText:_currentQuoteText quoteImage:cellImage];
     UIView  *shareView  = _shareVC.view;
 
     [UIView transitionFromView:cellView toView:shareView duration:1.0 options:UIViewAnimationOptionTransitionFlipFromTop completion:^(BOOL finished) {

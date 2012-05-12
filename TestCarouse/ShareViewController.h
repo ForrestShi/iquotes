@@ -11,14 +11,15 @@
 @interface ShareViewController : UIViewController 
 {
     IBOutlet UITextView   *textView;
+    IBOutlet UILabel *message;
 
 }
 
-- (id) initWithFrame:(CGRect)frame quoteText:(NSString*)quote;
+- (id) initWithFrame:(CGRect)frame quoteText:(NSString*)quote quoteImage:(UIImage*)image;
 
 - (IBAction)publishToMyFBWall:(id)sender;
 - (IBAction)inviteFBFriendsToUseThisApp:(id)sender;
 - (IBAction)sendToTwitter:(id)sender;
-- (IBAction)emailSend:(id)sender;
+- (IBAction)sendEmail:(id)sender;
 
 @end

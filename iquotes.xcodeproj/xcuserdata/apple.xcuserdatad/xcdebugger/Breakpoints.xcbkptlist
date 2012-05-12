@@ -121,11 +121,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TestCarouse/ViewController.m"
-         timestampString = "358444978.815286"
+         timestampString = "358492664.227058"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "261"
-         endingLineNumber = "261"
+         startingLineNumber = "287"
+         endingLineNumber = "287"
          landmarkName = "-carousel:placeholderViewAtIndex:reusingView:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -135,11 +135,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TestCarouse/ViewController.m"
-         timestampString = "358444978.815286"
+         timestampString = "358492664.227058"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "262"
-         endingLineNumber = "262"
+         startingLineNumber = "288"
+         endingLineNumber = "288"
          landmarkName = "-carousel:placeholderViewAtIndex:reusingView:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -205,12 +205,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TestCarouse/ShareViewController.m"
-         timestampString = "358447677.799529"
+         timestampString = "358485964.667112"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "147"
-         endingLineNumber = "147"
-         landmarkName = "-sendToTwitter:"
+         startingLineNumber = "153"
+         endingLineNumber = "153"
+         landmarkName = "-inviteFBFriendsToUseThisApp:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

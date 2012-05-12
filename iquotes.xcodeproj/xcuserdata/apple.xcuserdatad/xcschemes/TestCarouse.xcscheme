@@ -14,8 +14,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "18A2BC9F154FA89B00FEFAF4"
-               BuildableName = "iquotes.app"
-               BlueprintName = "iquotes"
+               BuildableName = "SJQuotes.app"
+               BlueprintName = "SJQuotes"
                ReferencedContainer = "container:iquotes.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,8 +32,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "18A2BC9F154FA89B00FEFAF4"
-            BuildableName = "iquotes.app"
-            BlueprintName = "iquotes"
+            BuildableName = "SJQuotes.app"
+            BlueprintName = "SJQuotes"
             ReferencedContainer = "container:iquotes.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -44,14 +44,15 @@
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Debug"
+      ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "18A2BC9F154FA89B00FEFAF4"
-            BuildableName = "iquotes.app"
-            BlueprintName = "iquotes"
+            BuildableName = "SJQuotes.app"
+            BlueprintName = "SJQuotes"
             ReferencedContainer = "container:iquotes.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -68,8 +69,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "18A2BC9F154FA89B00FEFAF4"
-            BuildableName = "iquotes.app"
-            BlueprintName = "iquotes"
+            BuildableName = "SJQuotes.app"
+            BlueprintName = "SJQuotes"
             ReferencedContainer = "container:iquotes.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
