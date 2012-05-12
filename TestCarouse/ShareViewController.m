@@ -82,6 +82,11 @@
             
         } afterDelay:.5];
     }
+    
+    //background texture
+    
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"pattern1.jpg"]];
+    
 }
 
 - (void)viewDidUnload
@@ -99,30 +104,11 @@
 
 #pragma mark - Facebook actions
 
-- (void)getUserInfo
-{
-    loadingView.hidden = NO;
-    
-    [SCFacebook getUserFQL:FQL_USER_STANDARD callBack:^(BOOL success, id result) {
-        if (success) {
-            NSLog(@"%@", result);
-            
-            loadingView.hidden = YES;
-        }else{
-            
-            loadingView.hidden = YES;
-            
-        }
-    }];
-}
-
 
 - (IBAction)publishToMyFBWall:(id)sender{
     
     loadingView.hidden = NO;
-    
     [SCFacebook loginCallBack:^(BOOL success, id result) {
-        
         if (success) {
             DLog(@"succeed to login");
             
@@ -133,10 +119,9 @@
                 loadingView.hidden = YES;
             }];
         }
-        
-        loadingView.hidden = YES;
-        
     }];
+    loadingView.hidden = YES;
+
     
 }
 

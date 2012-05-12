@@ -15,7 +15,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "18A2BC9F154FA89B00FEFAF4"
                BuildableName = "SJQuotes.app"
-               BlueprintName = "SJQuotes"
+               BlueprintName = "iChangedWorld"
                ReferencedContainer = "container:iquotes.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,7 +33,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "18A2BC9F154FA89B00FEFAF4"
             BuildableName = "SJQuotes.app"
-            BlueprintName = "SJQuotes"
+            BlueprintName = "iChangedWorld"
             ReferencedContainer = "container:iquotes.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -52,7 +52,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "18A2BC9F154FA89B00FEFAF4"
             BuildableName = "SJQuotes.app"
-            BlueprintName = "SJQuotes"
+            BlueprintName = "iChangedWorld"
             ReferencedContainer = "container:iquotes.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -70,7 +70,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "18A2BC9F154FA89B00FEFAF4"
             BuildableName = "SJQuotes.app"
-            BlueprintName = "SJQuotes"
+            BlueprintName = "iChangedWorld"
             ReferencedContainer = "container:iquotes.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

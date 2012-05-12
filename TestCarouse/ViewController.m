@@ -20,6 +20,13 @@
 #define ITEM_SPACING 210.0f
 #define INCLUDE_PLACEHOLDERS YES
 
+#define QUOTEVIEW_FRAME_X 50.0f
+#define QUOTEVIEW_FRAME_Y 50.0f
+#define QUOTEVIEW_FRAME_WIDTH 1024 - QUOTEVIEW_FRAME_X*2
+#define QUOTEVIEW_FRAME_HEIGHT 768 - QUOTEVIEW_FRAME_Y*2
+
+
+
 typedef enum{
     PEOPLE_VIEW,
     QUOTE_VIEW
@@ -122,6 +129,12 @@ typedef enum{
  
     NSArray *imageNameArray = [NSArray arrayWithObjects:@"steve_jobs.png",
                                @"stars1.jpg",
+                               @"deer.jpg",
+                               @"moon_light.jpg",
+                               @"blue_rays.jpg",
+                               @"28.jpg",
+                               @"71.jpg",
+                               @"1.jpg",
                                @"bill_gates.png",nil];
     
     changeBgTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 block:^(NSTimeInterval time) {
@@ -234,13 +247,15 @@ typedef enum{
         if (_carouseView == PEOPLE_VIEW) {
             view = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"steve.png"]];
         }else if (_carouseView == QUOTE_VIEW) {
-            view = [[QuoteView alloc] initWithFrame:CGRectMake(50, 80, 1024 - 50*2 , 768-160)];
+            view = [[QuoteView alloc] initWithFrame:CGRectMake(QUOTEVIEW_FRAME_X, QUOTEVIEW_FRAME_Y, 
+                                                               QUOTEVIEW_FRAME_WIDTH,QUOTEVIEW_FRAME_HEIGHT)];
         }
 		label = [[UILabel alloc] initWithFrame:view.bounds];
 		label.backgroundColor = [UIColor clearColor];
 		label.textAlignment = UITextAlignmentCenter;
 		label.font = [label.font fontWithSize:50];
 		[view addSubview:label];
+        view.alpha = 0.85;
 	}
 	else
 	{
@@ -261,11 +276,6 @@ typedef enum{
         if (quotesTotalNum > 0 ) {
             QuoteObject *quote = (QuoteObject*)[self.quotes objectAtIndex:index%quotesTotalNum];
             quoteView.quoteText = quote.quoteText;
-            DLog(@"%s count %d", __PRETTY_FUNCTION__, [quote.quoteText length] );
-            if ([quote.quoteText length] > 60) {
-                label.font = [label.font fontWithSize:30];
- 
-            }
         }
     }
 
@@ -306,7 +316,7 @@ typedef enum{
 - (CGFloat)carouselItemWidth:(iCarousel *)carousel
 {
     //usually this should be slightly wider than the item views
-    return 600.0f + 50.0f; //ITEM_SPACING;
+    return QUOTEVIEW_FRAME_WIDTH; //600.0f + 50.0f; //ITEM_SPACING;
 }
 
 - (CGFloat)carousel:(iCarousel *)carousel itemAlphaForOffset:(CGFloat)offset
@@ -330,6 +340,7 @@ typedef enum{
 
 - (void) captureCurrentQuote:(NSInteger)index carousel:(iCarousel*)carousel asImage:(UIImage**)capturedImage{
     UIView  *cellView = [carousel itemViewAtIndex:index];
+    cellView.alpha = 1.0;
     CGRect rect =cellView.frame;  
     UIGraphicsBeginImageContext(rect.size);  
     CGContextRef context = UIGraphicsGetCurrentContext();  
