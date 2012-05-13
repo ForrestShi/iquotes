@@ -13,17 +13,17 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "18A2BC9F154FA89B00FEFAF4"
-               BuildableName = "iChangedWorld.app"
-               BlueprintName = "iChangedWorld"
-               ReferencedContainer = "container:iquotes.xcodeproj">
+               BlueprintIdentifier = "F8E4695F1395739C00DB05C8"
+               BuildableName = "AFNetworking iOS Example.app"
+               BlueprintName = "AFNetworking iOS Example"
+               ReferencedContainer = "container:AFNetworking iOS Example.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
-      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.GDB"
-      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.GDB"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
@@ -31,16 +31,16 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "18A2BC9F154FA89B00FEFAF4"
-            BuildableName = "iChangedWorld.app"
-            BlueprintName = "iChangedWorld"
-            ReferencedContainer = "container:iquotes.xcodeproj">
+            BlueprintIdentifier = "F8E4695F1395739C00DB05C8"
+            BuildableName = "AFNetworking iOS Example.app"
+            BlueprintName = "AFNetworking iOS Example"
+            ReferencedContainer = "container:AFNetworking iOS Example.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
    <LaunchAction
-      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.GDB"
-      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.GDB"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Debug"
@@ -50,10 +50,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "18A2BC9F154FA89B00FEFAF4"
-            BuildableName = "iChangedWorld.app"
-            BlueprintName = "iChangedWorld"
-            ReferencedContainer = "container:iquotes.xcodeproj">
+            BlueprintIdentifier = "F8E4695F1395739C00DB05C8"
+            BuildableName = "AFNetworking iOS Example.app"
+            BlueprintName = "AFNetworking iOS Example"
+            ReferencedContainer = "container:AFNetworking iOS Example.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -68,10 +68,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "18A2BC9F154FA89B00FEFAF4"
-            BuildableName = "iChangedWorld.app"
-            BlueprintName = "iChangedWorld"
-            ReferencedContainer = "container:iquotes.xcodeproj">
+            BlueprintIdentifier = "F8E4695F1395739C00DB05C8"
+            BuildableName = "AFNetworking iOS Example.app"
+            BlueprintName = "AFNetworking iOS Example"
+            ReferencedContainer = "container:AFNetworking iOS Example.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -26,15 +26,8 @@
 #define QUOTEVIEW_FRAME_HEIGHT 768 - QUOTEVIEW_FRAME_Y*2
 
 
-
-typedef enum{
-    PEOPLE_VIEW,
-    QUOTE_VIEW
-} CAROUSELVIEW;
-
 @interface ViewController() <iCarouselDataSource, iCarouselDelegate > {
 @private
-    CAROUSELVIEW _carouseView;
     ShareViewController *_shareVC ;
     NSString            *_currentQuoteText;
     NSTimer             *changeBgTimer ;
@@ -65,8 +58,6 @@ typedef enum{
 	{
 		[peoples addObject:[NSNumber numberWithInt:i]];
 	}
-    
-    _carouseView = QUOTE_VIEW;
 }
 
 - (void)didReceiveMemoryWarning
@@ -107,6 +98,7 @@ typedef enum{
         NSString *plist1Path = [[NSBundle mainBundle] pathForResource:@"jobs_quotes" ofType:@"plist" ];
         quotes = [[[QuotesManager alloc] initWithPlist:plist1Path] quotesArray];
     }
+    
     if (_carousel) {
         _carousel.delegate = self;
         _carousel.dataSource = self;
@@ -127,8 +119,7 @@ typedef enum{
     //dynamic background images
     static int count = 0;
  
-    NSArray *imageNameArray = [NSArray arrayWithObjects:@"steve_jobs.png",
-                               @"stars1.jpg",
+    NSArray *imageNameArray = [NSArray arrayWithObjects:
                                @"deer.jpg",
                                @"moon_light.jpg",
                                @"blue_rays.jpg",
@@ -199,27 +190,6 @@ typedef enum{
 
 - (void) swipAction:(UISwipeGestureRecognizer*)sender{
     
-    [UIView animateWithDuration:1.0 animations:^{
-        self.carousel.type = iCarouselTypeTimeMachine;
-        self.carousel.vertical = NO;
-        _carouseView = QUOTE_VIEW;
-        self.carousel.alpha = 0.0;
-
-    } completion:^(BOOL finished) {
-        
-        [UIView animateWithDuration:.6 animations:^{
-            [self.carousel reloadData];
-
-        } completion:^(BOOL finished) {
-            [UIView animateWithDuration:.6 animations:^{
-                self.carousel.alpha = 1.0;
-            } completion:^(BOOL finished) {                
-            }];
-
-        }];
-        
-
-    }];
         
 }
 #pragma mark -
@@ -244,18 +214,20 @@ typedef enum{
 	//create new view if no view is available for recycling
 	if (view == nil)
 	{
-        if (_carouseView == PEOPLE_VIEW) {
-            view = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"steve.png"]];
-        }else if (_carouseView == QUOTE_VIEW) {
-            view = [[QuoteView alloc] initWithFrame:CGRectMake(QUOTEVIEW_FRAME_X, QUOTEVIEW_FRAME_Y, 
-                                                               QUOTEVIEW_FRAME_WIDTH,QUOTEVIEW_FRAME_HEIGHT)];
-        }
+        view = [[QuoteView alloc] initWithFrame:CGRectMake(QUOTEVIEW_FRAME_X, QUOTEVIEW_FRAME_Y, 
+                                                           QUOTEVIEW_FRAME_WIDTH,QUOTEVIEW_FRAME_HEIGHT)];
 		label = [[UILabel alloc] initWithFrame:view.bounds];
 		label.backgroundColor = [UIColor clearColor];
 		label.textAlignment = UITextAlignmentCenter;
 		label.font = [label.font fontWithSize:50];
 		[view addSubview:label];
         view.alpha = 0.85;
+        
+        view.layer.shadowColor = [[UIColor blackColor] CGColor];
+        view.layer.shadowOffset = CGSizeMake(25.0f, 25.0f);
+        view.layer.shadowOpacity = 1.0f;
+        view.layer.shadowRadius = 25.0f;
+        view.layer.shouldRasterize = YES;        
 	}
 	else
 	{
@@ -263,21 +235,17 @@ typedef enum{
 	}
 	
     //set label
-    if (_carouseView == PEOPLE_VIEW ) {
-       	label.text = [[peoples objectAtIndex:index] stringValue];
-        
-    }else if (_carouseView == QUOTE_VIEW ) {
-        QuoteView  *quoteView = (QuoteView*)view;
-        quoteView.backgroundColor = [UIColor blackColor];
-        
-        quoteView.peopleImage = [UIImage imageNamed:@"steve.png"];
-        
-        NSInteger quotesTotalNum = [quotes count];
-        if (quotesTotalNum > 0 ) {
-            QuoteObject *quote = (QuoteObject*)[self.quotes objectAtIndex:index%quotesTotalNum];
-            quoteView.quoteText = quote.quoteText;
-        }
+    QuoteView  *quoteView = (QuoteView*)view;
+    quoteView.backgroundColor = [UIColor blackColor];
+    
+    quoteView.peopleImage = [UIImage imageNamed:@"steve.png"];
+    
+    NSInteger quotesTotalNum = [quotes count];
+    if (quotesTotalNum > 0 ) {
+        QuoteObject *quote = (QuoteObject*)[self.quotes objectAtIndex:index%quotesTotalNum];
+        quoteView.quoteText = quote.quoteText;
     }
+
 
 	return view;
 }
@@ -362,6 +330,19 @@ typedef enum{
 
     DLog(@"current quote %@", _currentQuoteText);
     _shareVC = [[ShareViewController alloc] initWithFrame:cellView.frame quoteText:_currentQuoteText quoteImage:cellImage];
+    
+    
+    _shareVC.view.layer.shadowColor = [[UIColor blackColor] CGColor];
+    _shareVC.view.layer.shadowOffset = CGSizeMake(50.0, 20.0);
+    _shareVC.view.layer.shadowOpacity = 1.0;
+    _shareVC.view.layer.shadowRadius = 50.0f;
+
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:_shareVC.view.frame byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake(20, 20)];
+    CAShapeLayer *maskLayer = [CAShapeLayer layer];
+    maskLayer.frame = _shareVC.view.frame;
+    maskLayer.path = path.CGPath;
+    _shareVC.view.layer.mask = maskLayer;
+        
     UIView  *shareView  = _shareVC.view;
 
     [UIView transitionFromView:cellView toView:shareView duration:1.0 options:UIViewAnimationOptionTransitionFlipFromTop completion:^(BOOL finished) {

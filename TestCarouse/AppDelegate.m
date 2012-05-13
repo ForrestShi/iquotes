@@ -26,6 +26,22 @@
     }
     self.window.rootViewController = self.viewController;
     
+    //Local Notification
+    
+    UILocalNotification *localNotif = [[UILocalNotification alloc] init];
+    if (localNotif != nil){
+        localNotif.fireDate = [NSDate dateWithTimeIntervalSinceNow:20];
+        localNotif.timeZone = [NSTimeZone defaultTimeZone];
+        
+        localNotif.alertBody = [NSString stringWithFormat:NSLocalizedString(@"%@ -- Steve Jobs", nil),
+                                @"stay hungry,stay foolish" ];
+        localNotif.alertAction = NSLocalizedString(@"View Details", nil);
+        
+        localNotif.soundName = UILocalNotificationDefaultSoundName;
+        localNotif.applicationIconBadgeNumber = 1;
+        
+        [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
+    }
     
     [self.window makeKeyAndVisible];
     return YES;
