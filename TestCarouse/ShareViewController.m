@@ -9,12 +9,12 @@
 
 #import "ShareViewController.h"
 #import "SCFacebook.h"
+#import "AwesomeMenu.h"
 
-@interface ShareViewController () <MFMailComposeViewControllerDelegate>{
+
+@interface ShareViewController () <MFMailComposeViewControllerDelegate , AwesomeMenuDelegate >{
 @private
     UIView *loadingView; 
-    NSString *_quoteText;
-    UIImage *_quoteImage;
 }
 
 -(void)displayComposerSheet;
@@ -23,6 +23,9 @@
 @end
 
 @implementation ShareViewController
+
+@synthesize quoteText = _quoteText;
+@synthesize quoteImage = _quoteImage;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -87,6 +90,41 @@
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"pattern1.jpg"]];
     
+    //awesome menus    
+    AwesomeMenuItem *starMenuItem1 = [[AwesomeMenuItem alloc] initWithImage:[UIImage imageNamed:@"fb.png"]
+                                                           highlightedImage:[UIImage imageNamed:@"fb.png"] 
+                                                               ContentImage:[UIImage imageNamed:@"fb.png"] 
+                                                    highlightedContentImage:nil];
+    AwesomeMenuItem *starMenuItem2 = [[AwesomeMenuItem alloc] initWithImage:[UIImage imageNamed:@"tw.png"]
+                                                           highlightedImage:[UIImage imageNamed:@"tw.png"] 
+                                                               ContentImage:[UIImage imageNamed:@"tw.png"] 
+                                                    highlightedContentImage:nil];
+    AwesomeMenuItem *starMenuItem3 = [[AwesomeMenuItem alloc] initWithImage:[UIImage imageNamed:@"email.png"]
+                                                           highlightedImage:[UIImage imageNamed:@"email.png"] 
+                                                               ContentImage:[UIImage imageNamed:@"email.png"] 
+                                                    highlightedContentImage:nil];
+    AwesomeMenuItem *starMenuItem4 = [[AwesomeMenuItem alloc] initWithImage:[UIImage imageNamed:@"fb_invite.png"]
+                                                           highlightedImage:[UIImage imageNamed:@"fb_invite.png"] 
+                                                               ContentImage:[UIImage imageNamed:@"fb_invite.png"] 
+                                                    highlightedContentImage:nil];
+    
+    NSArray *menus = [NSArray arrayWithObjects:starMenuItem1, starMenuItem2, starMenuItem3, starMenuItem4, nil];
+    
+    AwesomeMenu *menu = [[AwesomeMenu alloc] initWithFrame:self.view.bounds menus:menus];
+    
+    menu.startPoint = CGPointMake(50.0, self.view.bounds.size.height - 50.0f);
+	// customize menu
+	
+     menu.rotateAngle = 0;
+     menu.menuWholeAngle = M_PI*3/4;
+     menu.timeOffset = .5f;
+     menu.farRadius = 250.0f;
+     menu.endRadius = 150.0f;
+     menu.nearRadius = 80.0f;
+    
+    menu.delegate = self;
+    [self.view addSubview:menu];
+    
 }
 
 - (void)viewDidUnload
@@ -100,6 +138,11 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void) setQuoteText:(NSString *)quoteText{    
+    _quoteText = quoteText;
+    [textView setText:[NSString stringWithFormat:@"%@ --- Steve Jobs ", _quoteText]];
 }
 
 #pragma mark - Facebook actions
@@ -249,7 +292,7 @@
 // Launches the Mail application on the device.
 -(void)launchMailAppOnDevice
 {
-    NSString *recipients = @"mailto:first@example.com?cc=second@example.com,third@example.com&subject=Hello from California!";
+    NSString *recipients = @"mailto:first@example.com&subject=Hello from California!";
     NSString *body = @"&body=Stay hungry,stay foolish!";
     
     NSString *email = [NSString stringWithFormat:@"%@%@", recipients, body];
@@ -259,4 +302,27 @@
 }
 
 
+#pragma mark - Awesome Menu Delegate 
+
+- (void)AwesomeMenu:(AwesomeMenu *)menu didSelectIndex:(NSInteger)idx{
+    switch (idx) {
+        case 0:
+            [self publishToMyFBWall:nil];
+            break;
+            
+        case 1:
+            [self sendToTwitter:nil];
+            break;
+           
+        case 2:
+            [self sendEmail:nil];
+            break;
+            
+        case 3:
+            [self inviteFBFriendsToUseThisApp:nil];
+            break;
+        default:
+            break;
+    }
+}
 @end

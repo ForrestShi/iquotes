@@ -15,6 +15,10 @@
 
 }
 
+@property (nonatomic, strong) NSString *quoteText;
+@property (nonatomic, strong) UIImage  *quoteImage;
+
+
 - (id) initWithFrame:(CGRect)frame quoteText:(NSString*)quote quoteImage:(UIImage*)image;
 
 - (IBAction)publishToMyFBWall:(id)sender;

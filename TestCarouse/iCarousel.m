@@ -1866,6 +1866,9 @@ NSComparisonResult compareViewDepth(UIView *view1, UIView *view2, iCarousel *sel
         {
             return NO;
         }
+    }else if ([gesture isKindOfClass:[UIPinchGestureRecognizer class]]){
+        // disable pinch 
+        return NO;
     }
     return YES;
 }

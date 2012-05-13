@@ -26,9 +26,10 @@
 #define QUOTEVIEW_FRAME_HEIGHT 768 - QUOTEVIEW_FRAME_Y*2
 
 
-@interface ViewController() <iCarouselDataSource, iCarouselDelegate > {
+@interface ViewController() <iCarouselDataSource, iCarouselDelegate , UIGestureRecognizerDelegate > {
 @private
     ShareViewController *_shareVC ;
+    BOOL                _isShowSocialView;
     NSString            *_currentQuoteText;
     NSTimer             *changeBgTimer ;
 }
@@ -118,9 +119,18 @@
     
     //dynamic background images
     static int count = 0;
- 
     NSArray *imageNameArray = [NSArray arrayWithObjects:
+                               @"3.jpeg",
+                               @"5.jpeg",
+                               @"60.jpg",
+                               @"38.jpg",
+                               @"0.jpg",
+                               @"113.png",
+                               @"8.jpeg"
+                            
+                               @"5.jpg",
                                @"deer.jpg",
+                               @"john.jpg",
                                @"moon_light.jpg",
                                @"blue_rays.jpg",
                                @"28.jpg",
@@ -145,6 +155,51 @@
         
     } repeats:YES];
     
+
+    // Swip action 
+    UISwipeGestureRecognizer *swipLeftGesture = [[UISwipeGestureRecognizer alloc] initWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
+        UISwipeGestureRecognizer *swip = (UISwipeGestureRecognizer*)sender;
+        
+        if (state == UIGestureRecognizerStateEnded) {
+            NSLog(@"%d directi on %d", [NSThread isMainThread] , [swip direction]);
+
+            [UIView animateWithDuration:1.0 animations:^{
+                self.carousel.alpha = 1.0;
+                
+            } completion:^(BOOL finished) {
+                
+            }];
+        }
+    }];
+    swipLeftGesture.direction = UISwipeGestureRecognizerDirectionLeft;
+    swipLeftGesture.numberOfTouchesRequired = 1;
+    
+    UISwipeGestureRecognizer *swipRightGesture = [[UISwipeGestureRecognizer alloc] initWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
+        UISwipeGestureRecognizer *swip = (UISwipeGestureRecognizer*)sender;
+        
+        if (state == UIGestureRecognizerStateEnded) {
+            NSLog(@"%d directi on %d", [NSThread isMainThread] , [swip direction]);
+            
+            [UIView animateWithDuration:1.0 animations:^{
+                self.carousel.alpha = 0.0;
+                
+            } completion:^(BOOL finished) {
+                
+            }];
+        }
+    }];
+    swipRightGesture.direction = UISwipeGestureRecognizerDirectionRight;
+    swipRightGesture.numberOfTouchesRequired = 1;
+    
+    swipLeftGesture.delegate = self;
+    swipRightGesture.delegate = self;
+    //Swip left/right to make carousel visible/invisible 
+    [self.view addGestureRecognizer:swipLeftGesture];
+    [self.view addGestureRecognizer:swipRightGesture];
+
+    // does not show carousel when launching 
+    self.carousel.alpha = 0.0;
+    _isShowSocialView = NO;
 }
 
 - (void)viewDidUnload
@@ -153,6 +208,25 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
+
+#pragma mark -  gesture delegate
+
+// called before touchesBegan:withEvent: is called on the gesture recognizer for a new touch. return NO to prevent the gesture recognizer from seeing this touch
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
+    
+    if ([gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]]) {
+        if ([touch.view isKindOfClass:[UIButton class]]) {
+            return NO;
+        }
+    }else if([gestureRecognizer isKindOfClass:[UISwipeGestureRecognizer class ]]){
+        if (_isShowSocialView) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -221,7 +295,7 @@
 		label.textAlignment = UITextAlignmentCenter;
 		label.font = [label.font fontWithSize:50];
 		[view addSubview:label];
-        view.alpha = 0.85;
+        view.alpha = 0.95;
         
         view.layer.shadowColor = [[UIColor blackColor] CGColor];
         view.layer.shadowOffset = CGSizeMake(25.0f, 25.0f);
@@ -329,20 +403,26 @@
     [self captureCurrentQuote:index carousel:carousel asImage:&cellImage];
 
     DLog(@"current quote %@", _currentQuoteText);
-    _shareVC = [[ShareViewController alloc] initWithFrame:cellView.frame quoteText:_currentQuoteText quoteImage:cellImage];
-    
-    
-    _shareVC.view.layer.shadowColor = [[UIColor blackColor] CGColor];
-    _shareVC.view.layer.shadowOffset = CGSizeMake(50.0, 20.0);
-    _shareVC.view.layer.shadowOpacity = 1.0;
-    _shareVC.view.layer.shadowRadius = 50.0f;
-
-    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:_shareVC.view.frame byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake(20, 20)];
-    CAShapeLayer *maskLayer = [CAShapeLayer layer];
-    maskLayer.frame = _shareVC.view.frame;
-    maskLayer.path = path.CGPath;
-    _shareVC.view.layer.mask = maskLayer;
+    if (!_shareVC) {
+            _shareVC = [[ShareViewController alloc] initWithFrame:cellView.frame quoteText:_currentQuoteText quoteImage:cellImage];
         
+        _shareVC.view.layer.shadowColor = [[UIColor blackColor] CGColor];
+        _shareVC.view.layer.shadowOffset = CGSizeMake(50.0, 20.0);
+        _shareVC.view.layer.shadowOpacity = 1.0;
+        _shareVC.view.layer.shadowRadius = 50.0f;
+        _shareVC.view.layer.masksToBounds = YES;
+        
+        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:_shareVC.view.frame byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake(20, 20)];
+        CAShapeLayer *maskLayer = [CAShapeLayer layer];
+        maskLayer.frame = _shareVC.view.frame;
+        maskLayer.path = path.CGPath;
+        _shareVC.view.layer.mask = maskLayer;
+
+    }else {
+        _shareVC.quoteText = _currentQuoteText;
+        _shareVC.quoteImage = cellImage;
+    }
+
     UIView  *shareView  = _shareVC.view;
 
     [UIView transitionFromView:cellView toView:shareView duration:1.0 options:UIViewAnimationOptionTransitionFlipFromTop completion:^(BOOL finished) {
@@ -350,12 +430,15 @@
             //remove all gestures for carouse 
             [self.carousel setIgnoreAllGestures:YES];
             
+            _isShowSocialView = YES;
+            
             UIButton *backButton = (UIButton*)[shareView viewWithTag:1001];
             [backButton addEventHandler:^(id sender) {
                 //flip back by tapping 
                 [UIView transitionFromView:shareView toView:cellView duration:1.0 options:UIViewAnimationOptionTransitionFlipFromBottom completion:^(BOOL finished) {
                     //
                     [self.carousel setIgnoreAllGestures:NO];
+                    _isShowSocialView = NO;
                     
                 }];
             } forControlEvents:UIControlEventTouchUpInside];

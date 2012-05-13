@@ -23,11 +23,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TestCarouse/iCarousel.m"
-         timestampString = "357878416.158765"
+         timestampString = "358588457.400909"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1875"
-         endingLineNumber = "1875"
+         startingLineNumber = "1878"
+         endingLineNumber = "1878"
          landmarkName = "-gestureRecognizerShouldBegin:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -37,11 +37,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TestCarouse/iCarousel.m"
-         timestampString = "357878416.158765"
+         timestampString = "358588457.400909"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1898"
-         endingLineNumber = "1898"
+         startingLineNumber = "1901"
+         endingLineNumber = "1901"
          landmarkName = "-didTap:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -121,11 +121,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TestCarouse/ViewController.m"
-         timestampString = "358579940.933898"
+         timestampString = "358594483.825213"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "264"
-         endingLineNumber = "264"
+         startingLineNumber = "338"
+         endingLineNumber = "338"
          landmarkName = "-carousel:placeholderViewAtIndex:reusingView:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -135,11 +135,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TestCarouse/ViewController.m"
-         timestampString = "358579940.933898"
+         timestampString = "358594483.825213"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "265"
-         endingLineNumber = "265"
+         startingLineNumber = "339"
+         endingLineNumber = "339"
          landmarkName = "-carousel:placeholderViewAtIndex:reusingView:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -205,12 +205,77 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TestCarouse/ShareViewController.m"
-         timestampString = "358528953.514572"
+         timestampString = "358608238.743069"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "138"
-         endingLineNumber = "138"
+         startingLineNumber = "181"
+         endingLineNumber = "181"
          landmarkName = "-inviteFBFriendsToUseThisApp:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "TestCarouse/ViewController.m"
+         timestampString = "358594483.825213"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "217"
+         endingLineNumber = "217"
+         landmarkName = "-gestureRecognizer:shouldReceiveTouch:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "TestCarouse/ViewController.m"
+         timestampString = "358605835.121015"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "438"
+         endingLineNumber = "438"
+         landmarkName = "-carousel:didSelectItemAtIndex:"
+         landmarkType = "5">
+         <Locations>
+            <Location
+               shouldBeEnabled = "No"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "__block_global_4"
+               urlString = "file://localhost/Users/apple/workspace/myApps/myApps2012/iQuotes/TestCarouse/ViewController.m"
+               timestampString = "358592716.76315"
+               startingColumnNumber = "9223372036854775807"
+               endingColumnNumber = "9223372036854775807"
+               startingLineNumber = "431"
+               endingLineNumber = "431">
+            </Location>
+            <Location
+               shouldBeEnabled = "No"
+               ignoreCount = "0"
+               continueAfterRunningActions = "No"
+               symbolName = "__block_global_5"
+               urlString = "file://localhost/Users/apple/workspace/myApps/myApps2012/iQuotes/TestCarouse/ViewController.m"
+               timestampString = "358592716.763493"
+               startingColumnNumber = "9223372036854775807"
+               endingColumnNumber = "9223372036854775807"
+               startingLineNumber = "431"
+               endingLineNumber = "431">
+            </Location>
+         </Locations>
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "TestCarouse/ViewController.m"
+         timestampString = "358594483.825213"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "219"
+         endingLineNumber = "219"
+         landmarkName = "-gestureRecognizer:shouldReceiveTouch:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
