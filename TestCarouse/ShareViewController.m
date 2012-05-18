@@ -90,40 +90,40 @@
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"pattern1.jpg"]];
     
-    //awesome menus    
-    AwesomeMenuItem *starMenuItem1 = [[AwesomeMenuItem alloc] initWithImage:[UIImage imageNamed:@"fb.png"]
-                                                           highlightedImage:[UIImage imageNamed:@"fb.png"] 
-                                                               ContentImage:[UIImage imageNamed:@"fb.png"] 
-                                                    highlightedContentImage:nil];
-    AwesomeMenuItem *starMenuItem2 = [[AwesomeMenuItem alloc] initWithImage:[UIImage imageNamed:@"tw.png"]
-                                                           highlightedImage:[UIImage imageNamed:@"tw.png"] 
-                                                               ContentImage:[UIImage imageNamed:@"tw.png"] 
-                                                    highlightedContentImage:nil];
-    AwesomeMenuItem *starMenuItem3 = [[AwesomeMenuItem alloc] initWithImage:[UIImage imageNamed:@"email.png"]
-                                                           highlightedImage:[UIImage imageNamed:@"email.png"] 
-                                                               ContentImage:[UIImage imageNamed:@"email.png"] 
-                                                    highlightedContentImage:nil];
-    AwesomeMenuItem *starMenuItem4 = [[AwesomeMenuItem alloc] initWithImage:[UIImage imageNamed:@"fb_invite.png"]
-                                                           highlightedImage:[UIImage imageNamed:@"fb_invite.png"] 
-                                                               ContentImage:[UIImage imageNamed:@"fb_invite.png"] 
-                                                    highlightedContentImage:nil];
-    
-    NSArray *menus = [NSArray arrayWithObjects:starMenuItem1, starMenuItem2, starMenuItem3, starMenuItem4, nil];
-    
-    AwesomeMenu *menu = [[AwesomeMenu alloc] initWithFrame:self.view.bounds menus:menus];
-    
-    menu.startPoint = CGPointMake(50.0, self.view.bounds.size.height - 50.0f);
-	// customize menu
-	
-     menu.rotateAngle = 0;
-     menu.menuWholeAngle = M_PI*3/4;
-     menu.timeOffset = .5f;
-     menu.farRadius = 250.0f;
-     menu.endRadius = 150.0f;
-     menu.nearRadius = 80.0f;
-    
-    menu.delegate = self;
-    [self.view addSubview:menu];
+//    //awesome menus    
+//    AwesomeMenuItem *starMenuItem1 = [[AwesomeMenuItem alloc] initWithImage:[UIImage imageNamed:@"fb.png"]
+//                                                           highlightedImage:[UIImage imageNamed:@"fb.png"] 
+//                                                               ContentImage:[UIImage imageNamed:@"fb.png"] 
+//                                                    highlightedContentImage:nil];
+//    AwesomeMenuItem *starMenuItem2 = [[AwesomeMenuItem alloc] initWithImage:[UIImage imageNamed:@"tw.png"]
+//                                                           highlightedImage:[UIImage imageNamed:@"tw.png"] 
+//                                                               ContentImage:[UIImage imageNamed:@"tw.png"] 
+//                                                    highlightedContentImage:nil];
+//    AwesomeMenuItem *starMenuItem3 = [[AwesomeMenuItem alloc] initWithImage:[UIImage imageNamed:@"email.png"]
+//                                                           highlightedImage:[UIImage imageNamed:@"email.png"] 
+//                                                               ContentImage:[UIImage imageNamed:@"email.png"] 
+//                                                    highlightedContentImage:nil];
+//    AwesomeMenuItem *starMenuItem4 = [[AwesomeMenuItem alloc] initWithImage:[UIImage imageNamed:@"fb_invite.png"]
+//                                                           highlightedImage:[UIImage imageNamed:@"fb_invite.png"] 
+//                                                               ContentImage:[UIImage imageNamed:@"fb_invite.png"] 
+//                                                    highlightedContentImage:nil];
+//    
+//    NSArray *menus = [NSArray arrayWithObjects:starMenuItem1, starMenuItem2, starMenuItem3, starMenuItem4, nil];
+//    
+//    AwesomeMenu *menu = [[AwesomeMenu alloc] initWithFrame:self.view.bounds menus:menus];
+//    
+//    menu.startPoint = CGPointMake(50.0, self.view.bounds.size.height - 50.0f);
+//	// customize menu
+//	
+//     menu.rotateAngle = 0;
+//     menu.menuWholeAngle = M_PI*3/4;
+//     menu.timeOffset = .5f;
+//     menu.farRadius = 250.0f;
+//     menu.endRadius = 150.0f;
+//     menu.nearRadius = 80.0f;
+//    
+//    menu.delegate = self;
+//    [self.view addSubview:menu];
     
 }
 
@@ -137,7 +137,7 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return UIInterfaceOrientationIsLandscape(interfaceOrientation);
 }
 
 - (void) setQuoteText:(NSString *)quoteText{    
@@ -151,19 +151,26 @@
 - (IBAction)publishToMyFBWall:(id)sender{
     
     loadingView.hidden = NO;
+    
     [SCFacebook loginCallBack:^(BOOL success, id result) {
-        if (success) {
+        
+        loadingView.hidden = YES;
+       if (success) {
             DLog(@"succeed to login");
-            
-            [SCFacebook feedPostWithAppStore:_quoteText callBack:^(BOOL success, id result) {
-                if (success) {
-                    DLog(@"succeed to post msg to fb");
-                } 
-                loadingView.hidden = YES;
-            }];
-        }
+//            loadingView.hidden = NO;
+//
+//            [SCFacebook feedPostWithAppStore:_quoteText callBack:^(BOOL success, id result) {
+//                loadingView.hidden = YES;
+//
+//                if (success) {
+//                    DLog(@"succeed to post msg to fb");
+//                } 
+//            }];
+       }else {
+           //
+           DLog(@"Failed to login FB");
+       }
     }];
-    loadingView.hidden = YES;
 
     
 }

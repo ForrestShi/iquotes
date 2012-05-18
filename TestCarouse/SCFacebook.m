@@ -191,6 +191,7 @@ static SCFacebook * _scFacebook = nil;
             callBack(YES,@"Logged");
          //   [callBack release];
         }
+
     }
 }
 

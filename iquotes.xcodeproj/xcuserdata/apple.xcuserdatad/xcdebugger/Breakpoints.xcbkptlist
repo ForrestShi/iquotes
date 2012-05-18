@@ -121,11 +121,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TestCarouse/ViewController.m"
-         timestampString = "358594483.825213"
+         timestampString = "358613202.553035"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "338"
-         endingLineNumber = "338"
+         startingLineNumber = "334"
+         endingLineNumber = "334"
          landmarkName = "-carousel:placeholderViewAtIndex:reusingView:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -135,11 +135,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TestCarouse/ViewController.m"
-         timestampString = "358594483.825213"
+         timestampString = "358613202.553035"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "339"
-         endingLineNumber = "339"
+         startingLineNumber = "335"
+         endingLineNumber = "335"
          landmarkName = "-carousel:placeholderViewAtIndex:reusingView:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -205,11 +205,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TestCarouse/ShareViewController.m"
-         timestampString = "358608238.743069"
+         timestampString = "359048676.190029"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "181"
-         endingLineNumber = "181"
+         startingLineNumber = "188"
+         endingLineNumber = "188"
          landmarkName = "-inviteFBFriendsToUseThisApp:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -231,7 +231,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TestCarouse/ViewController.m"
-         timestampString = "358605835.121015"
+         timestampString = "359046837.792995"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "438"
@@ -276,6 +276,58 @@
          startingLineNumber = "219"
          endingLineNumber = "219"
          landmarkName = "-gestureRecognizer:shouldReceiveTouch:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "TestCarouse/ShareViewController.m"
+         timestampString = "359048676.190029"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "156"
+         endingLineNumber = "156"
+         landmarkName = "-publishToMyFBWall:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "TestCarouse/ShareViewController.m"
+         timestampString = "359048676.190029"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "158"
+         endingLineNumber = "158"
+         landmarkName = "-publishToMyFBWall:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "TestCarouse/SCFacebook.m"
+         timestampString = "359049230.438863"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "328"
+         endingLineNumber = "328"
+         landmarkName = "+loginCallBack:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "SCFacebook/SCFacebook/ExternalFrameworks/facebook-ios-sdk/src/Facebook.m"
+         timestampString = "359049429.138325"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "219"
+         endingLineNumber = "219"
+         landmarkName = "-authorizeWithFBAppAuth:safariAuth:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

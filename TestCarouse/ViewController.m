@@ -255,11 +255,7 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
-    } else {
-        return YES;
-    }
+    return UIInterfaceOrientationIsLandscape(interfaceOrientation);
 }
 
 - (void) swipAction:(UISwipeGestureRecognizer*)sender{
@@ -399,20 +395,24 @@
     _currentQuoteText = [currentQuote quoteText];
     
     UIView  *cellView = [carousel itemViewAtIndex:index];
-    UIImage *cellImage = nil;
-    [self captureCurrentQuote:index carousel:carousel asImage:&cellImage];
+    __block UIImage *cellImage = nil;
+    dispatch_queue_t capture_queue = dispatch_queue_create("capture", NULL);
+    dispatch_async(capture_queue, ^{
+        [self captureCurrentQuote:index carousel:carousel asImage:&cellImage];
+   
+    });
 
     DLog(@"current quote %@", _currentQuoteText);
     if (!_shareVC) {
             _shareVC = [[ShareViewController alloc] initWithFrame:cellView.frame quoteText:_currentQuoteText quoteImage:cellImage];
         
-        _shareVC.view.layer.shadowColor = [[UIColor blackColor] CGColor];
-        _shareVC.view.layer.shadowOffset = CGSizeMake(50.0, 20.0);
-        _shareVC.view.layer.shadowOpacity = 1.0;
-        _shareVC.view.layer.shadowRadius = 50.0f;
-        _shareVC.view.layer.masksToBounds = YES;
+//        _shareVC.view.layer.shadowColor = [[UIColor blackColor] CGColor];
+//        _shareVC.view.layer.shadowOffset = CGSizeMake(50.0, 20.0);
+//        _shareVC.view.layer.shadowOpacity = 1.0;
+//        _shareVC.view.layer.shadowRadius = 50.0f;
+//        _shareVC.view.layer.masksToBounds = YES;
         
-        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:_shareVC.view.frame byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake(20, 20)];
+        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:_shareVC.view.frame byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake(50, 50)];
         CAShapeLayer *maskLayer = [CAShapeLayer layer];
         maskLayer.frame = _shareVC.view.frame;
         maskLayer.path = path.CGPath;
@@ -425,7 +425,7 @@
 
     UIView  *shareView  = _shareVC.view;
 
-    [UIView transitionFromView:cellView toView:shareView duration:1.0 options:UIViewAnimationOptionTransitionFlipFromTop completion:^(BOOL finished) {
+    [UIView transitionFromView:cellView toView:shareView duration:.5 options:UIViewAnimationOptionTransitionFlipFromTop completion:^(BOOL finished) {
         if (finished) {
             //remove all gestures for carouse 
             [self.carousel setIgnoreAllGestures:YES];
@@ -435,7 +435,7 @@
             UIButton *backButton = (UIButton*)[shareView viewWithTag:1001];
             [backButton addEventHandler:^(id sender) {
                 //flip back by tapping 
-                [UIView transitionFromView:shareView toView:cellView duration:1.0 options:UIViewAnimationOptionTransitionFlipFromBottom completion:^(BOOL finished) {
+                [UIView transitionFromView:shareView toView:cellView duration:.5 options:UIViewAnimationOptionTransitionFlipFromBottom completion:^(BOOL finished) {
                     //
                     [self.carousel setIgnoreAllGestures:NO];
                     _isShowSocialView = NO;
