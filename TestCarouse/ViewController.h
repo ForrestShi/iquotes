@@ -15,6 +15,4 @@
 @property (nonatomic,strong) IBOutlet UIView    *facebookView;
 @property (nonatomic,strong) IBOutlet UIImageView  *bacgroundImageView;
 
-//- (IBAction)publishToMyFBWall:(id)sender;
-
 @end

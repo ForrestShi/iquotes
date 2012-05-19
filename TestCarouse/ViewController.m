@@ -15,13 +15,14 @@
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 
-#define NUMBER_OF_ITEMS (IS_IPAD? 19: 12)
+//#define NUMBER_OF_ITEMS (IS_IPAD? 19: 12)
+#define NUMBER_OF_ITEMS (IS_IPAD? 100: 12)
 #define NUMBER_OF_VISIBLE_ITEMS 25
 #define ITEM_SPACING 210.0f
-#define INCLUDE_PLACEHOLDERS YES
+#define INCLUDE_PLACEHOLDERS NO
 
-#define QUOTEVIEW_FRAME_X 50.0f
-#define QUOTEVIEW_FRAME_Y 50.0f
+#define QUOTEVIEW_FRAME_X 80.0f
+#define QUOTEVIEW_FRAME_Y 80.0f
 #define QUOTEVIEW_FRAME_WIDTH 1024 - QUOTEVIEW_FRAME_X*2
 #define QUOTEVIEW_FRAME_HEIGHT 768 - QUOTEVIEW_FRAME_Y*2
 
@@ -53,7 +54,7 @@
 - (void)setUp
 {
 	//set up data
-	wrap = YES;
+	wrap = NO;
 	self.peoples = [NSMutableArray array];
 	for (int i = 0; i < NUMBER_OF_ITEMS; i++)
 	{
@@ -76,6 +77,7 @@
     return self;
 }
 
+#pragma mark - Shake Motion
 
 - (void) motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event{
     DLog(@"%s", __PRETTY_FUNCTION__);
@@ -106,7 +108,7 @@
         
         //configure carousel
         _carousel.decelerationRate = 2.5;
-        _carousel.type = iCarouselTypeCylinder;
+        _carousel.type = iCarouselTypeInvertedWheel;
         _carousel.vertical = YES;
         
     }
@@ -163,12 +165,20 @@
         if (state == UIGestureRecognizerStateEnded) {
             NSLog(@"%d directi on %d", [NSThread isMainThread] , [swip direction]);
 
+            __block CGPoint oldCenter = self.carousel.center;
+
             [UIView animateWithDuration:1.0 animations:^{
-                self.carousel.alpha = 1.0;
-                
+                float newX = oldCenter.x - self.view.bounds.size.width*0.9;
+                if (newX > 1024/4) {
+                    //come back to reader mode
+                    self.carousel.center = CGPointMake(newX , oldCenter.y);
+                    [self.carousel setIgnoreAllGestures:NO];
+                }
+
             } completion:^(BOOL finished) {
                 
             }];
+            
         }
     }];
     swipLeftGesture.direction = UISwipeGestureRecognizerDirectionLeft;
@@ -179,10 +189,15 @@
         
         if (state == UIGestureRecognizerStateEnded) {
             NSLog(@"%d directi on %d", [NSThread isMainThread] , [swip direction]);
+            __block CGPoint oldCenter = self.carousel.center;
             
             [UIView animateWithDuration:1.0 animations:^{
-                self.carousel.alpha = 0.0;
-                
+                self.carousel.alpha = 1.0;
+                float newX = oldCenter.x + self.view.bounds.size.width*0.9;
+                if (newX < self.view.bounds.size.width + 1024/2) {
+                    [self.carousel setIgnoreAllGestures:YES];
+                    self.carousel.center = CGPointMake(newX , oldCenter.y); 
+                }
             } completion:^(BOOL finished) {
                 
             }];
@@ -198,7 +213,7 @@
     [self.view addGestureRecognizer:swipRightGesture];
 
     // does not show carousel when launching 
-    self.carousel.alpha = 0.0;
+    self.carousel.alpha = 1.0;
     _isShowSocialView = NO;
 }
 
@@ -222,6 +237,8 @@
         if (_isShowSocialView) {
             return NO;
         }
+    }else if([gestureRecognizer isKindOfClass:[UIPinchGestureRecognizer class ]]){
+        return NO;
     }
     return YES;
 }
@@ -258,10 +275,6 @@
     return UIInterfaceOrientationIsLandscape(interfaceOrientation);
 }
 
-- (void) swipAction:(UISwipeGestureRecognizer*)sender{
-    
-        
-}
 #pragma mark -
 #pragma mark iCarousel methods
 
@@ -293,10 +306,11 @@
 		[view addSubview:label];
         view.alpha = 0.95;
         
+        float shadowSize = 50.0f;
         view.layer.shadowColor = [[UIColor blackColor] CGColor];
-        view.layer.shadowOffset = CGSizeMake(25.0f, 25.0f);
+        view.layer.shadowOffset = CGSizeMake(shadowSize,shadowSize);
         view.layer.shadowOpacity = 1.0f;
-        view.layer.shadowRadius = 25.0f;
+        view.layer.shadowRadius = shadowSize;
         view.layer.shouldRasterize = YES;        
 	}
 	else
@@ -315,8 +329,6 @@
         QuoteObject *quote = (QuoteObject*)[self.quotes objectAtIndex:index%quotesTotalNum];
         quoteView.quoteText = quote.quoteText;
     }
-
-
 	return view;
 }
 
@@ -328,33 +340,34 @@
 
 - (UIView *)carousel:(iCarousel *)carousel placeholderViewAtIndex:(NSUInteger)index reusingView:(UIView *)view
 {
-	UILabel *label = nil;
-	
-	//create new view if no view is available for recycling
-	if (view == nil)
-	{
-		view = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"page.png"]];
-		label = [[UILabel alloc] initWithFrame:view.bounds];
-		label.backgroundColor = [UIColor clearColor];
-		label.textAlignment = UITextAlignmentCenter;
-		label.font = [label.font fontWithSize:50.0f];
-		[view addSubview:label];
-	}
-	else
-	{
-		label = [[view subviews] lastObject];
-	}
-	
-    //set label
-	label.text = (index == 0)? @"[": @"]";
-	
-	return view;
+//	UILabel *label = nil;
+//	
+//	//create new view if no view is available for recycling
+//	if (view == nil)
+//	{
+//		view = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"page.png"]];
+//		label = [[UILabel alloc] initWithFrame:view.bounds];
+//		label.backgroundColor = [UIColor clearColor];
+//		label.textAlignment = UITextAlignmentCenter;
+//		label.font = [label.font fontWithSize:50.0f];
+//		[view addSubview:label];
+//	}
+//	else
+//	{
+//		label = [[view subviews] lastObject];
+//	}
+//	
+//    //set label
+//	label.text = (index == 0)? @"[": @"]";
+//	
+//	return view;
+    return nil;
 }
 
 - (CGFloat)carouselItemWidth:(iCarousel *)carousel
 {
     //usually this should be slightly wider than the item views
-    return QUOTEVIEW_FRAME_WIDTH; //600.0f + 50.0f; //ITEM_SPACING;
+    return QUOTEVIEW_FRAME_WIDTH;
 }
 
 - (CGFloat)carousel:(iCarousel *)carousel itemAlphaForOffset:(CGFloat)offset
@@ -405,13 +418,7 @@
     DLog(@"current quote %@", _currentQuoteText);
     if (!_shareVC) {
             _shareVC = [[ShareViewController alloc] initWithFrame:cellView.frame quoteText:_currentQuoteText quoteImage:cellImage];
-        
-//        _shareVC.view.layer.shadowColor = [[UIColor blackColor] CGColor];
-//        _shareVC.view.layer.shadowOffset = CGSizeMake(50.0, 20.0);
-//        _shareVC.view.layer.shadowOpacity = 1.0;
-//        _shareVC.view.layer.shadowRadius = 50.0f;
-//        _shareVC.view.layer.masksToBounds = YES;
-        
+            
         UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:_shareVC.view.frame byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake(50, 50)];
         CAShapeLayer *maskLayer = [CAShapeLayer layer];
         maskLayer.frame = _shareVC.view.frame;
