@@ -12,12 +12,13 @@
 #import "QuoteView.h"
 #import "ShareViewController.h"
 #import "SCFacebook.h"
+#import "CategoryViewController.h"
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 
-//#define NUMBER_OF_ITEMS (IS_IPAD? 19: 12)
-#define NUMBER_OF_ITEMS (IS_IPAD? 100: 12)
-#define NUMBER_OF_VISIBLE_ITEMS 25
+#define NUMBER_OF_ITEMS 1000
+#define NUMBER_OF_VISIBLE_ITEMS (IS_IPAD? 12: 19)
+
 #define ITEM_SPACING 210.0f
 #define INCLUDE_PLACEHOLDERS NO
 
@@ -26,6 +27,10 @@
 #define QUOTEVIEW_FRAME_WIDTH 1024 - QUOTEVIEW_FRAME_X*2
 #define QUOTEVIEW_FRAME_HEIGHT 768 - QUOTEVIEW_FRAME_Y*2
 
+typedef enum{
+    CATEGORY,
+    QUOTE
+} VIEWTYPE;
 
 @interface ViewController() <iCarouselDataSource, iCarouselDelegate , UIGestureRecognizerDelegate > {
 @private
@@ -33,20 +38,21 @@
     BOOL                _isShowSocialView;
     NSString            *_currentQuoteText;
     NSTimer             *changeBgTimer ;
+    iCarousel           *_quotesView;
+    iCarousel           *_categoryView;
+    CategoryViewController *_categoryVC;
+    
+    VIEWTYPE            _currentFocusViewType;
 }
 @property (nonatomic, assign) BOOL wrap;
-@property (nonatomic, strong) NSMutableArray *peoples;
 @property (nonatomic, strong) NSMutableArray *quotes;
 @property (nonatomic, strong) ShareViewController *shareVC;
 @end
 
 
 @implementation ViewController
-@synthesize carousel = _carousel;
 @synthesize wrap;
-@synthesize peoples;
 @synthesize quotes;
-@synthesize facebookView;
 @synthesize shareVC = _shareVC;
 @synthesize bacgroundImageView;
 
@@ -55,11 +61,11 @@
 {
 	//set up data
 	wrap = NO;
-	self.peoples = [NSMutableArray array];
-	for (int i = 0; i < NUMBER_OF_ITEMS; i++)
-	{
-		[peoples addObject:[NSNumber numberWithInt:i]];
-	}
+//	self.peoples = [NSMutableArray array];
+//	for (int i = 0; i < NUMBER_OF_ITEMS; i++)
+//	{
+//		[peoples addObject:[NSNumber numberWithInt:i]];
+//	}
 }
 
 - (void)didReceiveMemoryWarning
@@ -92,32 +98,44 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    
-    if (quotes) {
-        [quotes removeAllObjects];
-        quotes = nil;
-    }
     if (!quotes) {
-        NSString *plist1Path = [[NSBundle mainBundle] pathForResource:@"jobs_quotes" ofType:@"plist" ];
+        NSTimeInterval startTime = [NSDate timeIntervalSinceReferenceDate];
+        
+        NSString *plist1Path = [[NSBundle mainBundle] pathForResource:@"jobs_quotes1" ofType:@"plist" ];
         quotes = [[[QuotesManager alloc] initWithPlist:plist1Path] quotesArray];
+        
+        NSTimeInterval endTime = [NSDate timeIntervalSinceReferenceDate];
+        DLog(@"%s  ALL QUOTES %d using TIME %f ",__PRETTY_FUNCTION__, [quotes count] , (endTime - startTime) );
+        
     }
     
-    if (_carousel) {
-        _carousel.delegate = self;
-        _carousel.dataSource = self;
+    // Quote View
+    CGRect viewBounds = self.view.bounds;
+    if (!_quotesView) {
+        _quotesView = [[iCarousel alloc] initWithFrame:viewBounds];
+        _quotesView.delegate = self;
+        _quotesView.dataSource = self;
         
         //configure carousel
-        _carousel.decelerationRate = 2.5;
-        _carousel.type = iCarouselTypeInvertedWheel;
-        _carousel.vertical = YES;
-        
+        _quotesView.decelerationRate = 2.5;
+        _quotesView.type = iCarouselTypeInvertedWheel;
+        _quotesView.vertical = YES;
     }
     
     [[NSNotificationCenter defaultCenter] addObserverForName:@"shake" object:nil queue:nil usingBlock:^(NSNotification *note) {
         //
         DLog(@"%s", __PRETTY_FUNCTION__);
-        _carousel.type = rand()%iCarouselTypeCustom;
+        _quotesView.type = rand()%iCarouselTypeCustom;
     }];
+    _currentFocusViewType = QUOTE; 
+    [self.view addSubview:_quotesView];
+    
+    if (!_categoryVC) {
+        _categoryVC = [[CategoryViewController alloc] init];
+        _categoryVC.view.frame = CGRectMake(viewBounds.origin.x - viewBounds.size.width, viewBounds.origin.y, viewBounds.size.width, viewBounds.size.height);
+    }
+    _categoryVC.view.alpha = 0.0;
+    [self.view addSubview:_categoryVC.view];
     
     //dynamic background images
     static int count = 0;
@@ -129,7 +147,7 @@
                                @"0.jpg",
                                @"113.png",
                                @"8.jpeg"
-                            
+                               
                                @"5.jpg",
                                @"deer.jpg",
                                @"john.jpg",
@@ -152,31 +170,36 @@
             transition.type = kCATransitionFade;
             [bacgroundImageView.layer addAnimation:transition forKey:@"image"];
         }
-
+        
         bacgroundImageView.image = [UIImage imageNamed:imageName];
         
     } repeats:YES];
     
-
+    
+    
     // Swip action 
     UISwipeGestureRecognizer *swipLeftGesture = [[UISwipeGestureRecognizer alloc] initWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
         UISwipeGestureRecognizer *swip = (UISwipeGestureRecognizer*)sender;
         
         if (state == UIGestureRecognizerStateEnded) {
             NSLog(@"%d directi on %d", [NSThread isMainThread] , [swip direction]);
-
-            __block CGPoint oldCenter = self.carousel.center;
-
+            
+            __block CGPoint oldCenter = _quotesView.center;
+            
             [UIView animateWithDuration:1.0 animations:^{
                 float newX = oldCenter.x - self.view.bounds.size.width*0.9;
                 if (newX > 1024/4) {
                     //come back to reader mode
-                    self.carousel.center = CGPointMake(newX , oldCenter.y);
-                    [self.carousel setIgnoreAllGestures:NO];
+                    _quotesView.center = CGPointMake(newX , oldCenter.y);
+                    [_quotesView setIgnoreAllGestures:NO];
                 }
-
-            } completion:^(BOOL finished) {
                 
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.5 animations:^{
+                    _categoryVC.view.transform = CGAffineTransformMakeTranslation(-self.view.bounds.size.width, 0);
+                    _categoryVC.view.alpha = 0.0;
+                    
+                }];
             }];
             
         }
@@ -184,21 +207,29 @@
     swipLeftGesture.direction = UISwipeGestureRecognizerDirectionLeft;
     swipLeftGesture.numberOfTouchesRequired = 1;
     
+    // SHOW CATEGORY VIEW 
     UISwipeGestureRecognizer *swipRightGesture = [[UISwipeGestureRecognizer alloc] initWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
         UISwipeGestureRecognizer *swip = (UISwipeGestureRecognizer*)sender;
         
         if (state == UIGestureRecognizerStateEnded) {
             NSLog(@"%d directi on %d", [NSThread isMainThread] , [swip direction]);
-            __block CGPoint oldCenter = self.carousel.center;
+            __block CGPoint oldCenter = _quotesView.center;
             
             [UIView animateWithDuration:1.0 animations:^{
-                self.carousel.alpha = 1.0;
+                
                 float newX = oldCenter.x + self.view.bounds.size.width*0.9;
                 if (newX < self.view.bounds.size.width + 1024/2) {
-                    [self.carousel setIgnoreAllGestures:YES];
-                    self.carousel.center = CGPointMake(newX , oldCenter.y); 
+                    [_quotesView setIgnoreAllGestures:YES];
+                    _quotesView.center = CGPointMake(newX , oldCenter.y); 
                 }
+                
             } completion:^(BOOL finished) {
+                //_currentFocusViewType = CATEGORY;
+                [UIView animateWithDuration:0.5 animations:^{
+                    _categoryVC.view.transform = CGAffineTransformMakeTranslation(self.view.bounds.size.width, 0);
+                    _categoryVC.view.alpha = 1.0;
+                    
+                }];
                 
             }];
         }
@@ -211,10 +242,40 @@
     //Swip left/right to make carousel visible/invisible 
     [self.view addGestureRecognizer:swipLeftGesture];
     [self.view addGestureRecognizer:swipRightGesture];
-
-    // does not show carousel when launching 
-    self.carousel.alpha = 1.0;
+    
     _isShowSocialView = NO;
+    
+    // handle actions of selecting category
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"select_category" object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+        //
+        NSUInteger category_index = [[[note userInfo] objectForKey:@"category_index"] intValue];
+        DLog(@"%s index %d",__PRETTY_FUNCTION__ , category_index);
+        //set the data source for the specified category 
+        //TODO
+        
+        //transition of views
+        __block CGPoint oldCenter = _quotesView.center;
+        [UIView animateWithDuration:.5 animations:^{
+            
+            _categoryVC.view.transform = CGAffineTransformMakeTranslation(-self.view.bounds.size.width, 0);
+            _categoryVC.view.alpha = 0.0;
+        } completion:^(BOOL finished) {
+            
+            [UIView animateWithDuration:1.0 animations:^{
+                
+                float newX = oldCenter.x - self.view.bounds.size.width*0.9;
+                if (newX > 1024/4) {
+                    //come back to reader mode
+                    _quotesView.center = CGPointMake(newX , oldCenter.y);
+                    [_quotesView setIgnoreAllGestures:NO];
+                }
+                
+            }];
+            
+        }];
+        
+    }];
+    
 }
 
 - (void)viewDidUnload
@@ -280,7 +341,8 @@
 
 - (NSUInteger)numberOfItemsInCarousel:(iCarousel *)carousel
 {
-    return [peoples count];
+    DLog(@"%s numbers of count %d",__PRETTY_FUNCTION__ ,[quotes count]);
+    return [quotes count];
 }
 
 - (NSUInteger)numberOfVisibleItemsInCarousel:(iCarousel *)carousel
@@ -292,43 +354,43 @@
 
 - (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSUInteger)index reusingView:(UIView *)view
 {
-	UILabel *label = nil;
-	
-	//create new view if no view is available for recycling
-	if (view == nil)
-	{
+    UILabel *label = nil;
+    //create new view if no view is available for recycling
+    if (view == nil)
+    {
         view = [[QuoteView alloc] initWithFrame:CGRectMake(QUOTEVIEW_FRAME_X, QUOTEVIEW_FRAME_Y, 
                                                            QUOTEVIEW_FRAME_WIDTH,QUOTEVIEW_FRAME_HEIGHT)];
-		label = [[UILabel alloc] initWithFrame:view.bounds];
-		label.backgroundColor = [UIColor clearColor];
-		label.textAlignment = UITextAlignmentCenter;
-		label.font = [label.font fontWithSize:50];
-		[view addSubview:label];
-        view.alpha = 0.95;
+        label = [[UILabel alloc] initWithFrame:view.bounds];
+        label.backgroundColor = [UIColor clearColor];
+        label.textAlignment = UITextAlignmentCenter;
+        label.textColor =[UIColor whiteColor];
+        label.font = [label.font fontWithSize:50];
+        //[view addSubview:label];
         
+        view.alpha = 0.95;
         float shadowSize = 50.0f;
         view.layer.shadowColor = [[UIColor blackColor] CGColor];
         view.layer.shadowOffset = CGSizeMake(shadowSize,shadowSize);
         view.layer.shadowOpacity = 1.0f;
         view.layer.shadowRadius = shadowSize;
         view.layer.shouldRasterize = YES;        
-	}
-	else
-	{
-		label = [[view subviews] lastObject];
-	}
-	
-    //set label
+    }
+    else
+    {
+        label = [[view subviews] lastObject];
+    }
+    
     QuoteView  *quoteView = (QuoteView*)view;
-    quoteView.backgroundColor = [UIColor blackColor];
     
     quoteView.peopleImage = [UIImage imageNamed:@"steve.png"];
+    QuoteObject *quote = (QuoteObject*)[self.quotes objectAtIndex:index%([quotes count])];
+    quoteView.quoteText = quote.quoteText;
     
-    NSInteger quotesTotalNum = [quotes count];
-    if (quotesTotalNum > 0 ) {
-        QuoteObject *quote = (QuoteObject*)[self.quotes objectAtIndex:index%quotesTotalNum];
-        quoteView.quoteText = quote.quoteText;
-    }
+    //THIS CAN FIX ! STRANGE !!
+    label.text = quote.quoteText;
+
+    //DLog(@"%s index %d  \n %@",__PRETTY_FUNCTION__ , index , quoteView.quoteText);
+
 	return view;
 }
 
@@ -340,27 +402,6 @@
 
 - (UIView *)carousel:(iCarousel *)carousel placeholderViewAtIndex:(NSUInteger)index reusingView:(UIView *)view
 {
-//	UILabel *label = nil;
-//	
-//	//create new view if no view is available for recycling
-//	if (view == nil)
-//	{
-//		view = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"page.png"]];
-//		label = [[UILabel alloc] initWithFrame:view.bounds];
-//		label.backgroundColor = [UIColor clearColor];
-//		label.textAlignment = UITextAlignmentCenter;
-//		label.font = [label.font fontWithSize:50.0f];
-//		[view addSubview:label];
-//	}
-//	else
-//	{
-//		label = [[view subviews] lastObject];
-//	}
-//	
-//    //set label
-//	label.text = (index == 0)? @"[": @"]";
-//	
-//	return view;
     return nil;
 }
 
@@ -402,7 +443,6 @@
 }
 
 - (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index{
-    DLog(@"%s",__PRETTY_FUNCTION__);
     
     QuoteObject *currentQuote =  [self.quotes objectAtIndex:index % [self.quotes count]];
     _currentQuoteText = [currentQuote quoteText];
@@ -412,30 +452,33 @@
     dispatch_queue_t capture_queue = dispatch_queue_create("capture", NULL);
     dispatch_async(capture_queue, ^{
         [self captureCurrentQuote:index carousel:carousel asImage:&cellImage];
-   
+        
     });
-
-    DLog(@"current quote %@", _currentQuoteText);
+    
+    NSString *idxString = [NSString stringWithFormat:@"%d / %d", index , [quotes count]];
+    DLog(@"current quote %@ index %@ \n quote is \n %@", _currentQuoteText, idxString, _currentQuoteText);
+    
     if (!_shareVC) {
-            _shareVC = [[ShareViewController alloc] initWithFrame:cellView.frame quoteText:_currentQuoteText quoteImage:cellImage];
-            
+        _shareVC = [[ShareViewController alloc] initWithFrame:cellView.frame quoteText:_currentQuoteText quoteImage:cellImage indexString:idxString];
+        
         UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:_shareVC.view.frame byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake(50, 50)];
         CAShapeLayer *maskLayer = [CAShapeLayer layer];
         maskLayer.frame = _shareVC.view.frame;
         maskLayer.path = path.CGPath;
         _shareVC.view.layer.mask = maskLayer;
-
+        
     }else {
         _shareVC.quoteText = _currentQuoteText;
         _shareVC.quoteImage = cellImage;
+        _shareVC.indexString = idxString;
     }
-
+    
     UIView  *shareView  = _shareVC.view;
-
+    
     [UIView transitionFromView:cellView toView:shareView duration:.5 options:UIViewAnimationOptionTransitionFlipFromTop completion:^(BOOL finished) {
         if (finished) {
             //remove all gestures for carouse 
-            [self.carousel setIgnoreAllGestures:YES];
+            [_quotesView setIgnoreAllGestures:YES];
             
             _isShowSocialView = YES;
             
@@ -444,14 +487,36 @@
                 //flip back by tapping 
                 [UIView transitionFromView:shareView toView:cellView duration:.5 options:UIViewAnimationOptionTransitionFlipFromBottom completion:^(BOOL finished) {
                     //
-                    [self.carousel setIgnoreAllGestures:NO];
+                    [_quotesView setIgnoreAllGestures:NO];
                     _isShowSocialView = NO;
                     
                 }];
             } forControlEvents:UIControlEventTouchUpInside];
-
+            
         }
     }];
 }
- 
+
+- (void)carouselWillBeginScrollingAnimation:(iCarousel *)carousel{
+    DLog(@"%s",__PRETTY_FUNCTION__);
+}
+- (void)carouselDidEndScrollingAnimation:(iCarousel *)carousel{
+    DLog(@"%s",__PRETTY_FUNCTION__);
+}
+
+- (void)carouselDidScroll:(iCarousel *)carousel{
+    //DLog(@"%s",__PRETTY_FUNCTION__);
+}
+
+- (void)carouselCurrentItemIndexUpdated:(iCarousel *)carousel{
+    DLog(@"%s %d",__PRETTY_FUNCTION__ , [carousel currentItemIndex]);
+    
+    QuoteView *quoteView = (QuoteView*)carousel.currentItemView;
+    QuoteObject *quote = [quotes objectAtIndex:[carousel currentItemIndex]];
+    quoteView.quoteText = quote.quoteText;
+    DLog(@"set as \n %@", quoteView.quoteText);
+    
+}
+
+
 @end

@@ -15,6 +15,7 @@
 @interface ShareViewController () <MFMailComposeViewControllerDelegate , AwesomeMenuDelegate >{
 @private
     UIView *loadingView; 
+    NSString *_indexString;
 }
 
 -(void)displayComposerSheet;
@@ -26,6 +27,7 @@
 
 @synthesize quoteText = _quoteText;
 @synthesize quoteImage = _quoteImage;
+@synthesize indexString = _indexString;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,13 +38,14 @@
     return self;
 }
 
-- (id) initWithFrame:(CGRect)frame quoteText:(NSString*)quote quoteImage:(UIImage*)image{
+- (id) initWithFrame:(CGRect)frame quoteText:(NSString*)quote quoteImage:(UIImage*)image indexString:(NSString*)idx{
     self = [super initWithNibName:@"ShareViewController" bundle:nil];
     if (self) {
         // Custom initialization
         self.view.frame = frame;
         _quoteText = quote;
         _quoteImage = image;
+        _indexString = idx;
     }
     return self;
 }
@@ -83,6 +86,8 @@
                 textView.alpha = 1.0;
             }];
             
+            indexLabel.text = _indexString;
+            
         } afterDelay:.5];
     }
     
@@ -109,6 +114,11 @@
 - (void) setQuoteText:(NSString *)quoteText{    
     _quoteText = quoteText;
     [textView setText:[NSString stringWithFormat:@"%@ --- Steve Jobs ", _quoteText]];
+}
+
+- (void) setIndexString:(NSString *)indexString{
+    _indexString = indexString;
+    [indexLabel setText:_indexString];
 }
 
 #pragma mark - Facebook actions

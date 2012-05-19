@@ -12,14 +12,16 @@
 {
     IBOutlet UITextView   *textView;
     IBOutlet UILabel *message;
-
+    IBOutlet UILabel *indexLabel;
 }
 
 @property (nonatomic, strong) NSString *quoteText;
 @property (nonatomic, strong) UIImage  *quoteImage;
+@property (nonatomic, strong) NSString *indexString;
 
 
-- (id) initWithFrame:(CGRect)frame quoteText:(NSString*)quote quoteImage:(UIImage*)image;
+
+- (id) initWithFrame:(CGRect)frame quoteText:(NSString*)quote quoteImage:(UIImage*)image indexString:(NSString*)idx;
 
 - (IBAction)publishToMyFBWall:(id)sender;
 - (IBAction)inviteFBFriendsToUseThisApp:(id)sender;

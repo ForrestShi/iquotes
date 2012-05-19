@@ -11,8 +11,6 @@
 
 @interface ViewController : UIViewController
 
-@property (nonatomic,strong) IBOutlet iCarousel *carousel;
-@property (nonatomic,strong) IBOutlet UIView    *facebookView;
 @property (nonatomic,strong) IBOutlet UIImageView  *bacgroundImageView;
 
 @end
