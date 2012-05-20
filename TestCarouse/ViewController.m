@@ -17,7 +17,7 @@
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 
 #define NUMBER_OF_ITEMS 1000
-#define NUMBER_OF_VISIBLE_ITEMS (IS_IPAD? 12: 19)
+#define NUMBER_OF_VISIBLE_ITEMS (IS_IPAD? 18: 20)
 
 #define ITEM_SPACING 210.0f
 #define INCLUDE_PLACEHOLDERS NO
@@ -34,15 +34,12 @@ typedef enum{
 
 @interface ViewController() <iCarouselDataSource, iCarouselDelegate , UIGestureRecognizerDelegate > {
 @private
-    ShareViewController *_shareVC ;
     BOOL                _isShowSocialView;
     NSString            *_currentQuoteText;
     NSTimer             *changeBgTimer ;
     iCarousel           *_quotesView;
-    iCarousel           *_categoryView;
     CategoryViewController *_categoryVC;
     
-    VIEWTYPE            _currentFocusViewType;
 }
 @property (nonatomic, assign) BOOL wrap;
 @property (nonatomic, strong) NSMutableArray *quotes;
@@ -127,7 +124,6 @@ typedef enum{
         DLog(@"%s", __PRETTY_FUNCTION__);
         _quotesView.type = rand()%iCarouselTypeCustom;
     }];
-    _currentFocusViewType = QUOTE; 
     [self.view addSubview:_quotesView];
     
     if (!_categoryVC) {
@@ -224,7 +220,6 @@ typedef enum{
                 }
                 
             } completion:^(BOOL finished) {
-                //_currentFocusViewType = CATEGORY;
                 [UIView animateWithDuration:0.5 animations:^{
                     _categoryVC.view.transform = CGAffineTransformMakeTranslation(self.view.bounds.size.width, 0);
                     _categoryVC.view.alpha = 1.0;
@@ -355,40 +350,48 @@ typedef enum{
 - (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSUInteger)index reusingView:(UIView *)view
 {
     UILabel *label = nil;
+    UIImageView *imageView = nil;
     //create new view if no view is available for recycling
     if (view == nil)
     {
         view = [[QuoteView alloc] initWithFrame:CGRectMake(QUOTEVIEW_FRAME_X, QUOTEVIEW_FRAME_Y, 
                                                            QUOTEVIEW_FRAME_WIDTH,QUOTEVIEW_FRAME_HEIGHT)];
-        label = [[UILabel alloc] initWithFrame:view.bounds];
-        label.backgroundColor = [UIColor clearColor];
-        label.textAlignment = UITextAlignmentCenter;
-        label.textColor =[UIColor whiteColor];
-        label.font = [label.font fontWithSize:50];
-        //[view addSubview:label];
-        
         view.alpha = 0.95;
         float shadowSize = 50.0f;
         view.layer.shadowColor = [[UIColor blackColor] CGColor];
         view.layer.shadowOffset = CGSizeMake(shadowSize,shadowSize);
         view.layer.shadowOpacity = 1.0f;
         view.layer.shadowRadius = shadowSize;
-        view.layer.shouldRasterize = YES;        
+        view.layer.shouldRasterize = YES;  
     }
     else
     {
-        label = [[view subviews] lastObject];
+        for (id obj in [view subviews]) {
+            if ([obj isKindOfClass:[UIImageView class]]) {
+                //
+                DLog(@"image view");
+                imageView = obj;
+            }else if([obj isKindOfClass:[UILabel class]]){
+                DLog(@"label class");
+                label = obj;
+            }
+        }
     }
     
     QuoteView  *quoteView = (QuoteView*)view;
+    NSUInteger randIndex = index%6;  //
+    NSString *fileName = [NSString stringWithFormat:@"steve%d.jpg",randIndex];
+    DLog(@"filename %@",fileName);
+    quoteView.peopleImage = [UIImage imageNamed:fileName];
     
-    quoteView.peopleImage = [UIImage imageNamed:@"steve.png"];
     QuoteObject *quote = (QuoteObject*)[self.quotes objectAtIndex:index%([quotes count])];
-    quoteView.quoteText = quote.quoteText;
+    if (!label) {
+        quoteView.quoteText = quote.quoteText;
+    }else {
+        label.text = quote.quoteText;
+        //imageView.image = [UIImage imageNamed:fileName];
+    }
     
-    //THIS CAN FIX ! STRANGE !!
-    label.text = quote.quoteText;
-
     //DLog(@"%s index %d  \n %@",__PRETTY_FUNCTION__ , index , quoteView.quoteText);
 
 	return view;
@@ -447,7 +450,7 @@ typedef enum{
     QuoteObject *currentQuote =  [self.quotes objectAtIndex:index % [self.quotes count]];
     _currentQuoteText = [currentQuote quoteText];
     
-    UIView  *cellView = [carousel itemViewAtIndex:index];
+    UIView  *cellView =  [carousel currentItemView];//[carousel itemViewAtIndex:index];
     __block UIImage *cellImage = nil;
     dispatch_queue_t capture_queue = dispatch_queue_create("capture", NULL);
     dispatch_async(capture_queue, ^{
@@ -456,56 +459,34 @@ typedef enum{
     });
     
     NSString *idxString = [NSString stringWithFormat:@"%d / %d", index , [quotes count]];
-    DLog(@"current quote %@ index %@ \n quote is \n %@", _currentQuoteText, idxString, _currentQuoteText);
+
+    ShareViewController *_shareVC = [[ShareViewController alloc] initWithFrame:cellView.frame 
+                                                                     quoteText:_currentQuoteText 
+                                                                    quoteImage:cellImage 
+                                                                   indexString:idxString];
     
-    if (!_shareVC) {
-        _shareVC = [[ShareViewController alloc] initWithFrame:cellView.frame quoteText:_currentQuoteText quoteImage:cellImage indexString:idxString];
-        
-        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:_shareVC.view.frame byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake(50, 50)];
-        CAShapeLayer *maskLayer = [CAShapeLayer layer];
-        maskLayer.frame = _shareVC.view.frame;
-        maskLayer.path = path.CGPath;
-        _shareVC.view.layer.mask = maskLayer;
-        
-    }else {
-        _shareVC.quoteText = _currentQuoteText;
-        _shareVC.quoteImage = cellImage;
-        _shareVC.indexString = idxString;
-    }
     
-    UIView  *shareView  = _shareVC.view;
+    _shareVC.quoteText = _currentQuoteText;
+    _shareVC.quoteImage = cellImage;
+    _shareVC.indexString = idxString;
     
-    [UIView transitionFromView:cellView toView:shareView duration:.5 options:UIViewAnimationOptionTransitionFlipFromTop completion:^(BOOL finished) {
+    [UIView transitionFromView:cellView toView:_shareVC.view duration:.5 options:UIViewAnimationOptionTransitionFlipFromTop completion:^(BOOL finished) {
         if (finished) {
             //remove all gestures for carouse 
             [_quotesView setIgnoreAllGestures:YES];
-            
             _isShowSocialView = YES;
             
-            UIButton *backButton = (UIButton*)[shareView viewWithTag:1001];
+            UIButton *backButton = (UIButton*)[_shareVC.view viewWithTag:1001];
             [backButton addEventHandler:^(id sender) {
                 //flip back by tapping 
-                [UIView transitionFromView:shareView toView:cellView duration:.5 options:UIViewAnimationOptionTransitionFlipFromBottom completion:^(BOOL finished) {
+                [UIView transitionFromView:_shareVC.view toView:cellView duration:.5 options:UIViewAnimationOptionTransitionFlipFromBottom completion:^(BOOL finished) {
                     //
                     [_quotesView setIgnoreAllGestures:NO];
                     _isShowSocialView = NO;
-                    
                 }];
             } forControlEvents:UIControlEventTouchUpInside];
-            
         }
     }];
-}
-
-- (void)carouselWillBeginScrollingAnimation:(iCarousel *)carousel{
-    DLog(@"%s",__PRETTY_FUNCTION__);
-}
-- (void)carouselDidEndScrollingAnimation:(iCarousel *)carousel{
-    DLog(@"%s",__PRETTY_FUNCTION__);
-}
-
-- (void)carouselDidScroll:(iCarousel *)carousel{
-    //DLog(@"%s",__PRETTY_FUNCTION__);
 }
 
 - (void)carouselCurrentItemIndexUpdated:(iCarousel *)carousel{
@@ -514,8 +495,6 @@ typedef enum{
     QuoteView *quoteView = (QuoteView*)carousel.currentItemView;
     QuoteObject *quote = [quotes objectAtIndex:[carousel currentItemIndex]];
     quoteView.quoteText = quote.quoteText;
-    DLog(@"set as \n %@", quoteView.quoteText);
-    
 }
 
 

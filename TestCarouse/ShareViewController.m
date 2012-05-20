@@ -6,6 +6,7 @@
 //  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
 //
 #import <Twitter/twitter.h>
+#import <QuartzCore/QuartzCore.h>
 
 #import "ShareViewController.h"
 #import "SCFacebook.h"
@@ -16,6 +17,8 @@
 @private
     UIView *loadingView; 
     NSString *_indexString;
+    
+    NSString *_quoteText;
 }
 
 -(void)displayComposerSheet;
@@ -46,6 +49,13 @@
         _quoteText = quote;
         _quoteImage = image;
         _indexString = idx;
+        
+        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:self.view.bounds byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake(50, 50)];
+        CAShapeLayer *maskLayer = [CAShapeLayer layer];
+        maskLayer.frame = self.view.frame;
+        maskLayer.path = path.CGPath;
+        self.view.layer.mask = maskLayer;
+
     }
     return self;
 }

@@ -16,7 +16,7 @@
 		1890027E155E766A00F160E9 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 1890027D155E766A00F160E9 /* back.png */; };
 		18900280155E798000F160E9 /* pattern1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1890027F155E798000F160E9 /* pattern1.jpg */; };
 		1898575C15594EE500F7A0F8 /* jobs_quotes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1898575B15594EE500F7A0F8 /* jobs_quotes.plist */; };
-		1898575E15594FA300F7A0F8 /* steve.png in Resources */ = {isa = PBXBuildFile; fileRef = 1898575D15594FA300F7A0F8 /* steve.png */; };
+		1898575E15594FA300F7A0F8 /* steve5.png in Resources */ = {isa = PBXBuildFile; fileRef = 1898575D15594FA300F7A0F8 /* steve5.png */; };
 		189F91DC1555666C00AD0D08 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189F91DA1555666C00AD0D08 /* ShareViewController.m */; };
 		189F91DD1555666C00AD0D08 /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189F91DB1555666C00AD0D08 /* ShareViewController.xib */; };
 		18A04F75155D79A80079F831 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A04F74155D79A80079F831 /* Twitter.framework */; };
@@ -31,7 +31,6 @@
 		18A2BCBE154FA89B00FEFAF4 /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A2BCBC154FA89B00FEFAF4 /* ViewController_iPad.xib */; };
 		18A2BCC6154FA8BE00FEFAF4 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A2BCC5154FA8BE00FEFAF4 /* iCarousel.m */; };
 		18A2BCC8154FA8DA00FEFAF4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2BCC7154FA8DA00FEFAF4 /* QuartzCore.framework */; };
-		18A2BCD6154FD1FF00FEFAF4 /* steve_jobs.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A2BCD5154FD1FF00FEFAF4 /* steve_jobs.png */; };
 		18A2BCD8154FD23A00FEFAF4 /* bill_gates.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A2BCD7154FD23A00FEFAF4 /* bill_gates.png */; };
 		18A2BCEA15500E7C00FEFAF4 /* QuotesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A2BCE715500E7C00FEFAF4 /* QuotesManager.m */; };
 		18A2BCEB15500E7C00FEFAF4 /* QuoteObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A2BCE915500E7C00FEFAF4 /* QuoteObject.m */; };
@@ -39,6 +38,16 @@
 		18A563B21554D9520069AC14 /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A563AE1554D8E80069AC14 /* libfacebook_ios_sdk.a */; };
 		18A56B841567AB2400E6183C /* CategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A56B831567AB2400E6183C /* CategoryViewController.m */; };
 		18A56B861567B91E00E6183C /* jobs_quotes1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18A56B851567B91E00E6183C /* jobs_quotes1.plist */; };
+		18AFAFB51568AB11001C09A3 /* steve2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18AFAFB21568AB11001C09A3 /* steve2.jpg */; };
+		18AFAFB61568AB11001C09A3 /* steve3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18AFAFB31568AB11001C09A3 /* steve3.jpg */; };
+		18AFAFB71568AB11001C09A3 /* steve4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18AFAFB41568AB11001C09A3 /* steve4.jpg */; };
+		18AFAFBC1568AB47001C09A3 /* 7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18AFAFB91568AB47001C09A3 /* 7.jpg */; };
+		18AFAFBD1568AB47001C09A3 /* steve0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18AFAFBA1568AB47001C09A3 /* steve0.jpg */; };
+		18AFAFBE1568AB47001C09A3 /* steve1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18AFAFBB1568AB47001C09A3 /* steve1.jpg */; };
+		18AFAFC31568ABAF001C09A3 /* 6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18AFAFBF1568ABAF001C09A3 /* 6.jpg */; };
+		18AFAFC41568ABAF001C09A3 /* 4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18AFAFC01568ABAF001C09A3 /* 4.jpg */; };
+		18AFAFC51568ABAF001C09A3 /* 3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18AFAFC11568ABAF001C09A3 /* 3.jpg */; };
+		18AFAFC61568ABAF001C09A3 /* 2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18AFAFC21568ABAF001C09A3 /* 2.jpg */; };
 		18C442C2155E7D450023E71D /* wood.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18C442BD155E7D450023E71D /* wood.jpg */; };
 		18C442C3155E7D450023E71D /* deer.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18C442BE155E7D450023E71D /* deer.jpg */; };
 		18C442C4155E7D450023E71D /* moon_light.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18C442BF155E7D450023E71D /* moon_light.jpg */; };
@@ -132,7 +141,7 @@
 		1890027D155E766A00F160E9 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		1890027F155E798000F160E9 /* pattern1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pattern1.jpg; sourceTree = "<group>"; };
 		1898575B15594EE500F7A0F8 /* jobs_quotes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = jobs_quotes.plist; path = ../jobs_quotes.plist; sourceTree = "<group>"; };
-		1898575D15594FA300F7A0F8 /* steve.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = steve.png; sourceTree = "<group>"; };
+		1898575D15594FA300F7A0F8 /* steve5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = steve5.png; sourceTree = "<group>"; };
 		189F91D91555666C00AD0D08 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
 		189F91DA1555666C00AD0D08 /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
 		189F91DB1555666C00AD0D08 /* ShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareViewController.xib; sourceTree = "<group>"; };
@@ -154,7 +163,6 @@
 		18A2BCC4154FA8BE00FEFAF4 /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
 		18A2BCC5154FA8BE00FEFAF4 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
 		18A2BCC7154FA8DA00FEFAF4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		18A2BCD5154FD1FF00FEFAF4 /* steve_jobs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = steve_jobs.png; sourceTree = "<group>"; };
 		18A2BCD7154FD23A00FEFAF4 /* bill_gates.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bill_gates.png; sourceTree = "<group>"; };
 		18A2BCE615500E7C00FEFAF4 /* QuotesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuotesManager.h; sourceTree = "<group>"; };
 		18A2BCE715500E7C00FEFAF4 /* QuotesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuotesManager.m; sourceTree = "<group>"; };
@@ -166,6 +174,16 @@
 		18A56B821567AB2400E6183C /* CategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryViewController.h; sourceTree = "<group>"; };
 		18A56B831567AB2400E6183C /* CategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryViewController.m; sourceTree = "<group>"; };
 		18A56B851567B91E00E6183C /* jobs_quotes1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = jobs_quotes1.plist; sourceTree = "<group>"; };
+		18AFAFB21568AB11001C09A3 /* steve2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = steve2.jpg; sourceTree = "<group>"; };
+		18AFAFB31568AB11001C09A3 /* steve3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = steve3.jpg; sourceTree = "<group>"; };
+		18AFAFB41568AB11001C09A3 /* steve4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = steve4.jpg; sourceTree = "<group>"; };
+		18AFAFB91568AB47001C09A3 /* 7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 7.jpg; sourceTree = "<group>"; };
+		18AFAFBA1568AB47001C09A3 /* steve0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = steve0.jpg; sourceTree = "<group>"; };
+		18AFAFBB1568AB47001C09A3 /* steve1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = steve1.jpg; sourceTree = "<group>"; };
+		18AFAFBF1568ABAF001C09A3 /* 6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 6.jpg; sourceTree = "<group>"; };
+		18AFAFC01568ABAF001C09A3 /* 4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 4.jpg; sourceTree = "<group>"; };
+		18AFAFC11568ABAF001C09A3 /* 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3.jpg; sourceTree = "<group>"; };
+		18AFAFC21568ABAF001C09A3 /* 2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.jpg; sourceTree = "<group>"; };
 		18C442BD155E7D450023E71D /* wood.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wood.jpg; sourceTree = "<group>"; };
 		18C442BE155E7D450023E71D /* deer.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = deer.jpg; sourceTree = "<group>"; };
 		18C442BF155E7D450023E71D /* moon_light.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = moon_light.jpg; sourceTree = "<group>"; };
@@ -328,8 +346,7 @@
 				18900276155E748A00F160E9 /* facebook.png */,
 				1898575B15594EE500F7A0F8 /* jobs_quotes.plist */,
 				18A56B851567B91E00E6183C /* jobs_quotes1.plist */,
-				1898575D15594FA300F7A0F8 /* steve.png */,
-				18A2BCD5154FD1FF00FEFAF4 /* steve_jobs.png */,
+				18AFAFB81568AB28001C09A3 /* Jobs */,
 				18A2BCAC154FA89B00FEFAF4 /* iquotes-Info.plist */,
 				18A2BCAD154FA89B00FEFAF4 /* InfoPlist.strings */,
 				18A2BCB0154FA89B00FEFAF4 /* main.m */,
@@ -379,18 +396,36 @@
 				18C44356155FB70A0023E71D /* 113.png */,
 				18C44358155FB72A0023E71D /* 8.jpeg */,
 				18C44354155FB6D60023E71D /* 3.jpeg */,
-				18C44352155FB67E0023E71D /* 5.jpg */,
 				18C4435E155FB7650023E71D /* 5.jpeg */,
 				18C44350155FB58C0023E71D /* john.jpg */,
 				18C442DE155EA8390023E71D /* 28.jpg */,
 				18C442E0155EA8550023E71D /* 71.jpg */,
-				18C442DC155EA82B0023E71D /* 1.jpg */,
 				18C442BD155E7D450023E71D /* wood.jpg */,
 				18C442BE155E7D450023E71D /* deer.jpg */,
 				18C442BF155E7D450023E71D /* moon_light.jpg */,
 				18C442C0155E7D450023E71D /* blue_rays.jpg */,
 			);
 			name = background_story;
+			sourceTree = "<group>";
+		};
+		18AFAFB81568AB28001C09A3 /* Jobs */ = {
+			isa = PBXGroup;
+			children = (
+				18C44352155FB67E0023E71D /* 5.jpg */,
+				18C442DC155EA82B0023E71D /* 1.jpg */,
+				18AFAFBF1568ABAF001C09A3 /* 6.jpg */,
+				18AFAFC01568ABAF001C09A3 /* 4.jpg */,
+				18AFAFC11568ABAF001C09A3 /* 3.jpg */,
+				18AFAFC21568ABAF001C09A3 /* 2.jpg */,
+				18AFAFB91568AB47001C09A3 /* 7.jpg */,
+				18AFAFBA1568AB47001C09A3 /* steve0.jpg */,
+				18AFAFBB1568AB47001C09A3 /* steve1.jpg */,
+				18AFAFB21568AB11001C09A3 /* steve2.jpg */,
+				18AFAFB31568AB11001C09A3 /* steve3.jpg */,
+				18AFAFB41568AB11001C09A3 /* steve4.jpg */,
+				1898575D15594FA300F7A0F8 /* steve5.png */,
+			);
+			name = Jobs;
 			sourceTree = "<group>";
 		};
 		18C44327155F71B60023E71D /* AFNetworking */ = {
@@ -553,11 +588,10 @@
 				18A2BCAF154FA89B00FEFAF4 /* InfoPlist.strings in Resources */,
 				18A2BCBB154FA89B00FEFAF4 /* ViewController_iPhone.xib in Resources */,
 				18A2BCBE154FA89B00FEFAF4 /* ViewController_iPad.xib in Resources */,
-				18A2BCD6154FD1FF00FEFAF4 /* steve_jobs.png in Resources */,
 				18A2BCD8154FD23A00FEFAF4 /* bill_gates.png in Resources */,
 				189F91DD1555666C00AD0D08 /* ShareViewController.xib in Resources */,
 				1898575C15594EE500F7A0F8 /* jobs_quotes.plist in Resources */,
-				1898575E15594FA300F7A0F8 /* steve.png in Resources */,
+				1898575E15594FA300F7A0F8 /* steve5.png in Resources */,
 				18900277155E748A00F160E9 /* friend.png in Resources */,
 				18900278155E748A00F160E9 /* invite.png in Resources */,
 				18900279155E748A00F160E9 /* twitter.png in Resources */,
@@ -588,6 +622,16 @@
 				18C44390155FED180023E71D /* tw.png in Resources */,
 				18C44391155FED180023E71D /* fb.png in Resources */,
 				18A56B861567B91E00E6183C /* jobs_quotes1.plist in Resources */,
+				18AFAFB51568AB11001C09A3 /* steve2.jpg in Resources */,
+				18AFAFB61568AB11001C09A3 /* steve3.jpg in Resources */,
+				18AFAFB71568AB11001C09A3 /* steve4.jpg in Resources */,
+				18AFAFBC1568AB47001C09A3 /* 7.jpg in Resources */,
+				18AFAFBD1568AB47001C09A3 /* steve0.jpg in Resources */,
+				18AFAFBE1568AB47001C09A3 /* steve1.jpg in Resources */,
+				18AFAFC31568ABAF001C09A3 /* 6.jpg in Resources */,
+				18AFAFC41568ABAF001C09A3 /* 4.jpg in Resources */,
+				18AFAFC51568ABAF001C09A3 /* 3.jpg in Resources */,
+				18AFAFC61568ABAF001C09A3 /* 2.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

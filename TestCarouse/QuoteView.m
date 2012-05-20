@@ -25,32 +25,40 @@
         peopleImageView = [[UIImageView alloc] initWithImage:_peopleImage];
     }
     //frame of image
-    peopleImageView.center = CGPointMake(_peopleImage.size.width/2, _peopleImage.size.height/2);
+    peopleImageView.center = CGPointMake(_peopleImage.size.width/2, _peopleImage.size.height/2 + QUOTE_TEXT_START_Y*2);
     peopleImageView.alpha = 0.7;
+    peopleImageView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     
+    UITextAlignment quoteAlignmentStyle = UITextAlignmentRight;
+    // frame 1 : image left + text right 
     CGRect txtRect =  CGRectMake(_peopleImage.size.width + QUOTE_TEXT_START_X, QUOTE_TEXT_START_Y , 
                                  self.bounds.size.width - QUOTE_TEXT_START_X *2 - _peopleImage.size.width , 
                                  self.bounds.size.height - QUOTE_TEXT_START_Y*2) ;
 
 
+    if (_peopleImage.size.width > self.bounds.size.width/2 ) {
+        //too large image
+        txtRect = CGRectMake(QUOTE_TEXT_START_X, QUOTE_TEXT_START_Y, 
+                             self.bounds.size.width - QUOTE_TEXT_START_X*2, 
+                             self.bounds.size.height - QUOTE_TEXT_START_Y*2);
+        quoteAlignmentStyle = UITextAlignmentCenter;
+    }
+    
     UILabel *quoteLabel = [[UILabel alloc] initWithFrame:txtRect];
     //frame
-    
-    quoteLabel.textAlignment = UITextAlignmentRight;
-    
+    quoteLabel.textAlignment = quoteAlignmentStyle;
+
     quoteLabel.text = _quoteText;
     int fontSize = 30;
     if ([_quoteText length] > 250 ) {
-        fontSize = 20;
+        fontSize = 25;
     } 
     quoteLabel.font = [UIFont fontWithName:@"ArialMT" size:fontSize];
     
     quoteLabel.textColor = [UIColor whiteColor];
-   // quoteLabel.shadowColor = [UIColor lightGrayColor];
     quoteLabel.lineBreakMode = UILineBreakModeWordWrap;
     quoteLabel.numberOfLines = 0;
 
-   // quoteLabel.transform = CGAffineTransformMakeRotation(M_PI/6);
     quoteLabel.backgroundColor = [UIColor clearColor];
     quoteLabel.adjustsFontSizeToFitWidth = YES;
     
