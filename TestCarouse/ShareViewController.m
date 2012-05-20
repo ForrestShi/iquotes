@@ -10,10 +10,9 @@
 
 #import "ShareViewController.h"
 #import "SCFacebook.h"
-#import "AwesomeMenu.h"
+#import "QuotesManager.h"
 
-
-@interface ShareViewController () <MFMailComposeViewControllerDelegate , AwesomeMenuDelegate >{
+@interface ShareViewController () <MFMailComposeViewControllerDelegate >{
 @private
     UIView *loadingView; 
     NSString *_indexString;
@@ -31,6 +30,7 @@
 @synthesize quoteText = _quoteText;
 @synthesize quoteImage = _quoteImage;
 @synthesize indexString = _indexString;
+@synthesize quoteIndex = _quoteIndex;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -297,25 +297,7 @@
 
 #pragma mark - Awesome Menu Delegate 
 
-- (void)AwesomeMenu:(AwesomeMenu *)menu didSelectIndex:(NSInteger)idx{
-    switch (idx) {
-        case 0:
-            [self publishToMyFBWall:nil];
-            break;
-            
-        case 1:
-            [self sendToTwitter:nil];
-            break;
-           
-        case 2:
-            [self sendEmail:nil];
-            break;
-            
-        case 3:
-            [self inviteFBFriendsToUseThisApp:nil];
-            break;
-        default:
-            break;
-    }
+- (IBAction)bookmarkQuote:(id)sender{
+    [[QuotesManager shareInstance] bookmarkQuote:_quoteIndex];
 }
 @end

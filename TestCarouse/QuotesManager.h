@@ -16,4 +16,7 @@
 
 - (id) initWithPlist:(NSString*)plistFilePath ;
 
+- (void) bookmarkQuote:(NSUInteger)quoteIndex;
+- (NSArray*) bookmarkQuotes;
+
 @end

@@ -18,6 +18,7 @@
 @property (nonatomic, strong) NSString *quoteText;
 @property (nonatomic, strong) UIImage  *quoteImage;
 @property (nonatomic, strong) NSString *indexString;
+@property (nonatomic) NSUInteger quoteIndex;
 
 
 
@@ -27,5 +28,6 @@
 - (IBAction)inviteFBFriendsToUseThisApp:(id)sender;
 - (IBAction)sendToTwitter:(id)sender;
 - (IBAction)sendEmail:(id)sender;
+- (IBAction)bookmarkQuote:(id)sender;
 
 @end

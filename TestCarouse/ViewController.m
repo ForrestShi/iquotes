@@ -17,7 +17,7 @@
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 
 #define NUMBER_OF_ITEMS 1000
-#define NUMBER_OF_VISIBLE_ITEMS (IS_IPAD? 18: 20)
+#define NUMBER_OF_VISIBLE_ITEMS (IS_IPAD? 5: 5)
 
 #define ITEM_SPACING 210.0f
 #define INCLUDE_PLACEHOLDERS NO
@@ -42,7 +42,7 @@ typedef enum{
     
 }
 @property (nonatomic, assign) BOOL wrap;
-@property (nonatomic, strong) NSMutableArray *quotes;
+@property (nonatomic, strong) NSArray *quotes;
 @property (nonatomic, strong) ShareViewController *shareVC;
 @end
 
@@ -58,11 +58,6 @@ typedef enum{
 {
 	//set up data
 	wrap = NO;
-//	self.peoples = [NSMutableArray array];
-//	for (int i = 0; i < NUMBER_OF_ITEMS; i++)
-//	{
-//		[peoples addObject:[NSNumber numberWithInt:i]];
-//	}
 }
 
 - (void)didReceiveMemoryWarning
@@ -96,14 +91,7 @@ typedef enum{
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     if (!quotes) {
-        NSTimeInterval startTime = [NSDate timeIntervalSinceReferenceDate];
-        
-        NSString *plist1Path = [[NSBundle mainBundle] pathForResource:@"jobs_quotes1" ofType:@"plist" ];
-        quotes = [[[QuotesManager alloc] initWithPlist:plist1Path] quotesArray];
-        
-        NSTimeInterval endTime = [NSDate timeIntervalSinceReferenceDate];
-        DLog(@"%s  ALL QUOTES %d using TIME %f ",__PRETTY_FUNCTION__, [quotes count] , (endTime - startTime) );
-        
+        quotes = [[QuotesManager shareInstance] quotesArray];
     }
     
     // Quote View
@@ -247,7 +235,20 @@ typedef enum{
         DLog(@"%s index %d",__PRETTY_FUNCTION__ , category_index);
         //set the data source for the specified category 
         //TODO
-        
+        switch (category_index) {
+            case 0:
+            {
+                quotes = [[QuotesManager shareInstance] quotesArray];
+                break;
+            }   
+            case 1:
+            {
+                quotes = [[QuotesManager shareInstance] bookmarkQuotes];
+                break;
+            }
+            default:
+                break;
+        }
         //transition of views
         __block CGPoint oldCenter = _quotesView.center;
         [UIView animateWithDuration:.5 animations:^{
@@ -344,7 +345,7 @@ typedef enum{
 {
     //limit the number of items views loaded concurrently (for performance reasons)
     //this also affects the appearance of circular-type carousels
-    return NUMBER_OF_VISIBLE_ITEMS;
+    return [quotes count] < NUMBER_OF_VISIBLE_ITEMS ? [quotes count] : NUMBER_OF_VISIBLE_ITEMS;
 }
 
 - (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSUInteger)index reusingView:(UIView *)view
@@ -465,10 +466,12 @@ typedef enum{
                                                                     quoteImage:cellImage 
                                                                    indexString:idxString];
     
-    
-    _shareVC.quoteText = _currentQuoteText;
-    _shareVC.quoteImage = cellImage;
-    _shareVC.indexString = idxString;
+//    
+//    _shareVC.quoteText = _currentQuoteText;
+//    _shareVC.quoteImage = cellImage;
+//    _shareVC.indexString = idxString;
+
+    _shareVC.quoteIndex = index;
     
     [UIView transitionFromView:cellView toView:_shareVC.view duration:.5 options:UIViewAnimationOptionTransitionFlipFromTop completion:^(BOOL finished) {
         if (finished) {
@@ -489,13 +492,13 @@ typedef enum{
     }];
 }
 
-- (void)carouselCurrentItemIndexUpdated:(iCarousel *)carousel{
-    DLog(@"%s %d",__PRETTY_FUNCTION__ , [carousel currentItemIndex]);
-    
-    QuoteView *quoteView = (QuoteView*)carousel.currentItemView;
-    QuoteObject *quote = [quotes objectAtIndex:[carousel currentItemIndex]];
-    quoteView.quoteText = quote.quoteText;
-}
-
+//- (void)carouselCurrentItemIndexUpdated:(iCarousel *)carousel{
+//    DLog(@"%s %d",__PRETTY_FUNCTION__ , [carousel currentItemIndex]);
+//    
+//    QuoteView *quoteView = (QuoteView*)carousel.currentItemView;
+//    QuoteObject *quote = [quotes objectAtIndex:[carousel currentItemIndex]];
+//    quoteView.quoteText = quote.quoteText;
+//}
+//
 
 @end

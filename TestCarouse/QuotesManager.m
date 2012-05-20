@@ -11,7 +11,8 @@
 
 @interface QuotesManager () {
 @private
-    
+    NSMutableArray  *_quotesArray;
+    NSMutableArray  *_favoriteQuotesArray;
 }
 
 - (void) loadQuotesFromPlistFile:(NSString*)plistFilePath;
@@ -23,11 +24,14 @@
 
 + (QuotesManager*) shareInstance{
     static QuotesManager* _instance = nil;
-    if (_instance == nil) {
-        _instance = [[QuotesManager alloc] init];
-        NSString *plist1Path = [[NSBundle mainBundle] pathForResource:@"jobs_quotes" ofType:@"plist" ];
-        [_instance loadQuotesFromPlistFile:plist1Path];
-    }
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        if (_instance == nil) {
+            _instance = [[QuotesManager alloc] init];
+            NSString *plist1Path = [[NSBundle mainBundle] pathForResource:@"jobs_quotes1" ofType:@"plist" ];
+            [_instance loadQuotesFromPlistFile:plist1Path];
+        }
+    });
     return _instance;
 }
 
@@ -56,26 +60,24 @@
         }
         [_quotesArray addObject:quote];
     }
+}
 
-//    dispatch_queue_t loadQueue = dispatch_queue_create("loadplist", NULL);
-//    dispatch_async(loadQueue, ^{
-//                       
-//        NSDictionary    *dict = [NSDictionary dictionaryWithContentsOfFile:plistFilePath];
-//        if (!dict) {
-//            return ;
-//        }
-//        
-//        NSArray *arrayObjects = [dict allValues];
-//        for (id object in arrayObjects) {
-//            QuoteObject *quote = [[QuoteObject alloc] init];
-//            quote.quoteText = [object objectForKey:@"quote"];
-//            if (_quotesArray == nil) {
-//                _quotesArray = [NSMutableArray array];
-//            }
-//            [_quotesArray addObject:quote];
-//        }
-//        
-//                   });
+#pragma mark - Bookmark Quotes
+
+- (void) bookmarkQuote:(NSUInteger)quoteIndex{
+    QuoteObject *likedQuote = [self.quotesArray objectAtIndex:quoteIndex];
+    if (!_favoriteQuotesArray) {
+        _favoriteQuotesArray = [[NSMutableArray alloc] init];
+    }
+    if (![_favoriteQuotesArray containsObject:likedQuote]) {
+        DLog(@"%s add bookmarked quote",__PRETTY_FUNCTION__);
+        [_favoriteQuotesArray addObject:likedQuote];
+    }
+}
+
+- (NSArray*) bookmarkQuotes{
+    DLog(@"%s count %d",__PRETTY_FUNCTION__ , [_favoriteQuotesArray count]);
+    return _favoriteQuotesArray;
 }
 
 @end
