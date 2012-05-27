@@ -12,8 +12,16 @@
 #import "SCFacebook.h"
 #import "QuotesManager.h"
 
+#define GAPX 20
+#define GAPY 16
+
+#define BUTTONWIDTH 48
+#define BUTTONHEIGHT 48
+
+
 @interface ShareViewController () <MFMailComposeViewControllerDelegate >{
 @private
+    
     UIView *loadingView; 
     NSString *_indexString;
     
@@ -32,17 +40,8 @@
 @synthesize indexString = _indexString;
 @synthesize quoteIndex = _quoteIndex;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (id) initWithFrame:(CGRect)frame quoteText:(NSString*)quote quoteImage:(UIImage*)image indexString:(NSString*)idx{
-    self = [super initWithNibName:@"ShareViewController" bundle:nil];
+    self = [super init];
     if (self) {
         // Custom initialization
         self.view.frame = frame;
@@ -50,14 +49,71 @@
         _quoteImage = image;
         _indexString = idx;
         
-        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:self.view.bounds byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake(50, 50)];
+        //
+        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:self.view.bounds byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake(25, 25)];
         CAShapeLayer *maskLayer = [CAShapeLayer layer];
         maskLayer.frame = self.view.frame;
         maskLayer.path = path.CGPath;
         self.view.layer.mask = maskLayer;
-
+        
+    
     }
     return self;
+}
+
+- (void) buildUI{
+    //back button 
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(GAPX, GAPY, 60, 60*.75)];
+    [backButton setImage: [UIImage imageNamed:@"back.png"] forState:UIControlStateNormal];
+    backButton.tag = 1001;
+    [self.view addSubview:backButton];
+    
+    
+    //status label 
+    UILabel *statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - BUTTONWIDTH, GAPY, BUTTONWIDTH*2, BUTTONHEIGHT)];
+    statusLabel.text = _indexString;
+    statusLabel.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:statusLabel];
+    
+    //textView
+    UITextView *quoteTextView = [[UITextView alloc] initWithFrame:CGRectMake(GAPX, 
+                                                                             GAPY + backButton.frame.size.height + 10,
+                                                                             self.view.bounds.size.width - GAPX*2,
+                                                                             self.view.bounds.size.height *.5)];
+    
+    quoteTextView.alpha = 0;
+    quoteTextView.font = [UIFont fontWithName:@"Noteworthy-Light" size:26];
+
+    quoteTextView.text = [NSString stringWithFormat:@"%@ -- Steve Jobs ", _quoteText];
+    [UIView animateWithDuration:.5 animations:^{
+        quoteTextView.alpha = 1.0;
+    }];
+    
+    [self.view addSubview:quoteTextView];
+    
+    //share buttons
+    for (int i = 0 ; i < 4; i++) {
+        UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(GAPX + i * ( BUTTONWIDTH + GAPX ), 
+                                                                           quoteTextView.frame.origin.y + quoteTextView.frame.size.height + GAPY  ,
+                                                                           BUTTONWIDTH,
+                                                                           BUTTONHEIGHT)];
+        if (i == 0 ) {
+            [shareButton addTarget:self action:@selector(publishToMyFBWall:) forControlEvents:UIControlEventTouchUpInside];
+            [shareButton setImage:[UIImage imageNamed:@"facebook.png"] forState:UIControlStateNormal];
+        }else if (i == 1 ) {
+            [shareButton addTarget:self action:@selector(sendToTwitter:) forControlEvents:UIControlEventTouchUpInside];
+            [shareButton setImage:[UIImage imageNamed:@"twitter.png"] forState:UIControlStateNormal];
+        }else if (i == 2 ) {
+            [shareButton addTarget:self action:@selector(sendEmail:) forControlEvents:UIControlEventTouchUpInside];
+            [shareButton setImage:[UIImage imageNamed:@"mail_black.png"] forState:UIControlStateNormal];
+        }else if (i == 3 ) {
+            [shareButton addTarget:self action:@selector(inviteFBFriendsToUseThisApp:) forControlEvents:UIControlEventTouchUpInside];
+            [shareButton setImage:[UIImage imageNamed:@"invite.png"] forState:UIControlStateNormal];
+        }
+        
+        [self.view addSubview:shareButton];
+    }
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -74,6 +130,13 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+
+    double delayInSeconds = .5;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self buildUI];
+    });
+    
     //Loading
     
     loadingView = [[UIView alloc] initWithFrame:self.view.bounds];
@@ -84,22 +147,6 @@
 	aiView.center =  loadingView.center;
 	loadingView.hidden = YES;
     [self.view addSubview:loadingView];
-    
-    //textfield
-    
-    if (textView) {
-        [self performBlock:^(id sender) {
-            //
-            textView.alpha = 0;
-            textView.text = [NSString stringWithFormat:@"%@ -- Steve Jobs ", _quoteText];
-            [UIView animateWithDuration:1.5 animations:^{
-                textView.alpha = 1.0;
-            }];
-            
-            indexLabel.text = _indexString;
-            
-        } afterDelay:.5];
-    }
     
     //background texture
     
@@ -121,15 +168,15 @@
     return UIInterfaceOrientationIsLandscape(interfaceOrientation);
 }
 
-- (void) setQuoteText:(NSString *)quoteText{    
-    _quoteText = quoteText;
-    [textView setText:[NSString stringWithFormat:@"%@ --- Steve Jobs ", _quoteText]];
-}
-
-- (void) setIndexString:(NSString *)indexString{
-    _indexString = indexString;
-    [indexLabel setText:_indexString];
-}
+//- (void) setQuoteText:(NSString *)quoteText{    
+//    _quoteText = quoteText;
+//    [textView setText:[NSString stringWithFormat:@"%@ --- Steve Jobs ", _quoteText]];
+//}
+//
+//- (void) setIndexString:(NSString *)indexString{
+//    _indexString = indexString;
+//    [indexLabel setText:_indexString];
+//}
 
 #pragma mark - Facebook actions
 
@@ -255,26 +302,6 @@
 // Dismisses the email composition interface when users tap Cancel or Send. Proceeds to update the message field with the result of the operation.
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error 
 {   
-    message.hidden = NO;
-    // Notifies users about errors associated with the interface
-    switch (result)
-    {
-        case MFMailComposeResultCancelled:
-            message.text = @"Result: canceled";
-            break;
-        case MFMailComposeResultSaved:
-            message.text = @"Result: saved";
-            break;
-        case MFMailComposeResultSent:
-            message.text = @"Result: sent";
-            break;
-        case MFMailComposeResultFailed:
-            message.text = @"Result: failed";
-            break;
-        default:
-            message.text = @"Result: not sent";
-            break;
-    }
     [self dismissModalViewControllerAnimated:YES];
 }
 

@@ -16,16 +16,12 @@
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 
-#define NUMBER_OF_ITEMS 1000
-#define NUMBER_OF_VISIBLE_ITEMS (IS_IPAD? 5: 5)
+#define NUMBER_OF_VISIBLE_ITEMS (IS_IPAD? 10: 5)
 
-#define ITEM_SPACING 210.0f
 #define INCLUDE_PLACEHOLDERS NO
 
 #define QUOTEVIEW_FRAME_X 80.0f
-#define QUOTEVIEW_FRAME_Y 80.0f
-#define QUOTEVIEW_FRAME_WIDTH 1024 - QUOTEVIEW_FRAME_X*2
-#define QUOTEVIEW_FRAME_HEIGHT 768 - QUOTEVIEW_FRAME_Y*2
+#define QUOTEVIEW_FRAME_Y 40.0f
 
 typedef enum{
     CATEGORY,
@@ -40,6 +36,7 @@ typedef enum{
     iCarousel           *_quotesView;
     CategoryViewController *_categoryVC;
     
+    UIImageView *bacgroundImageView;
 }
 @property (nonatomic, assign) BOOL wrap;
 @property (nonatomic, strong) NSArray *quotes;
@@ -51,14 +48,8 @@ typedef enum{
 @synthesize wrap;
 @synthesize quotes;
 @synthesize shareVC = _shareVC;
-@synthesize bacgroundImageView;
 
 
-- (void)setUp
-{
-	//set up data
-	wrap = NO;
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -66,61 +57,15 @@ typedef enum{
     // Release any cached data, images, etc that aren't in use.
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]))
+- (id) initWithFrame:(CGRect)frame{
+    if ((self = [super init]))
     {
-        [self setUp];
+        self.view.frame = frame;
     }
     return self;
 }
 
-#pragma mark - Shake Motion
-
-- (void) motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event{
-    DLog(@"%s", __PRETTY_FUNCTION__);
-    if (event.type == UIEventTypeMotion && event.subtype == UIEventSubtypeMotionShake ) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"shake" object:nil];
-    }
-}
-
-#pragma mark - View lifecycle
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-    if (!quotes) {
-        quotes = [[QuotesManager shareInstance] quotesArray];
-    }
-    
-    // Quote View
-    CGRect viewBounds = self.view.bounds;
-    if (!_quotesView) {
-        _quotesView = [[iCarousel alloc] initWithFrame:viewBounds];
-        _quotesView.delegate = self;
-        _quotesView.dataSource = self;
-        
-        //configure carousel
-        _quotesView.decelerationRate = 2.5;
-        _quotesView.type = iCarouselTypeInvertedWheel;
-        _quotesView.vertical = YES;
-    }
-    
-    [[NSNotificationCenter defaultCenter] addObserverForName:@"shake" object:nil queue:nil usingBlock:^(NSNotification *note) {
-        //
-        DLog(@"%s", __PRETTY_FUNCTION__);
-        _quotesView.type = rand()%iCarouselTypeCustom;
-    }];
-    [self.view addSubview:_quotesView];
-    
-    if (!_categoryVC) {
-        _categoryVC = [[CategoryViewController alloc] init];
-        _categoryVC.view.frame = CGRectMake(viewBounds.origin.x - viewBounds.size.width, viewBounds.origin.y, viewBounds.size.width, viewBounds.size.height);
-    }
-    _categoryVC.view.alpha = 0.0;
-    [self.view addSubview:_categoryVC.view];
-    
+- (void) buildDynamicBackgroudImages{
     //dynamic background images
     static int count = 0;
     NSArray *imageNameArray = [NSArray arrayWithObjects:
@@ -142,6 +87,11 @@ typedef enum{
                                @"1.jpg",
                                @"bill_gates.png",nil];
     
+    if (!bacgroundImageView) {
+        bacgroundImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+                              
+    }
+    
     changeBgTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 block:^(NSTimeInterval time) {
         NSString *imageName = [imageNameArray objectAtIndex:(count++)%[imageNameArray count] ];
         
@@ -159,6 +109,38 @@ typedef enum{
         
     } repeats:YES];
     
+    [self.view addSubview:bacgroundImageView];
+
+}
+
+- (void) buildQuoteCarousel{
+    // Quote View
+    CGRect viewBounds = self.view.bounds;
+    if (!_quotesView) {
+        _quotesView = [[iCarousel alloc] initWithFrame:viewBounds];
+        _quotesView.delegate = self;
+        _quotesView.dataSource = self;
+        _quotesView.backgroundColor = [UIColor clearColor];
+        
+        //configure carousel
+        _quotesView.decelerationRate = 2.5;
+        _quotesView.type = iCarouselTypeInvertedWheel;
+        _quotesView.vertical = YES;
+    }
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"shake" object:nil queue:nil usingBlock:^(NSNotification *note) {
+        //
+        DLog(@"%s", __PRETTY_FUNCTION__);
+        _quotesView.type = rand()%iCarouselTypeCustom;
+    }];
+    [self.view addSubview:_quotesView];
+    
+    if (!_categoryVC) {
+        _categoryVC = [[CategoryViewController alloc] initWithFrame:self.view.bounds];
+        //_categoryVC.view.transform = CGAffineTransformMakeTranslation(-self.view.bounds.size.width, 0);
+    }
+    _categoryVC.view.alpha = 0.0;
+    [self.view addSubview:_categoryVC.view];
     
     
     // Swip action 
@@ -180,7 +162,7 @@ typedef enum{
                 
             } completion:^(BOOL finished) {
                 [UIView animateWithDuration:0.5 animations:^{
-                    _categoryVC.view.transform = CGAffineTransformMakeTranslation(-self.view.bounds.size.width, 0);
+                    //_categoryVC.view.transform = CGAffineTransformMakeTranslation(-self.view.bounds.size.width, 0);
                     _categoryVC.view.alpha = 0.0;
                     
                 }];
@@ -196,20 +178,20 @@ typedef enum{
         UISwipeGestureRecognizer *swip = (UISwipeGestureRecognizer*)sender;
         
         if (state == UIGestureRecognizerStateEnded) {
-            NSLog(@"%d directi on %d", [NSThread isMainThread] , [swip direction]);
+
             __block CGPoint oldCenter = _quotesView.center;
             
             [UIView animateWithDuration:1.0 animations:^{
                 
                 float newX = oldCenter.x + self.view.bounds.size.width*0.9;
-                if (newX < self.view.bounds.size.width + 1024/2) {
+                if (newX < self.view.bounds.size.width + self.view.bounds.size.width/2) {
                     [_quotesView setIgnoreAllGestures:YES];
                     _quotesView.center = CGPointMake(newX , oldCenter.y); 
                 }
                 
             } completion:^(BOOL finished) {
                 [UIView animateWithDuration:0.5 animations:^{
-                    _categoryVC.view.transform = CGAffineTransformMakeTranslation(self.view.bounds.size.width, 0);
+                   // _categoryVC.view.transform = CGAffineTransformMakeTranslation(self.view.bounds.size.width, 0);
                     _categoryVC.view.alpha = 1.0;
                     
                 }];
@@ -225,6 +207,18 @@ typedef enum{
     //Swip left/right to make carousel visible/invisible 
     [self.view addGestureRecognizer:swipLeftGesture];
     [self.view addGestureRecognizer:swipRightGesture];
+
+}
+- (void) buildAllQuotesView{
+	// Do any additional setup after loading the view, typically from a nib.
+    if (!quotes) {
+        quotes = [[QuotesManager shareInstance] quotesArray];
+    }
+    
+    [self buildDynamicBackgroudImages];
+    
+    [self buildQuoteCarousel];
+     
     
     _isShowSocialView = NO;
     
@@ -253,14 +247,14 @@ typedef enum{
         __block CGPoint oldCenter = _quotesView.center;
         [UIView animateWithDuration:.5 animations:^{
             
-            _categoryVC.view.transform = CGAffineTransformMakeTranslation(-self.view.bounds.size.width, 0);
+           // _categoryVC.view.transform = CGAffineTransformMakeTranslation(-self.view.bounds.size.width, 0);
             _categoryVC.view.alpha = 0.0;
         } completion:^(BOOL finished) {
             
             [UIView animateWithDuration:1.0 animations:^{
                 
                 float newX = oldCenter.x - self.view.bounds.size.width*0.9;
-                if (newX > 1024/4) {
+                if (newX > self.view.bounds.size.width/4) {
                     //come back to reader mode
                     _quotesView.center = CGPointMake(newX , oldCenter.y);
                     [_quotesView setIgnoreAllGestures:NO];
@@ -271,6 +265,14 @@ typedef enum{
         }];
         
     }];
+
+}
+#pragma mark - View lifecycle
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     
 }
 
@@ -356,13 +358,14 @@ typedef enum{
     if (view == nil)
     {
         view = [[QuoteView alloc] initWithFrame:CGRectMake(QUOTEVIEW_FRAME_X, QUOTEVIEW_FRAME_Y, 
-                                                           QUOTEVIEW_FRAME_WIDTH,QUOTEVIEW_FRAME_HEIGHT)];
+                                                           self.view.bounds.size.width - QUOTEVIEW_FRAME_X*2,
+                                                           self.view.bounds.size.height - QUOTEVIEW_FRAME_Y*2)];
         view.alpha = 0.95;
-        float shadowSize = 50.0f;
+        float shadowSize = 20.0f;
         view.layer.shadowColor = [[UIColor blackColor] CGColor];
-        view.layer.shadowOffset = CGSizeMake(shadowSize,shadowSize);
-        view.layer.shadowOpacity = 1.0f;
-        view.layer.shadowRadius = shadowSize;
+        view.layer.shadowOffset = CGSizeMake(-shadowSize,shadowSize);
+        view.layer.shadowOpacity = .8f;
+        view.layer.shadowRadius = shadowSize/2;
         view.layer.shouldRasterize = YES;  
     }
     else
@@ -393,8 +396,6 @@ typedef enum{
         //imageView.image = [UIImage imageNamed:fileName];
     }
     
-    //DLog(@"%s index %d  \n %@",__PRETTY_FUNCTION__ , index , quoteView.quoteText);
-
 	return view;
 }
 
@@ -412,7 +413,7 @@ typedef enum{
 - (CGFloat)carouselItemWidth:(iCarousel *)carousel
 {
     //usually this should be slightly wider than the item views
-    return QUOTEVIEW_FRAME_WIDTH;
+    return self.view.bounds.size.width - QUOTEVIEW_FRAME_X * 2;
 }
 
 - (CGFloat)carousel:(iCarousel *)carousel itemAlphaForOffset:(CGFloat)offset
@@ -461,16 +462,11 @@ typedef enum{
     
     NSString *idxString = [NSString stringWithFormat:@"%d / %d", index , [quotes count]];
 
-    ShareViewController *_shareVC = [[ShareViewController alloc] initWithFrame:cellView.frame 
+    ShareViewController *_shareVC = [[ShareViewController alloc] initWithFrame:cellView.bounds 
                                                                      quoteText:_currentQuoteText 
                                                                     quoteImage:cellImage 
                                                                    indexString:idxString];
     
-//    
-//    _shareVC.quoteText = _currentQuoteText;
-//    _shareVC.quoteImage = cellImage;
-//    _shareVC.indexString = idxString;
-
     _shareVC.quoteIndex = index;
     
     [UIView transitionFromView:cellView toView:_shareVC.view duration:.5 options:UIViewAnimationOptionTransitionFlipFromTop completion:^(BOOL finished) {
@@ -500,5 +496,16 @@ typedef enum{
 //    quoteView.quoteText = quote.quoteText;
 //}
 //
+
+#pragma mark - Shake Motion
+
+- (void) motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event{
+    DLog(@"%s", __PRETTY_FUNCTION__);
+    if (event.type == UIEventTypeMotion && event.subtype == UIEventSubtypeMotionShake ) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"shake" object:nil];
+    }
+}
+
+
 
 @end

@@ -20,10 +20,11 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        self.viewController = [[ViewController alloc] initWithNibName:@"ViewController_iPhone" bundle:nil];
+        self.viewController = [[ViewController alloc] initWithFrame:CGRectMake(0, 0, 480, 320)];
     } else {
-        self.viewController = [[ViewController alloc] initWithNibName:@"ViewController_iPad" bundle:nil];
+        self.viewController = [[ViewController alloc]  initWithFrame:CGRectMake(0, 0, 1024, 768)];
     }
+    [self.viewController buildAllQuotesView];
     self.window.rootViewController = self.viewController;
     
     //Local Notification

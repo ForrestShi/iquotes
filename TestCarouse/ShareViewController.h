@@ -10,9 +10,7 @@
 
 @interface ShareViewController : UIViewController 
 {
-    IBOutlet UITextView   *textView;
-    IBOutlet UILabel *message;
-    IBOutlet UILabel *indexLabel;
+
 }
 
 @property (nonatomic, strong) NSString *quoteText;
@@ -24,10 +22,10 @@
 
 - (id) initWithFrame:(CGRect)frame quoteText:(NSString*)quote quoteImage:(UIImage*)image indexString:(NSString*)idx;
 
-- (IBAction)publishToMyFBWall:(id)sender;
-- (IBAction)inviteFBFriendsToUseThisApp:(id)sender;
-- (IBAction)sendToTwitter:(id)sender;
-- (IBAction)sendEmail:(id)sender;
-- (IBAction)bookmarkQuote:(id)sender;
+//- (IBAction)publishToMyFBWall:(id)sender;
+//- (IBAction)inviteFBFriendsToUseThisApp:(id)sender;
+//- (IBAction)sendToTwitter:(id)sender;
+//- (IBAction)sendEmail:(id)sender;
+//- (IBAction)bookmarkQuote:(id)sender;
 
 @end

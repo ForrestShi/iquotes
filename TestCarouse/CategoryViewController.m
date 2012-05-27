@@ -8,6 +8,7 @@
 
 #import "CategoryViewController.h"
 #import "iCarousel.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface CategoryViewController ()<iCarouselDataSource, iCarouselDelegate >
 {
@@ -18,36 +19,46 @@
 
 @implementation CategoryViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+
+- (id) initWithFrame:(CGRect)frame{
+    if (self = [super init]) {
+        self.view.frame = frame;
     }
     return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
+- (void) buildUp{
     //Category view
     CGRect viewBounds = self.view.bounds;
     
     if (!_categoryView) {
         
         _categoryView = [[iCarousel alloc] initWithFrame:viewBounds];
-        _categoryView.type = iCarouselTypeWheel;
+        _categoryView.type = iCarouselTypeLinear;
         _categoryView.delegate = self;
         _categoryView.dataSource = self;  
         
         _categoryView.decelerationRate = 2.5;
         _categoryView.vertical = NO;
+        _categoryView.backgroundColor = [UIColor clearColor];
         
     }
     _categoryView.alpha = 1.0;
     [self.view addSubview:_categoryView];
+
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+	// Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor clearColor];
     
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self buildUp];
+    });
 }
 
 - (void)viewDidUnload
@@ -58,7 +69,7 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
 }
 
 #pragma mark -
@@ -80,13 +91,19 @@
 {
     UILabel *nameLabel = nil;
     if (!view) {
-        view = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"steve5.png"]];
+        view = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"page.png"]];
         
         nameLabel = [[UILabel alloc] initWithFrame:view.bounds];
-        nameLabel.textColor = [UIColor whiteColor];
+        nameLabel.textColor = [UIColor blackColor];
         nameLabel.backgroundColor = [UIColor clearColor];
         nameLabel.textAlignment = UITextAlignmentCenter;
+        nameLabel.font = [UIFont fontWithName:@"ArialHebrew-Bold" size:30];
+        nameLabel.layer.shadowColor = [UIColor grayColor].CGColor;
+        nameLabel.layer.shadowOffset = CGSizeMake(-8, 8);
+        nameLabel.layer.shadowOpacity = 0.7;
+        nameLabel.layer.shadowRadius = 3;
         
+
         [view addSubview:nameLabel];
     }
     
@@ -121,7 +138,7 @@
 - (CGFloat)carouselItemWidth:(iCarousel *)carousel
 {
     //usually this should be slightly wider than the item views
-    return 500;
+    return 300;
 }
 
 - (CGFloat)carousel:(iCarousel *)carousel itemAlphaForOffset:(CGFloat)offset

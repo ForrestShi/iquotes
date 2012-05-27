@@ -11,6 +11,9 @@
 
 @interface ViewController : UIViewController
 
-@property (nonatomic,strong) IBOutlet UIImageView  *bacgroundImageView;
+
+
+- (id) initWithFrame:(CGRect)frame;
+- (void) buildAllQuotesView;
 
 @end

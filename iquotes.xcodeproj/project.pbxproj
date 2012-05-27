@@ -18,8 +18,8 @@
 		1898575C15594EE500F7A0F8 /* jobs_quotes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1898575B15594EE500F7A0F8 /* jobs_quotes.plist */; };
 		1898575E15594FA300F7A0F8 /* steve5.png in Resources */ = {isa = PBXBuildFile; fileRef = 1898575D15594FA300F7A0F8 /* steve5.png */; };
 		189F91DC1555666C00AD0D08 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189F91DA1555666C00AD0D08 /* ShareViewController.m */; };
-		189F91DD1555666C00AD0D08 /* ShareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189F91DB1555666C00AD0D08 /* ShareViewController.xib */; };
 		18A04F75155D79A80079F831 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A04F74155D79A80079F831 /* Twitter.framework */; };
+		18A0F1271570CF2B00B2646C /* page.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A0F1261570CF2B00B2646C /* page.png */; };
 		18A2BCA5154FA89B00FEFAF4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2BCA4154FA89B00FEFAF4 /* UIKit.framework */; };
 		18A2BCA7154FA89B00FEFAF4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2BCA6154FA89B00FEFAF4 /* Foundation.framework */; };
 		18A2BCA9154FA89B00FEFAF4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2BCA8154FA89B00FEFAF4 /* CoreGraphics.framework */; };
@@ -27,8 +27,6 @@
 		18A2BCB1154FA89B00FEFAF4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A2BCB0154FA89B00FEFAF4 /* main.m */; };
 		18A2BCB5154FA89B00FEFAF4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A2BCB4154FA89B00FEFAF4 /* AppDelegate.m */; };
 		18A2BCB8154FA89B00FEFAF4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A2BCB7154FA89B00FEFAF4 /* ViewController.m */; };
-		18A2BCBB154FA89B00FEFAF4 /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A2BCB9154FA89B00FEFAF4 /* ViewController_iPhone.xib */; };
-		18A2BCBE154FA89B00FEFAF4 /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A2BCBC154FA89B00FEFAF4 /* ViewController_iPad.xib */; };
 		18A2BCC6154FA8BE00FEFAF4 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A2BCC5154FA8BE00FEFAF4 /* iCarousel.m */; };
 		18A2BCC8154FA8DA00FEFAF4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A2BCC7154FA8DA00FEFAF4 /* QuartzCore.framework */; };
 		18A2BCD8154FD23A00FEFAF4 /* bill_gates.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A2BCD7154FD23A00FEFAF4 /* bill_gates.png */; };
@@ -144,8 +142,8 @@
 		1898575D15594FA300F7A0F8 /* steve5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = steve5.png; sourceTree = "<group>"; };
 		189F91D91555666C00AD0D08 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
 		189F91DA1555666C00AD0D08 /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
-		189F91DB1555666C00AD0D08 /* ShareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareViewController.xib; sourceTree = "<group>"; };
 		18A04F74155D79A80079F831 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		18A0F1261570CF2B00B2646C /* page.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page.png; sourceTree = "<group>"; };
 		18A2BCA0154FA89B00FEFAF4 /* iChangedWorld.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iChangedWorld.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18A2BCA4154FA89B00FEFAF4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		18A2BCA6154FA89B00FEFAF4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -158,8 +156,6 @@
 		18A2BCB4154FA89B00FEFAF4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		18A2BCB6154FA89B00FEFAF4 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		18A2BCB7154FA89B00FEFAF4 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		18A2BCBA154FA89B00FEFAF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
-		18A2BCBD154FA89B00FEFAF4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPad.xib; sourceTree = "<group>"; };
 		18A2BCC4154FA8BE00FEFAF4 /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
 		18A2BCC5154FA8BE00FEFAF4 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
 		18A2BCC7154FA8DA00FEFAF4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -269,11 +265,8 @@
 			children = (
 				189F91D91555666C00AD0D08 /* ShareViewController.h */,
 				189F91DA1555666C00AD0D08 /* ShareViewController.m */,
-				189F91DB1555666C00AD0D08 /* ShareViewController.xib */,
 				18A2BCB6154FA89B00FEFAF4 /* ViewController.h */,
 				18A2BCB7154FA89B00FEFAF4 /* ViewController.m */,
-				18A2BCB9154FA89B00FEFAF4 /* ViewController_iPhone.xib */,
-				18A2BCBC154FA89B00FEFAF4 /* ViewController_iPad.xib */,
 				18A56B821567AB2400E6183C /* CategoryViewController.h */,
 				18A56B831567AB2400E6183C /* CategoryViewController.m */,
 			);
@@ -389,6 +382,7 @@
 		18A56B871567C06A00E6183C /* background_story */ = {
 			isa = PBXGroup;
 			children = (
+				18A0F1261570CF2B00B2646C /* page.png */,
 				18A2BCD7154FD23A00FEFAF4 /* bill_gates.png */,
 				18C44360155FB7710023E71D /* 60.jpg */,
 				18C4435C155FB7480023E71D /* 38.jpg */,
@@ -586,10 +580,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18A2BCAF154FA89B00FEFAF4 /* InfoPlist.strings in Resources */,
-				18A2BCBB154FA89B00FEFAF4 /* ViewController_iPhone.xib in Resources */,
-				18A2BCBE154FA89B00FEFAF4 /* ViewController_iPad.xib in Resources */,
 				18A2BCD8154FD23A00FEFAF4 /* bill_gates.png in Resources */,
-				189F91DD1555666C00AD0D08 /* ShareViewController.xib in Resources */,
 				1898575C15594EE500F7A0F8 /* jobs_quotes.plist in Resources */,
 				1898575E15594FA300F7A0F8 /* steve5.png in Resources */,
 				18900277155E748A00F160E9 /* friend.png in Resources */,
@@ -632,6 +623,7 @@
 				18AFAFC41568ABAF001C09A3 /* 4.jpg in Resources */,
 				18AFAFC51568ABAF001C09A3 /* 3.jpg in Resources */,
 				18AFAFC61568ABAF001C09A3 /* 2.jpg in Resources */,
+				18A0F1271570CF2B00B2646C /* page.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -676,22 +668,6 @@
 				18A2BCAE154FA89B00FEFAF4 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		18A2BCB9154FA89B00FEFAF4 /* ViewController_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				18A2BCBA154FA89B00FEFAF4 /* en */,
-			);
-			name = ViewController_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		18A2BCBC154FA89B00FEFAF4 /* ViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				18A2BCBD154FA89B00FEFAF4 /* en */,
-			);
-			name = ViewController_iPad.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

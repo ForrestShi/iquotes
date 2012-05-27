@@ -53,7 +53,7 @@
     if ([_quoteText length] > 250 ) {
         fontSize = 25;
     } 
-    quoteLabel.font = [UIFont fontWithName:@"ArialMT" size:fontSize];
+    quoteLabel.font = [UIFont fontWithName:@"Chalkduster" size:fontSize];
     
     quoteLabel.textColor = [UIColor whiteColor];
     quoteLabel.lineBreakMode = UILineBreakModeWordWrap;

@@ -10,4 +10,6 @@
 
 @interface CategoryViewController : UIViewController
 
+- (id) initWithFrame:(CGRect)frame;
+
 @end
