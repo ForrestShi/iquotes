@@ -14,9 +14,9 @@
 
 @property (nonatomic,strong) NSMutableArray*   quotesArray;
 
-- (id) initWithPlist:(NSString*)plistFilePath ;
+- (BOOL) bookmarkQuote:(NSUInteger)quoteIndex;
+- (BOOL) isBookmarked:(NSUInteger)quoteIndex;
 
-- (void) bookmarkQuote:(NSUInteger)quoteIndex;
 - (NSArray*) bookmarkQuotes;
 
 @end

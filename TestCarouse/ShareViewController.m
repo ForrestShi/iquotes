@@ -12,21 +12,21 @@
 #import "SCFacebook.h"
 #import "QuotesManager.h"
 
-#define GAPX 20
-#define GAPY 16
-
-#define BUTTONWIDTH 48
-#define BUTTONHEIGHT 48
 
 
 @interface ShareViewController () <MFMailComposeViewControllerDelegate >{
 @private
     
     UIView *loadingView; 
-    NSString *_indexString;
+    UITextView *quoteTextView; 
     
-    NSString *_quoteText;
 }
+@property (nonatomic, strong) NSString *quoteText;
+@property (nonatomic, strong) UIImage  *quoteImage;
+@property (nonatomic, strong) NSString *indexString;
+@property (nonatomic) NSUInteger quoteIndex;
+@property (nonatomic) BOOL bookmarkType;
+
 
 -(void)displayComposerSheet;
 -(void)launchMailAppOnDevice;
@@ -39,8 +39,16 @@
 @synthesize quoteImage = _quoteImage;
 @synthesize indexString = _indexString;
 @synthesize quoteIndex = _quoteIndex;
+@synthesize bookmarkType = _bookmarkType;
 
-- (id) initWithFrame:(CGRect)frame quoteText:(NSString*)quote quoteImage:(UIImage*)image indexString:(NSString*)idx{
+@synthesize delegate;
+
+- (id) initWithFrame:(CGRect)frame 
+           quoteText:(NSString*)quote 
+          quoteImage:(UIImage*)image 
+         indexString:(NSString*)idx
+               index:(NSUInteger)index
+            bookmark:(BOOL)yesOrNo{
     self = [super init];
     if (self) {
         // Custom initialization
@@ -48,55 +56,87 @@
         _quoteText = quote;
         _quoteImage = image;
         _indexString = idx;
+        _quoteIndex = index;
+        _bookmarkType = yesOrNo;
         
         //
-        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:self.view.bounds byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake(25, 25)];
+        UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:self.view.bounds byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake( IS_IPAD ? 25 : 15, IS_IPAD ? 25 : 15)];
         CAShapeLayer *maskLayer = [CAShapeLayer layer];
         maskLayer.frame = self.view.frame;
         maskLayer.path = path.CGPath;
         self.view.layer.mask = maskLayer;
-        
-    
     }
     return self;
 }
 
 - (void) buildUI{
     //back button 
-    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(GAPX, GAPY, 60, 60*.75)];
+    UIButton *backButton = [[UIButton alloc] initWithFrame:CGRectMake(GAPX, GAPY, BUTTONWIDTH, BUTTONHEIGHT)];
     [backButton setImage: [UIImage imageNamed:@"back.png"] forState:UIControlStateNormal];
-    backButton.tag = 1001;
+    [backButton addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:backButton];
     
-    
     //status label 
-    UILabel *statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - BUTTONWIDTH, GAPY, BUTTONWIDTH*2, BUTTONHEIGHT)];
+    UILabel *statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/2 - BUTTONWIDTH, GAPY, BUTTONWIDTH*3, BUTTONHEIGHT)];
     statusLabel.text = _indexString;
     statusLabel.backgroundColor = [UIColor clearColor];
+    statusLabel.font = [UIFont fontWithName:@"Kailasa" size:IS_IPAD ? 25 : 15];
+    statusLabel.textColor = [UIColor yellowColor];
+    statusLabel.textAlignment = UITextAlignmentCenter;
+    
     [self.view addSubview:statusLabel];
     
+    
+    
     //textView
-    UITextView *quoteTextView = [[UITextView alloc] initWithFrame:CGRectMake(GAPX, 
+     quoteTextView = [[UITextView alloc] initWithFrame:CGRectMake(GAPX, 
                                                                              GAPY + backButton.frame.size.height + 10,
                                                                              self.view.bounds.size.width - GAPX*2,
                                                                              self.view.bounds.size.height *.5)];
     
     quoteTextView.alpha = 0;
-    quoteTextView.font = [UIFont fontWithName:@"Noteworthy-Light" size:26];
+    quoteTextView.font = [UIFont fontWithName:@"Noteworthy-Light" size:FONT_SIZE_MIDDLE];
 
     quoteTextView.text = [NSString stringWithFormat:@"%@ -- Steve Jobs ", _quoteText];
-    [UIView animateWithDuration:.5 animations:^{
-        quoteTextView.alpha = 1.0;
-    }];
+        
+    float shadowSize = 10.0f;
+    quoteTextView.layer.shadowColor = [[UIColor blackColor] CGColor];
+    quoteTextView.layer.shadowOffset = CGSizeMake(-shadowSize,shadowSize);
+    quoteTextView.layer.shadowOpacity = .8f;
+    quoteTextView.layer.shadowRadius = shadowSize/2;
+    quoteTextView.layer.shouldRasterize = YES;  
     
-    [self.view addSubview:quoteTextView];
     
+    if ( _bookmarkType || [[QuotesManager shareInstance] isBookmarked:_quoteIndex] ) {
+        [UIView animateWithDuration:0.8 animations:^{
+            quoteTextView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"parchment.jpg"]]; 
+            quoteTextView.alpha = .8;
+        }];
+    }else {
+        [UIView animateWithDuration:0.8 animations:^{
+            quoteTextView.backgroundColor = [UIColor lightGrayColor]; 
+            quoteTextView.alpha = .8;
+        }];
+    }    [self.view addSubview:quoteTextView];
+    
+    
+    //add bookmark button
+    
+    if (!_bookmarkType ) {
+        UIButton *bookmarkButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width - BUTTONWIDTH *2, GAPY, BUTTONWIDTH, BUTTONHEIGHT)];
+        [bookmarkButton addTarget:self action:@selector(bookmark:) forControlEvents:UIControlEventTouchUpInside];
+        [bookmarkButton setImage:[UIImage imageNamed:@"love.png"] forState:UIControlStateNormal];
+        
+        [self.view addSubview:bookmarkButton];
+    }
+
     //share buttons
     for (int i = 0 ; i < 4; i++) {
-        UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(GAPX + i * ( BUTTONWIDTH + GAPX ), 
+         __strong UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(GAPX + i * ( BUTTONWIDTH + GAPX ), 
                                                                            quoteTextView.frame.origin.y + quoteTextView.frame.size.height + GAPY  ,
                                                                            BUTTONWIDTH,
                                                                            BUTTONHEIGHT)];
+        
         if (i == 0 ) {
             [shareButton addTarget:self action:@selector(publishToMyFBWall:) forControlEvents:UIControlEventTouchUpInside];
             [shareButton setImage:[UIImage imageNamed:@"facebook.png"] forState:UIControlStateNormal];
@@ -109,8 +149,7 @@
         }else if (i == 3 ) {
             [shareButton addTarget:self action:@selector(inviteFBFriendsToUseThisApp:) forControlEvents:UIControlEventTouchUpInside];
             [shareButton setImage:[UIImage imageNamed:@"invite.png"] forState:UIControlStateNormal];
-        }
-        
+        }        
         [self.view addSubview:shareButton];
     }
 
@@ -131,8 +170,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 
-    double delayInSeconds = .5;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    //double delayInSeconds = .5;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.5 /*delayInSeconds * NSEC_PER_SEC*/);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         [self buildUI];
     });
@@ -167,17 +206,6 @@
     // Return YES for supported orientations
     return UIInterfaceOrientationIsLandscape(interfaceOrientation);
 }
-
-//- (void) setQuoteText:(NSString *)quoteText{    
-//    _quoteText = quoteText;
-//    [textView setText:[NSString stringWithFormat:@"%@ --- Steve Jobs ", _quoteText]];
-//}
-//
-//- (void) setIndexString:(NSString *)indexString{
-//    _indexString = indexString;
-//    [indexLabel setText:_indexString];
-//}
-
 #pragma mark - Facebook actions
 
 
@@ -288,11 +316,12 @@
     [picker setSubject:@""];
         
     // Attach an image to the email
-    NSData *myData = UIImagePNGRepresentation(_quoteImage);
-    [picker addAttachmentData:myData mimeType:@"image/png" fileName:@"rainy"];
-    
+    if (_quoteImage) {
+        NSData *myData = UIImagePNGRepresentation(_quoteImage);
+        [picker addAttachmentData:myData mimeType:@"image/png" fileName:@"rainy"];
+    }
     // Fill out the email body text
-    NSString *emailBody = @"Stay hungry,stay foolish. --- Steve Jobs";
+    NSString *emailBody = _quoteText ;// @"Stay hungry,stay foolish. --- Steve Jobs";
     [picker setMessageBody:emailBody isHTML:NO];
     
     [self presentModalViewController:picker animated:YES];
@@ -312,8 +341,8 @@
 // Launches the Mail application on the device.
 -(void)launchMailAppOnDevice
 {
-    NSString *recipients = @"mailto:first@example.com&subject=Hello from California!";
-    NSString *body = @"&body=Stay hungry,stay foolish!";
+    NSString *recipients = @"mailto:first@example.com&subject=Jobs Quotes!";
+    NSString *body = _quoteText;
     
     NSString *email = [NSString stringWithFormat:@"%@%@", recipients, body];
     email = [email stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -324,7 +353,24 @@
 
 #pragma mark - Awesome Menu Delegate 
 
-- (IBAction)bookmarkQuote:(id)sender{
-    [[QuotesManager shareInstance] bookmarkQuote:_quoteIndex];
+- (void)bookmark:(id)sender{
+    DLog(@"%s",__PRETTY_FUNCTION__);
+
+    if ([[QuotesManager shareInstance] bookmarkQuote:_quoteIndex]) {
+        [UIView animateWithDuration:0.8 animations:^{
+            quoteTextView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"parchment.jpg"]]; 
+        }];
+    }else {
+        [UIView animateWithDuration:0.8 animations:^{
+            quoteTextView.backgroundColor = [UIColor lightGrayColor]; 
+        }];
+    }
+
+}
+
+- (void)back:(id)sender{
+    if (delegate) {
+        [delegate flipBack];
+    }
 }
 @end

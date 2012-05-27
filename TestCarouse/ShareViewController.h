@@ -8,24 +8,23 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ShareViewController : UIViewController 
-{
+@protocol FlipBackDelegate <NSObject>
+
+- (void) flipBack;
+
+@end
+
+@interface ShareViewController : UIViewController {
 
 }
 
-@property (nonatomic, strong) NSString *quoteText;
-@property (nonatomic, strong) UIImage  *quoteImage;
-@property (nonatomic, strong) NSString *indexString;
-@property (nonatomic) NSUInteger quoteIndex;
+@property (nonatomic) id<FlipBackDelegate>    delegate;
 
-
-
-- (id) initWithFrame:(CGRect)frame quoteText:(NSString*)quote quoteImage:(UIImage*)image indexString:(NSString*)idx;
-
-//- (IBAction)publishToMyFBWall:(id)sender;
-//- (IBAction)inviteFBFriendsToUseThisApp:(id)sender;
-//- (IBAction)sendToTwitter:(id)sender;
-//- (IBAction)sendEmail:(id)sender;
-//- (IBAction)bookmarkQuote:(id)sender;
+- (id) initWithFrame:(CGRect)frame 
+           quoteText:(NSString*)quote 
+          quoteImage:(UIImage*)image 
+         indexString:(NSString*)idx
+               index:(NSUInteger)index
+            bookmark:(BOOL)yesOrNo;
 
 @end

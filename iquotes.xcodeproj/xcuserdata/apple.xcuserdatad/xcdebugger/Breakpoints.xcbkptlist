@@ -120,34 +120,6 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "TestCarouse/QuotesManager.m"
-         timestampString = "359190871.421184"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "40"
-         endingLineNumber = "40"
-         landmarkName = "-initWithPlist:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "TestCarouse/QuotesManager.m"
-         timestampString = "359190871.421184"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "45"
-         endingLineNumber = "45"
-         landmarkName = "-loadQuotesFromPlistFile:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
          filePath = "TestCarouse/SCFacebook.m"
          timestampString = "357924367.939053"
          startingColumnNumber = "9223372036854775807"
@@ -163,11 +135,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "TestCarouse/ShareViewController.m"
-         timestampString = "359742570.432468"
+         timestampString = "359816128.563846"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "222"
-         endingLineNumber = "222"
+         startingLineNumber = "250"
+         endingLineNumber = "250"
          landmarkName = "-inviteFBFriendsToUseThisApp:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -176,63 +148,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TestCarouse/ViewController.m"
-         timestampString = "359711591.173193"
+         timestampString = "359819122.950646"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "291"
-         endingLineNumber = "291"
+         startingLineNumber = "318"
+         endingLineNumber = "318"
          landmarkName = "-gestureRecognizer:shouldReceiveTouch:"
          landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "TestCarouse/ViewController.m"
-         timestampString = "359713442.279518"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "481"
-         endingLineNumber = "481"
-         landmarkName = "-carousel:didSelectItemAtIndex:"
-         landmarkType = "5">
-         <Locations>
-            <Location
-               shouldBeEnabled = "No"
-               ignoreCount = "0"
-               continueAfterRunningActions = "No"
-               symbolName = "__block_global_4"
-               urlString = "file://localhost/Users/apple/workspace/myApps/myApps2012/iQuotes/TestCarouse/ViewController.m"
-               timestampString = "358592716.76315"
-               startingColumnNumber = "9223372036854775807"
-               endingColumnNumber = "9223372036854775807"
-               startingLineNumber = "431"
-               endingLineNumber = "431">
-            </Location>
-            <Location
-               shouldBeEnabled = "No"
-               ignoreCount = "0"
-               continueAfterRunningActions = "No"
-               symbolName = "__block_global_5"
-               urlString = "file://localhost/Users/apple/workspace/myApps/myApps2012/iQuotes/TestCarouse/ViewController.m"
-               timestampString = "358592716.763493"
-               startingColumnNumber = "9223372036854775807"
-               endingColumnNumber = "9223372036854775807"
-               startingLineNumber = "431"
-               endingLineNumber = "431">
-            </Location>
-         </Locations>
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TestCarouse/ViewController.m"
-         timestampString = "359711591.173193"
+         timestampString = "359819122.950646"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "293"
-         endingLineNumber = "293"
+         startingLineNumber = "320"
+         endingLineNumber = "320"
          landmarkName = "-gestureRecognizer:shouldReceiveTouch:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -241,11 +174,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TestCarouse/ShareViewController.m"
-         timestampString = "359742570.432468"
+         timestampString = "359816128.563846"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "190"
-         endingLineNumber = "190"
+         startingLineNumber = "218"
+         endingLineNumber = "218"
          landmarkName = "-publishToMyFBWall:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -254,11 +187,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TestCarouse/ShareViewController.m"
-         timestampString = "359742570.432468"
+         timestampString = "359816128.563846"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "192"
-         endingLineNumber = "192"
+         startingLineNumber = "220"
+         endingLineNumber = "220"
          landmarkName = "-publishToMyFBWall:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -293,11 +226,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TestCarouse/ViewController.m"
-         timestampString = "359711591.173193"
+         timestampString = "359819122.950646"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "360"
-         endingLineNumber = "360"
+         startingLineNumber = "387"
+         endingLineNumber = "387"
          landmarkName = "-carousel:viewForItemAtIndex:reusingView:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -306,12 +239,51 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TestCarouse/QuotesManager.m"
-         timestampString = "359191952.670904"
+         timestampString = "359810362.128317"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "72"
-         endingLineNumber = "72"
+         startingLineNumber = "86"
+         endingLineNumber = "86"
+         landmarkName = "-loadQuotesFromPlistFile"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "TestCarouse/ShareViewController.m"
+         timestampString = "359816128.563846"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "363"
+         endingLineNumber = "363"
+         landmarkName = "-bookmark:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "TestCarouse/QuotesManager.m"
+         timestampString = "359810362.128317"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "117"
+         endingLineNumber = "117"
          landmarkName = "-bookmarkQuote:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "TestCarouse/ViewController.m"
+         timestampString = "359819145.313617"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "203"
+         endingLineNumber = "203"
+         landmarkName = "-buildQuoteCarousel"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -9,8 +9,9 @@
 #import "QuoteView.h"
 #define GAP_BELOW_IMAGE 30.0f
 
-#define QUOTE_TEXT_START_X 20.0
-#define QUOTE_TEXT_START_Y 10.0 
+#define QUOTE_TEXT_START_X ( IS_IPAD ? 20.0 : 0.0 )
+#define QUOTE_TEXT_START_Y ( IS_IPAD ? 10.0 : 0.0 )
+
 
 
 @implementation QuoteView
@@ -23,6 +24,7 @@
     UIImageView *peopleImageView = nil; 
     if (_peopleImage) {
         peopleImageView = [[UIImageView alloc] initWithImage:_peopleImage];
+        peopleImageView.contentMode = UIViewContentModeScaleAspectFit;
     }
     //frame of image
     peopleImageView.center = CGPointMake(_peopleImage.size.width/2, _peopleImage.size.height/2 + QUOTE_TEXT_START_Y*2);
@@ -49,9 +51,9 @@
     quoteLabel.textAlignment = quoteAlignmentStyle;
 
     quoteLabel.text = _quoteText;
-    int fontSize = 30;
+    int fontSize = FONT_SIZE_BIG;
     if ([_quoteText length] > 250 ) {
-        fontSize = 25;
+        fontSize = FONT_SIZE_MIDDLE;
     } 
     quoteLabel.font = [UIFont fontWithName:@"Chalkduster" size:fontSize];
     

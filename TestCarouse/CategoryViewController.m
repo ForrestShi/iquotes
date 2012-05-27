@@ -9,6 +9,7 @@
 #import "CategoryViewController.h"
 #import "iCarousel.h"
 #import <QuartzCore/QuartzCore.h>
+#import "QuotesManager.h"
 
 @interface CategoryViewController ()<iCarouselDataSource, iCarouselDelegate >
 {
@@ -54,10 +55,11 @@
 	// Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor clearColor];
     
-    double delayInSeconds = 2.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    double delayInSeconds = .5;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds );
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         [self buildUp];
+        [_categoryView scrollToItemAtIndex:1 animated:YES];
     });
 }
 
@@ -65,6 +67,7 @@
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
+    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -103,7 +106,6 @@
         nameLabel.layer.shadowOpacity = 0.7;
         nameLabel.layer.shadowRadius = 3;
         
-
         [view addSubview:nameLabel];
     }
     
@@ -160,7 +162,11 @@
 }
 
 - (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index{
-    DLog(@"%s index %d ",__PRETTY_FUNCTION__ , index);
+    
+    if (index == 1 && [[[QuotesManager shareInstance] bookmarkQuotes] count] == 0) {
+        return;
+    }
+    
     [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"select_category" object:nil userInfo:[NSDictionary dictionaryWithObject:[NSNumber numberWithInt:index] forKey:@"category_index"]]];
 }
 

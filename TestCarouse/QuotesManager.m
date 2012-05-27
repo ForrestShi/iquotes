@@ -9,10 +9,12 @@
 #import "QuotesManager.h"
 #import "QuoteObject.h"
 
+#define LOAD_ARCHIVED_DATA 1
+#define ARCHIVED_DATA_FILE_NAME @"archived_quotes"
+
 @interface QuotesManager () {
 @private
     NSMutableArray  *_quotesArray;
-    NSMutableArray  *_favoriteQuotesArray;
 }
 
 - (void) loadQuotesFromPlistFile:(NSString*)plistFilePath;
@@ -27,21 +29,60 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         if (_instance == nil) {
+            DLog(@"%s",__PRETTY_FUNCTION__);
             _instance = [[QuotesManager alloc] init];
-            NSString *plist1Path = [[NSBundle mainBundle] pathForResource:@"jobs_quotes1" ofType:@"plist" ];
-            [_instance loadQuotesFromPlistFile:plist1Path];
+            
+            if ([_instance canLoadFromArchivedData]) {
+                [_instance loadFromArchivedData];
+            }else {
+                [_instance loadQuotesFromPlistFile];
+            }   
+            
+        [[NSNotificationCenter defaultCenter] addObserverForName:@"save_when_leave" object:nil queue:[NSOperationQueue currentQueue] usingBlock:^(NSNotification *note) {
+            //archive datat (include bookmark)
+            DLog(@"%s",__PRETTY_FUNCTION__);
+            [_instance archiveQuoteData];
+            //save current index 
+            
+            //[[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:currentIndex] forKey:@"current"];
+            
+            
+        }];
         }
     });
     return _instance;
 }
 
-- (id) initWithPlist:(NSString*)plistFilePath {
-    if (self = [super init]) {
-        [self loadQuotesFromPlistFile:plistFilePath];
-    }
-    return self;
+#pragma mark - Privates 
+
+- (NSString*) archivedDataPath{
+    NSArray *docPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *filePath = [NSString stringWithFormat:@"%@/%@",[docPath objectAtIndex:0], ARCHIVED_DATA_FILE_NAME];
+    return filePath;
 }
-- (void) loadQuotesFromPlistFile:(NSString*)plistFilePath{
+
+- (BOOL) canLoadFromArchivedData{
+    return [[NSFileManager defaultManager] fileExistsAtPath:[self archivedDataPath]]; 
+}
+
+- (void) loadFromArchivedData{
+    
+    NSData *archivedData = [NSData dataWithContentsOfFile:[self archivedDataPath]];
+    _quotesArray = (NSMutableArray*)[NSKeyedUnarchiver unarchiveObjectWithData:archivedData];
+}
+
+- (void) archiveQuoteData{
+    NSData *plistData = [NSKeyedArchiver archivedDataWithRootObject:_quotesArray];
+    if (NO == [plistData writeToFile:[self archivedDataPath] atomically:YES]) {
+        DLog(@"Failed to save");
+    }
+
+}
+
+- (void) loadQuotesFromPlistFile{
+    
+    NSString *plistFilePath = [[NSBundle mainBundle] pathForResource:@"jobs_quotes1" ofType:@"plist" ];
+
     if (!plistFilePath) {
         return;
     }
@@ -52,32 +93,46 @@
     }
     
     NSArray *arrayObjects = [dict allValues];
+    int i=0;
     for (id object in arrayObjects) {
         QuoteObject *quote = [[QuoteObject alloc] init];
+        quote.quoteIndex = i++;
         quote.quoteText = [object objectForKey:@"quote"];
+        quote.bookmark = NO;
         if (_quotesArray == nil) {
             _quotesArray = [NSMutableArray array];
         }
         [_quotesArray addObject:quote];
     }
+    
+    //create a new plist file 
+    [self archiveQuoteData];
 }
+
+
 
 #pragma mark - Bookmark Quotes
 
-- (void) bookmarkQuote:(NSUInteger)quoteIndex{
+- (BOOL) bookmarkQuote:(NSUInteger)quoteIndex{
+    DLog(@"%s index %d",__PRETTY_FUNCTION__ , quoteIndex);
+
     QuoteObject *likedQuote = [self.quotesArray objectAtIndex:quoteIndex];
-    if (!_favoriteQuotesArray) {
-        _favoriteQuotesArray = [[NSMutableArray alloc] init];
+    if (likedQuote) {
+        likedQuote.bookmark = !likedQuote.bookmark;
     }
-    if (![_favoriteQuotesArray containsObject:likedQuote]) {
-        DLog(@"%s add bookmarked quote",__PRETTY_FUNCTION__);
-        [_favoriteQuotesArray addObject:likedQuote];
-    }
+    return likedQuote.bookmark;
 }
 
-- (NSArray*) bookmarkQuotes{
-    DLog(@"%s count %d",__PRETTY_FUNCTION__ , [_favoriteQuotesArray count]);
-    return _favoriteQuotesArray;
+- (BOOL) isBookmarked:(NSUInteger)quoteIndex{
+    QuoteObject *likedQuote = [self.quotesArray objectAtIndex:quoteIndex];
+    return likedQuote.bookmark;
+}
+
+- (NSArray*) bookmarkQuotes{    
+    NSPredicate *bookmarkPredict = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"bookmark == 1"]];
+    NSArray *favorites = [_quotesArray filteredArrayUsingPredicate:bookmarkPredict];
+    DLog(@"favorites %@",favorites);
+    return favorites;
 }
 
 @end

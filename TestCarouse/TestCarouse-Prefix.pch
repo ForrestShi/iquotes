@@ -24,3 +24,17 @@
 // ALog always displays output regardless of the DEBUG setting
 #define ALog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
 
+#define PHONEFULLFRAME CGRectMake(0, 0, 480, 320)
+#define IPADFULLFRAME CGRectMake(0, 0, 1024, 768)
+#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+#define FULLFRAME (IS_IPAD ? IPADFULLFRAME : PHONEFULLFRAME)
+
+#define FONT_SIZE_BIG       (IS_IPAD ? 30 : 20 )
+#define FONT_SIZE_MIDDLE   (IS_IPAD ? 20 : 12 )
+
+#define GAPX  (IS_IPAD ? 20 : 8 )
+#define GAPY (IS_IPAD ?16 : 4 )
+
+#define BUTTONWIDTH (IS_IPAD ? 64: 32 )
+#define BUTTONHEIGHT (IS_IPAD ? 64 : 32 )
+

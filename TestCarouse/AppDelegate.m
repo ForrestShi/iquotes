@@ -17,14 +17,17 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [application setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:YES];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
     // Override point for customization after application launch.
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        self.viewController = [[ViewController alloc] initWithFrame:CGRectMake(0, 0, 480, 320)];
+        self.viewController = [[ViewController alloc] initWithFrame:PHONEFULLFRAME];
     } else {
-        self.viewController = [[ViewController alloc]  initWithFrame:CGRectMake(0, 0, 1024, 768)];
+        self.viewController = [[ViewController alloc]  initWithFrame:IPADFULLFRAME];
     }
-    [self.viewController buildAllQuotesView];
+    //[self.viewController buildAllQuotesView];
     self.window.rootViewController = self.viewController;
     
     //Local Notification
@@ -54,6 +57,8 @@
      Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
      Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
      */
+    DLog(@"%s",__PRETTY_FUNCTION__);
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"save_when_leave" object:nil userInfo:nil];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application

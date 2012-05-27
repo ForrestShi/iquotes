@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface QuoteObject : NSObject
+@interface QuoteObject : NSObject <NSCoding>
 
 @property (nonatomic,strong) NSString*  quoteText;
+@property (nonatomic)        NSUInteger quoteIndex;
+@property (nonatomic)        BOOL       bookmark;
 
 @end
