@@ -19,6 +19,12 @@
 		18920CA61571E0B100AC6387 /* love.png in Resources */ = {isa = PBXBuildFile; fileRef = 18920CA51571E0B100AC6387 /* love.png */; };
 		18920CAA15723CB700AC6387 /* parchment.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18920CA915723CB700AC6387 /* parchment.jpg */; };
 		1898575E15594FA300F7A0F8 /* steve5.png in Resources */ = {isa = PBXBuildFile; fileRef = 1898575D15594FA300F7A0F8 /* steve5.png */; };
+		18998FE11573ABED007EF1D4 /* Icon72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18998FE01573ABED007EF1D4 /* Icon72@2x.png */; };
+		18998FE61573ACB5007EF1D4 /* Icon57.png in Resources */ = {isa = PBXBuildFile; fileRef = 18998FE21573ACB5007EF1D4 /* Icon57.png */; };
+		18998FE71573ACB5007EF1D4 /* Icon57@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18998FE31573ACB5007EF1D4 /* Icon57@2x.png */; };
+		18998FE81573ACB5007EF1D4 /* Icon72.png in Resources */ = {isa = PBXBuildFile; fileRef = 18998FE41573ACB5007EF1D4 /* Icon72.png */; };
+		18998FE91573ACB5007EF1D4 /* Icon512.png in Resources */ = {isa = PBXBuildFile; fileRef = 18998FE51573ACB5007EF1D4 /* Icon512.png */; };
+		18998FEB1573AD69007EF1D4 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 18998FEA1573AD69007EF1D4 /* Default.png */; };
 		189F91DC1555666C00AD0D08 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189F91DA1555666C00AD0D08 /* ShareViewController.m */; };
 		18A04F75155D79A80079F831 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18A04F74155D79A80079F831 /* Twitter.framework */; };
 		18A0F1271570CF2B00B2646C /* page.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A0F1261570CF2B00B2646C /* page.png */; };
@@ -137,7 +143,14 @@
 		18920CA31571DD3600AC6387 /* bookmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bookmark.png; sourceTree = "<group>"; };
 		18920CA51571E0B100AC6387 /* love.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = love.png; sourceTree = "<group>"; };
 		18920CA915723CB700AC6387 /* parchment.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = parchment.jpg; sourceTree = "<group>"; };
+		18920CAB15727C8600AC6387 /* iChangedWorld.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = iChangedWorld.entitlements; sourceTree = "<group>"; };
 		1898575D15594FA300F7A0F8 /* steve5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = steve5.png; sourceTree = "<group>"; };
+		18998FE01573ABED007EF1D4 /* Icon72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon72@2x.png"; sourceTree = "<group>"; };
+		18998FE21573ACB5007EF1D4 /* Icon57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon57.png; sourceTree = "<group>"; };
+		18998FE31573ACB5007EF1D4 /* Icon57@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon57@2x.png"; sourceTree = "<group>"; };
+		18998FE41573ACB5007EF1D4 /* Icon72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon72.png; sourceTree = "<group>"; };
+		18998FE51573ACB5007EF1D4 /* Icon512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon512.png; sourceTree = "<group>"; };
+		18998FEA1573AD69007EF1D4 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		189F91D91555666C00AD0D08 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
 		189F91DA1555666C00AD0D08 /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
 		18A04F74155D79A80079F831 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
@@ -292,6 +305,12 @@
 		18A2BC95154FA89B00FEFAF4 = {
 			isa = PBXGroup;
 			children = (
+				18998FE21573ACB5007EF1D4 /* Icon57.png */,
+				18998FE31573ACB5007EF1D4 /* Icon57@2x.png */,
+				18998FE41573ACB5007EF1D4 /* Icon72.png */,
+				18998FE51573ACB5007EF1D4 /* Icon512.png */,
+				18998FE01573ABED007EF1D4 /* Icon72@2x.png */,
+				18920CAB15727C8600AC6387 /* iChangedWorld.entitlements */,
 				18C4434E155F794A0023E71D /* README */,
 				18A2BCAA154FA89B00FEFAF4 /* TestCarouse */,
 				18A2BCA3154FA89B00FEFAF4 /* Frameworks */,
@@ -339,6 +358,7 @@
 		18A2BCAB154FA89B00FEFAF4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				18998FEA1573AD69007EF1D4 /* Default.png */,
 				18A56B871567C06A00E6183C /* background_story */,
 				18920CA71572371000AC6387 /* patterns */,
 				18A0F1261570CF2B00B2646C /* page.png */,
@@ -468,9 +488,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		18A2BC9F154FA89B00FEFAF4 /* iChangedWorld */ = {
+		18A2BC9F154FA89B00FEFAF4 /* iJobsQuotes */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 18A2BCC1154FA89B00FEFAF4 /* Build configuration list for PBXNativeTarget "iChangedWorld" */;
+			buildConfigurationList = 18A2BCC1154FA89B00FEFAF4 /* Build configuration list for PBXNativeTarget "iJobsQuotes" */;
 			buildPhases = (
 				18A2BC9C154FA89B00FEFAF4 /* Sources */,
 				18A2BC9D154FA89B00FEFAF4 /* Frameworks */,
@@ -480,7 +500,7 @@
 			);
 			dependencies = (
 			);
-			name = iChangedWorld;
+			name = iJobsQuotes;
 			productName = TestCarouse;
 			productReference = 18A2BCA0154FA89B00FEFAF4 /* iChangedWorld.app */;
 			productType = "com.apple.product-type.application";
@@ -515,7 +535,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				18A2BC9F154FA89B00FEFAF4 /* iChangedWorld */,
+				18A2BC9F154FA89B00FEFAF4 /* iJobsQuotes */,
 			);
 		};
 /* End PBXProject section */
@@ -613,6 +633,12 @@
 				18920CA41571DD3600AC6387 /* bookmark.png in Resources */,
 				18920CA61571E0B100AC6387 /* love.png in Resources */,
 				18920CAA15723CB700AC6387 /* parchment.jpg in Resources */,
+				18998FE11573ABED007EF1D4 /* Icon72@2x.png in Resources */,
+				18998FE61573ACB5007EF1D4 /* Icon57.png in Resources */,
+				18998FE71573ACB5007EF1D4 /* Icon57@2x.png in Resources */,
+				18998FE81573ACB5007EF1D4 /* Icon72.png in Resources */,
+				18998FE91573ACB5007EF1D4 /* Icon512.png in Resources */,
+				18998FEB1573AD69007EF1D4 /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -660,6 +686,49 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		18920CAC15727CBC00AC6387 /* TestFlight */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = TestFlight;
+		};
+		18920CAD15727CBC00AC6387 /* TestFlight */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = iChangedWorld.entitlements;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TestCarouse/TestCarouse-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"./SCFacebook/SCFacebook/ExternalFrameworks/facebook-ios-sdk/**",
+					"./BlocksKit/**",
+				);
+				INFOPLIST_FILE = "TestCarouse/iquotes-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos5.1;
+				WRAPPER_EXTENSION = app;
+			};
+			name = TestFlight;
+		};
 		18A2BCBF154FA89B00FEFAF4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -710,6 +779,7 @@
 		18A2BCC2154FA89B00FEFAF4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = iChangedWorld.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Shi Lin (NER6K732V4)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Shi Lin (NER6K732V4)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -727,6 +797,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "126DE7D6-5F6B-41CE-B1A0-0BFC845046CF";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "126DE7D6-5F6B-41CE-B1A0-0BFC845046CF";
+				SDKROOT = iphoneos5.1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -734,6 +805,7 @@
 		18A2BCC3154FA89B00FEFAF4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = iChangedWorld.entitlements;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TestCarouse/TestCarouse-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -747,6 +819,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos5.1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -759,15 +832,17 @@
 			buildConfigurations = (
 				18A2BCBF154FA89B00FEFAF4 /* Debug */,
 				18A2BCC0154FA89B00FEFAF4 /* Release */,
+				18920CAC15727CBC00AC6387 /* TestFlight */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		18A2BCC1154FA89B00FEFAF4 /* Build configuration list for PBXNativeTarget "iChangedWorld" */ = {
+		18A2BCC1154FA89B00FEFAF4 /* Build configuration list for PBXNativeTarget "iJobsQuotes" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				18A2BCC2154FA89B00FEFAF4 /* Debug */,
 				18A2BCC3154FA89B00FEFAF4 /* Release */,
+				18920CAD15727CBC00AC6387 /* TestFlight */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

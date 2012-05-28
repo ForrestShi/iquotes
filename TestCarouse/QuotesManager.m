@@ -53,6 +53,13 @@
     return _instance;
 }
 
+- (NSString*) todayQuote{
+    
+    int randIndex = rand() % [self.quotesArray count] ;
+    QuoteObject *randObj = [self.quotesArray objectAtIndex:randIndex];
+    return randObj.quoteText;
+}
+
 #pragma mark - Privates 
 
 - (NSString*) archivedDataPath{

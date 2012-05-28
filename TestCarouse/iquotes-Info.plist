@@ -9,7 +9,12 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFiles</key>
-	<array/>
+	<array>
+		<string>Icon72@2x.png</string>
+		<string>Icon72.png</string>
+		<string>Icon57@2x.png</string>
+		<string>Icon57.png</string>
+	</array>
 	<key>CFBundleIdentifier</key>
 	<string>com.dfa.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>

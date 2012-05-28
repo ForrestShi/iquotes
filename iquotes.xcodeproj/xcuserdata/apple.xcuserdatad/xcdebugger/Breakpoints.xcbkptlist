@@ -239,11 +239,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TestCarouse/QuotesManager.m"
-         timestampString = "359810362.128317"
+         timestampString = "359903150.722194"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "86"
-         endingLineNumber = "86"
+         startingLineNumber = "93"
+         endingLineNumber = "93"
          landmarkName = "-loadQuotesFromPlistFile"
          landmarkType = "5">
       </FileBreakpoint>
@@ -265,11 +265,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TestCarouse/QuotesManager.m"
-         timestampString = "359810362.128317"
+         timestampString = "359903150.722194"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "117"
-         endingLineNumber = "117"
+         startingLineNumber = "124"
+         endingLineNumber = "124"
          landmarkName = "-bookmarkQuote:"
          landmarkType = "5">
       </FileBreakpoint>

@@ -16,6 +16,7 @@
 
 - (BOOL) bookmarkQuote:(NSUInteger)quoteIndex;
 - (BOOL) isBookmarked:(NSUInteger)quoteIndex;
+- (NSString*) todayQuote;
 
 - (NSArray*) bookmarkQuotes;
 

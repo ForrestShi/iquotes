@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "SCFacebook.h"
 #import "ViewController.h"
+#import "QuotesManager.h"
+
 
 @implementation AppDelegate
 
@@ -38,7 +40,7 @@
         localNotif.timeZone = [NSTimeZone defaultTimeZone];
         
         localNotif.alertBody = [NSString stringWithFormat:NSLocalizedString(@"%@ -- Steve Jobs", nil),
-                                @"stay hungry,stay foolish" ];
+                                [[QuotesManager shareInstance] todayQuote] ];
         localNotif.alertAction = NSLocalizedString(@"View Details", nil);
         
         localNotif.soundName = UILocalNotificationDefaultSoundName;
